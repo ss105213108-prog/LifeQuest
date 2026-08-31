@@ -4,6 +4,29 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>LifeQuest: Real Life RPG</title>
+  <!-- First-paint guard: active before external styles/scripts or identity restore. -->
+  <style id="initial-boot-style">
+    body.app-booting { overflow: hidden; }
+    body.app-booting > :not(#initial-boot),
+    body.app-booting > :not(#initial-boot) * { visibility: hidden !important; }
+    #initial-boot {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      gap: 1rem;
+      padding: 1.5rem;
+      background: #070b12;
+      color: #e4c98f;
+      font-family: system-ui, sans-serif;
+      text-align: center;
+    }
+    #initial-boot strong { font-size: 2rem; }
+    #initial-boot p { margin: 0; }
+    #initial-boot[hidden] { display: none !important; }
+  </style>
   <!-- Google Fonts: interface + Traditional Chinese story typography -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -27,7 +50,12 @@
   <link rel="stylesheet" href="style.css?v=37">
   <link rel="stylesheet" href="rpg-pages.css?v=25">
 </head>
-<body>
+<body class="app-booting">
+  <div id="initial-boot" role="status" aria-live="polite">
+    <strong>LifeQuest</strong>
+    <p>正在確認冒險者卷宗…</p>
+    <noscript>請啟用 JavaScript 後重新整理。</noscript>
+  </div>
   <!-- 頂部導覽列 -->
   <header class="app-header">
     <div class="header-left">

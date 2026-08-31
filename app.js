@@ -540,6 +540,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   const authResult = await initializeMemberAuth();
   if (authResult?.session) {
     restoreMemberGameplayWorkspace(authResult);
+    finishInitialBoot();
     return;
   }
   applyPendingMainQuest();
@@ -552,7 +553,14 @@ document.addEventListener('DOMContentLoaded', async () => {
   setCampStage('quest');
   initAllCharts();
   if (!restoredBoss.summoned) triggerAICoach(true);
+  finishInitialBoot();
 });
+
+function finishInitialBoot() {
+  const bootStatus = document.getElementById('initial-boot');
+  if (bootStatus) bootStatus.hidden = true;
+  document.body.classList.remove('app-booting');
+}
 
 function applyPendingMainQuest() {
   const result = MainQuestEngine.applyPending({
