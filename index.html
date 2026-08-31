@@ -1,0 +1,1508 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LifeQuest: Real Life RPG</title>
+  <!-- Google Fonts: interface + Traditional Chinese story typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@500;600;700;900&family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+  <!-- Fixed local runtime libraries: available without CDN access -->
+  <script src="vendor/chart.js/chart.umd.min.js?v=4.5.1"></script>
+  <script src="vendor/lucide/lucide.min.js?v=1.31.0"></script>
+  <!-- Centralized Mock Data -->
+  <script src="backendContract.js?v=2"></script>
+  <script src="lifequestCore.js?v=17"></script>
+  <script src="mockData.js?v=11"></script>
+  <script src="gameApplication.js?v=4&hardening=phase6a"></script>
+  <script src="vendor/supabase/supabase.js?v=2.112.3"></script>
+  <script src="supabaseConfig.js?v=1"></script>
+  <script src="supabaseClient.js?v=1"></script>
+  <script src="memberAuth.js?v=6&hardening=phase6c3-offline-reload"></script>
+  <script src="memberLogoutUi.js?v=1"></script>
+  <script src="guestMode.js?v=1"></script>
+  <script src="memberEconomyUi.js?v=1"></script>
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="style.css?v=37">
+  <link rel="stylesheet" href="rpg-pages.css?v=25">
+</head>
+<body>
+  <!-- 頂部導覽列 -->
+  <header class="app-header">
+    <div class="header-left">
+      <div class="logo-area">
+        <div class="logo-icon" aria-hidden="true"><i data-lucide="shield"></i><span>LQ</span></div>
+        <span class="logo-text">LifeQuest <small>冒險者公會</small></span>
+      </div>
+      <nav class="nav-tabs town-gate-nav" aria-label="公會城鎮據點">
+        <button class="nav-tab active" data-tab="dashboard" onclick="switchToTab('dashboard')">
+          <i data-lucide="tent-tree"></i> 冒險者營地
+        </button>
+        <button class="nav-tab" data-tab="training" onclick="switchToTab('training')">
+          <i data-lucide="dumbbell"></i> 公會訓練場
+        </button>
+        <button class="nav-tab" data-tab="boss-battle" onclick="switchToTab('boss-battle')">
+          <i data-lucide="swords"></i> 習慣魔獸
+          <span class="boss-alert-badge" id="boss-alert-badge">!</span>
+        </button>
+        <button class="nav-tab" data-tab="insights" onclick="switchToTab('insights')">
+          <i data-lucide="book-open"></i> 冒險者紀錄書
+        </button>
+        <details class="town-map-menu">
+          <summary><i data-lucide="map"></i><span>公會地圖</span><i data-lucide="chevron-down"></i></summary>
+          <div class="town-map-popover">
+            <p>城鎮據點</p>
+            <button class="nav-tab" data-tab="rules" onclick="switchToTab('rules')">
+              <i data-lucide="scroll-text"></i><span><strong>命運法典</strong><small>審閱公會法則</small></span>
+            </button>
+            <button class="nav-tab" data-tab="analytics" onclick="switchToTab('analytics')">
+              <i data-lucide="shield-plus"></i><span><strong>屬性與勳章</strong><small>查看能力卷軸</small></span>
+            </button>
+            <button class="nav-tab" data-tab="supply" onclick="switchToTab('supply')">
+              <i data-lucide="store"></i><span><strong>公會補給站</strong><small>購買裝備補給</small></span>
+            </button>
+            <button class="nav-tab" data-tab="privacy-settings" onclick="switchToTab('privacy-settings')">
+              <i data-lucide="shield-check"></i><span><strong>遊戲選單</strong><small>調整冒險設定</small></span>
+            </button>
+          </div>
+        </details>
+      </nav>
+    </div>
+    
+    <div class="header-right">
+      <button type="button" class="member-workspace-return" id="member-workspace-return" hidden>
+        <i data-lucide="cloud"></i><span>會員卷宗</span>
+      </button>
+      <button type="button" class="guest-exit-button" id="guest-exit-button" onclick="requestGuestExit()" hidden>
+        <i data-lucide="log-out" aria-hidden="true"></i><span>離開訪客模式</span>
+      </button>
+      <div class="goal-indicator-badge" id="header-goal-display">
+        <i data-lucide="scroll-text"></i><span>主線契約：未設定</span>
+      </div>
+      <div class="currency-container">
+        <div class="currency-item gem">
+          <i class="gem-icon" data-lucide="gem" aria-hidden="true"></i>
+          <span id="gem-count">0</span>
+        </div>
+        <div class="currency-item gold">
+          <i class="gold-icon" data-lucide="coins" aria-hidden="true"></i>
+          <span id="gold-count">0</span>
+        </div>
+      </div>
+      <div class="user-profile-trigger">
+        <div class="avatar-mini" id="avatar-mini-display"><i data-lucide="shield"></i></div>
+      </div>
+    </div>
+  </header>
+
+  <aside class="persistence-alert" id="persistence-alert" role="alert" hidden>
+    <i data-lucide="archive-x" aria-hidden="true"></i>
+    <div>
+      <strong id="persistence-alert-title">本機卷宗未能保存</strong>
+      <span id="persistence-alert-message">目前操作只留在記憶體中，重新整理前請先匯出存檔。</span>
+    </div>
+    <button type="button" onclick="exportSaveArchive()"><i data-lucide="download"></i>匯出目前資料</button>
+  </aside>
+
+  <!-- 主要內容區 -->
+  <main class="app-content">
+    
+    <!-- 頁面 1: 控制面板 (Dashboard) -->
+    <section class="tab-pane active" id="pane-dashboard">
+      <div class="camp-world-shell">
+        <section class="camp-hud" id="camp-hud-slot" aria-label="角色狀態 HUD">
+          <div class="camp-effect-strip" aria-label="目前角色狀態">
+            <span class="camp-effect-heading">狀態刻印</span>
+            <div class="camp-effect-slots">
+              <span class="camp-effect-chip buff" id="camp-buff-summary">
+                <i data-lucide="sun"></i><span class="camp-effect-copy">目前沒有角色祝福</span>
+              </span>
+              <span class="camp-effect-chip debuff" id="camp-debuff-summary">
+                <i data-lucide="skull"></i><span class="camp-effect-copy">目前沒有角色詛咒</span>
+              </span>
+            </div>
+            <button class="camp-effect-detail-btn" type="button" onclick="switchToTab('analytics')">
+              翻閱角色狀態 <i data-lucide="chevron-right"></i>
+            </button>
+          </div>
+        </section>
+
+        <section class="camp-stage-frame" aria-live="polite">
+          <span class="camp-frame-corner top-left" aria-hidden="true"></span>
+          <span class="camp-frame-corner top-right" aria-hidden="true"></span>
+          <span class="camp-frame-corner bottom-left" aria-hidden="true"></span>
+          <span class="camp-frame-corner bottom-right" aria-hidden="true"></span>
+          <div class="camp-stage active" data-camp-stage="quest" id="camp-stage-quest">
+            <header class="camp-stage-header">
+              <p class="camp-stage-eyebrow">冒險者公會 · 今日委託</p>
+              <h1>今日主線任務</h1>
+              <p>主線契約：<strong id="camp-goal-name">尚未設定</strong></p>
+              <span class="camp-progress-badge" id="camp-quest-progress">今日進度 0 / 0</span>
+            </header>
+            <div class="camp-quest-list-slot" id="camp-quest-list-slot"></div>
+            <p class="camp-quest-state">
+              <span aria-hidden="true">◆</span>
+              <strong id="camp-quest-state">任務尚未結算</strong>
+              <span aria-hidden="true">◆</span>
+            </p>
+            <div class="camp-primary-actions">
+              <button class="camp-primary-btn" id="btn-start-adventure" type="button">
+                <i data-lucide="swords"></i>
+                <span id="start-adventure-label">開始今天的冒險紀錄</span>
+              </button>
+              <button class="camp-secondary-btn" id="btn-edit-today-log" type="button" hidden>
+                <i data-lucide="pencil"></i> 修改今日紀錄
+              </button>
+            </div>
+          </div>
+
+          <div class="camp-stage" data-camp-stage="log" id="camp-stage-log" hidden>
+            <div class="camp-log-slot" id="camp-log-slot"></div>
+          </div>
+
+          <div class="camp-stage" data-camp-stage="settlement" id="camp-stage-settlement" hidden>
+            <div class="settlement-verdict-sheet">
+              <header class="camp-stage-header settlement-header">
+                <p class="camp-stage-eyebrow">冒險者公會 · 今日裁定</p>
+                <h1>公會任務結算</h1>
+                <p id="settlement-message">今日冒險已完成</p>
+                <span class="camp-progress-badge completed" id="settlement-progress">任務完成 0 / 0</span>
+              </header>
+
+              <div class="settlement-ledger-spread">
+                <section class="settlement-clause-panel" aria-labelledby="settlement-clause-title">
+                  <p class="settlement-ledger-heading" id="settlement-clause-title"><span>裁定欄</span>任務條目</p>
+                  <div class="settlement-rule-list" id="settlement-rule-results"></div>
+                </section>
+
+                <section class="settlement-outcome-panel" aria-labelledby="settlement-outcome-title">
+                  <p class="settlement-ledger-heading" id="settlement-outcome-title"><span>登錄欄</span>今日獎懲</p>
+                  <div class="settlement-reward-grid" aria-label="今日結算結果">
+                    <div class="settlement-reward-item exp">
+                      <i data-lucide="sparkles"></i>
+                      <span>經驗值</span>
+                      <strong id="settlement-exp">+0</strong>
+                    </div>
+                    <div class="settlement-reward-item gold">
+                      <i data-lucide="coins"></i>
+                      <span>金幣</span>
+                      <strong id="settlement-gold">+0</strong>
+                    </div>
+                    <div class="settlement-reward-item hp">
+                      <i data-lucide="heart-pulse"></i>
+                      <span>生命值</span>
+                      <strong id="settlement-hp">無變化</strong>
+                    </div>
+                  </div>
+
+                  <div class="settlement-event-stack">
+                    <div class="settlement-event-row" id="settlement-status-event">
+                      <i data-lucide="shield-check"></i>
+                      <span id="settlement-status-text">角色狀態穩定</span>
+                    </div>
+                    <div class="settlement-event-row boss" id="settlement-boss-event">
+                      <i data-lucide="swords"></i>
+                      <span id="settlement-boss-text">今日未觸發習慣魔獸</span>
+                      <button type="button" id="settlement-boss-btn" hidden>前往討伐</button>
+                    </div>
+                  </div>
+                </section>
+              </div>
+
+              <aside class="settlement-advisor-slip" aria-labelledby="settlement-advisor-title">
+                <span class="advisor-slip-pin" aria-hidden="true"><i data-lucide="feather"></i></span>
+                <div class="advisor-slip-copy">
+                  <strong id="settlement-advisor-title">導師批註已更新</strong>
+                  <p id="settlement-advisor-text">完成今日結算後，公會導師會留下簡短批註。</p>
+                </div>
+                <button type="button" onclick="switchToTab('insights')">
+                  翻閱完整批註 <i data-lucide="book-open"></i>
+                </button>
+              </aside>
+
+              <button class="camp-primary-btn" id="btn-return-camp" type="button">
+                <i data-lucide="tent-tree"></i> 返回冒險者營地
+              </button>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <div class="dashboard-grid" id="legacy-dashboard-grid">
+        
+        <!-- 左側：角色狀態與今日冒險紀錄 -->
+        <div class="dashboard-left">
+          <!-- 角色屬性卡 -->
+          <section class="character-panel">
+            <div class="char-avatar-container">
+              <div class="char-avatar-wrapper">
+                <div class="char-avatar" id="character-avatar-display"><i data-lucide="shield"></i></div>
+                <div class="avatar-glow"></div>
+              </div>
+            </div>
+            
+            <div class="char-info">
+              <div class="char-identity-plate">
+                <span class="char-roster-label">公會冒險者</span>
+                <div class="char-meta">
+                  <h2 id="char-name-display">測試冒險者</h2>
+                  <span class="char-title" id="char-class-display">等級 1 戰士</span>
+                </div>
+              </div>
+              
+              <div class="status-bars">
+                <div class="status-bar-wrapper">
+                  <div class="status-label">
+                    <span><i data-lucide="heart-pulse"></i>生命值</span>
+                    <span id="hp-text">50 / 50</span>
+                  </div>
+                  <div class="progress-track hp-track">
+                    <div class="progress-fill hp-fill" id="hp-bar" style="width: 100%;"></div>
+                  </div>
+                </div>
+                <div class="status-bar-wrapper">
+                  <div class="status-label">
+                    <span><i data-lucide="sparkles"></i>冒險經驗</span>
+                    <span id="xp-text">0 / 25</span>
+                  </div>
+                  <div class="progress-track xp-track">
+                    <div class="progress-fill xp-fill" id="xp-bar" style="width: 0%;"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <!-- 能力屬性面板 -->
+            <div class="char-attributes-rpg">
+              <div class="attr-item-rpg" title="減少任務失敗時受到的生命值傷害">
+                <span class="attr-icon-rpg"><i data-lucide="heart-pulse"></i></span>
+                <span class="attr-name-rpg">健康</span>
+                <span class="attr-val-rpg" id="attr-health">10</span>
+              </div>
+              <div class="attr-item-rpg" title="加成任務結算時的金幣與經驗暴擊率">
+                <span class="attr-icon-rpg"><i data-lucide="zap"></i></span>
+                <span class="attr-name-rpg">精力</span>
+                <span class="attr-val-rpg" id="attr-energy">10</span>
+              </div>
+              <div class="attr-item-rpg" title="降低公會補給站道具所需金幣（補給折扣）">
+                <span class="attr-icon-rpg"><i data-lucide="coins"></i></span>
+                <span class="attr-name-rpg">財富</span>
+                <span class="attr-val-rpg" id="attr-wealth">10</span>
+              </div>
+              <div class="attr-item-rpg" title="提升獲得的經驗值 (EXP) 比例">
+                <span class="attr-icon-rpg"><i data-lucide="book-open"></i></span>
+                <span class="attr-name-rpg">成長</span>
+                <span class="attr-val-rpg" id="attr-growth">10</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 今日冒險紀錄 -->
+          <section class="daily-log-panel card-panel guild-logbook">
+            <div class="panel-header logbook-heading">
+              <span class="logbook-seal" aria-hidden="true"><i data-lucide="book-marked"></i></span>
+              <div>
+                <span class="logbook-kicker">公會日誌 · 每日登錄頁</span>
+                <h3>今日冒險紀錄</h3>
+                <span class="panel-subtitle">依照實際生活數值填寫，公會將據此進行任務結算</span>
+              </div>
+              <time class="logbook-date" id="logbook-date">今日</time>
+            </div>
+            <form id="daily-log-form" novalidate>
+              <section class="daily-date-policy" aria-label="紀錄日期規則">
+                <i data-lucide="calendar-clock" aria-hidden="true"></i>
+                <div><strong>紀錄日期</strong><span>可補記最近 7 天；每個日期只保留一份正式紀錄，重送會重新核定而不重複發獎。</span></div>
+                <label class="record-date-control" for="log-date"><span>卷宗日期</span><input type="date" id="log-date" required></label>
+              </section>
+              <section class="daily-draft-source" id="daily-log-source-notice" aria-live="polite" hidden>
+                <i data-lucide="wand-sparkles" aria-hidden="true"></i>
+                <p data-draft-source-copy></p>
+              </section>
+              <section class="guild-validation-notice" id="daily-log-validation" role="alert" aria-live="assertive" hidden>
+                <span class="guild-rejection-stamp" aria-hidden="true">退件</span>
+                <div>
+                  <strong>公會書記退回這頁紀錄</strong>
+                  <p id="daily-log-validation-summary">有欄位尚未完成，補寫後才能蓋章送交。</p>
+                  <ul id="daily-log-validation-list"></ul>
+                </div>
+              </section>
+              <div class="log-form-grid">
+                <fieldset class="log-ledger-block vital-ledger">
+                  <legend><span>壹</span>身體與訓練</legend>
+                <div class="form-input-group">
+                  <label for="log-sleep"><i data-lucide="moon-star"></i><span>睡眠時數<small>0–24 小時</small></span></label>
+                  <div class="engraved-input"><input type="number" step="0.5" id="log-sleep" name="sleep" value="7.5" min="0" max="24" required><span>小時</span></div>
+                </div>
+                <div class="form-input-group">
+                  <label for="log-water"><i data-lucide="droplets"></i><span>飲水總量<small>以 50ml 為刻度</small></span></label>
+                  <div class="engraved-input"><input type="number" step="50" id="log-water" name="water" value="2000" min="0" max="10000" required><span>ml</span></div>
+                </div>
+                <div class="form-input-group">
+                  <label for="log-exercise"><i data-lucide="dumbbell"></i><span>運動時間<small>以 5 分鐘為刻度</small></span></label>
+                  <div class="engraved-input"><input type="number" step="5" id="log-exercise" name="exercise" value="30" min="0" max="1440" required><span>分鐘</span></div>
+                </div>
+                <div class="form-input-group">
+                  <label for="log-study"><i data-lucide="book-open-text"></i><span>研習時間<small>以 5 分鐘為刻度</small></span></label>
+                  <div class="engraved-input"><input type="number" step="5" id="log-study" name="study" value="0" min="0" max="1440" required><span>分鐘</span></div>
+                </div>
+                </fieldset>
+                <fieldset class="log-ledger-block expense-ledger">
+                  <legend><span>貳</span>支出與飲食事件</legend>
+                <div class="form-input-group">
+                  <label for="log-expense"><i data-lucide="coins"></i><span>本日支出<small>填寫今日總支出</small></span></label>
+                  <div class="engraved-input"><input type="number" id="log-expense" name="expense" value="120" min="0" required><span>元</span></div>
+                </div>
+                <div class="form-input-group">
+                  <label for="log-impulse"><i data-lucide="shopping-bag"></i><span>衝動購物<small>只計非計畫性消費</small></span></label>
+                  <div class="engraved-input"><input type="number" id="log-impulse" name="impulse" value="0" min="0" required><span>次</span></div>
+                </div>
+                <div class="form-input-group">
+                  <label for="log-sugary-drinks"><i data-lucide="cup-soda"></i><span>含糖飲料<small>記錄今日飲用次數</small></span></label>
+                  <div class="engraved-input"><input type="number" id="log-sugary-drinks" name="sugaryDrinks" value="0" min="0" required><span>次</span></div>
+                </div>
+                </fieldset>
+              </div>
+
+              <p class="logbook-rule-note"><i data-lucide="shield-check"></i>同一天只保留一份日誌；再次送交會撤銷舊結算並依新數值重新核定，不會重複發放獎勵。</p>
+              
+              <div class="form-actions">
+                <button type="button" class="return-quest-btn" id="btn-return-quest">
+                  <i data-lucide="arrow-left"></i> 返回任務
+                </button>
+                <button type="button" class="return-quest-btn save-draft-btn" id="btn-save-draft">
+                  <span class="draft-save-mark" aria-hidden="true"><i data-lucide="bookmark-plus"></i></span>
+                  <span class="draft-save-copy"><strong>保存未完成紀錄</strong><small>不進行結算，稍後可繼續填寫</small></span>
+                </button>
+                <button type="submit" class="submit-log-btn" id="btn-submit-log">
+                  <span class="submit-stamp" aria-hidden="true"><i data-lucide="stamp"></i></span>
+                  <span><strong>蓋章送交公會</strong><small>送出日誌並進行該日任務結算</small></span>
+                </button>
+              </div>
+            </form>
+          </section>
+
+          <!-- 儲蓄罐系統 (Savings Vault) -->
+          <section class="savings-panel card-panel locked-vault-panel" style="position: relative !important; overflow: hidden !important;">
+            <!-- 擬真周邊鋼鐵鎖鏈框 + 斜對角鎖頭 + 牛皮紙告示貼紙遮罩 -->
+            <div class="chain-lock-overlay" style="position: absolute !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; z-index: 50 !important; background: rgba(18, 19, 25, 0.25) !important; backdrop-filter: none !important; border-radius: 16px !important; overflow: hidden !important; pointer-events: none !important;">
+              <svg class="real-chains-svg" viewBox="0 0 600 280" preserveAspectRatio="none" style="position: absolute !important; top: 0 !important; left: 0 !important; width: 100% !important; height: 100% !important; pointer-events: none !important; z-index: 51 !important;">
+                <defs>
+                  <!-- 金屬銀灰漸層 1 (環狀主漸層) -->
+                  <linearGradient id="chainMetalRing" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="20%" stop-color="#d0d7de" />
+                    <stop offset="45%" stop-color="#646c79" />
+                    <stop offset="70%" stop-color="#f0f4f8" />
+                    <stop offset="90%" stop-color="#383d47" />
+                    <stop offset="100%" stop-color="#1f2228" />
+                  </linearGradient>
+
+                  <!-- 金屬銀灰漸層 2 (側向金屬環) -->
+                  <linearGradient id="chainMetalSide" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stop-color="#ffffff" />
+                    <stop offset="25%" stop-color="#b0b8c4" />
+                    <stop offset="50%" stop-color="#484e5a" />
+                    <stop offset="80%" stop-color="#cfd5df" />
+                    <stop offset="100%" stop-color="#24272e" />
+                  </linearGradient>
+
+                  <!-- 黃銅鎖頭金黃漸層 -->
+                  <linearGradient id="brassLockGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                    <stop offset="0%" stop-color="#fff5c0" />
+                    <stop offset="30%" stop-color="#e8c24a" />
+                    <stop offset="65%" stop-color="#9e7419" />
+                    <stop offset="90%" stop-color="#dfba3c" />
+                    <stop offset="100%" stop-color="#543c04" />
+                  </linearGradient>
+
+                  <!-- 環狀鎖鏈與鎖頭立體陰影 -->
+                  <filter id="realChainDropShadow" x="-30%" y="-30%" width="160%" height="160%">
+                    <feDropShadow dx="3" dy="6" stdDeviation="4" flood-color="#000000" flood-opacity="0.95"/>
+                  </filter>
+                </defs>
+
+                <g filter="url(#realChainDropShadow)">
+                  <!-- A. 頂部水平鎖鏈邊框 (Top Border Row) -->
+                  <g transform="translate(18, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(45, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(72, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(99, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(126, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(153, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(180, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(207, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(234, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(261, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(288, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(315, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(342, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(369, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(396, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(423, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(450, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(477, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(504, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(531, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(558, 12)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(582, 12)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+
+                  <!-- B. 底部水平鎖鏈邊框 (Bottom Border Row) -->
+                  <g transform="translate(18, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(45, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(72, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(99, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(126, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(153, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(180, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(207, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(234, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(261, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(288, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(315, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(342, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(369, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(396, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(423, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(450, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(477, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(504, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(531, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(558, 268)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(582, 268)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+
+                  <!-- C. 左側垂直鎖鏈邊框 (Left Border Column) -->
+                  <g transform="translate(12, 38) rotate(90)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(12, 65) rotate(90)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(12, 92) rotate(90)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(12, 119) rotate(90)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(12, 146) rotate(90)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(12, 173) rotate(90)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(12, 200) rotate(90)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(12, 227) rotate(90)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+
+                  <!-- D. 右側垂直鎖鏈邊框 (Right Border Column) -->
+                  <g transform="translate(588, 38) rotate(90)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(588, 65) rotate(90)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(588, 92) rotate(90)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(588, 119) rotate(90)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(588, 146) rotate(90)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(588, 173) rotate(90)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(588, 200) rotate(90)"><rect x="-14" y="-8" width="28" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4"/></g>
+                  <g transform="translate(588, 227) rotate(90)"><rect x="-6" y="-10" width="12" height="20" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+
+                  <!-- E. 從邊框穿過卡片延伸至右下鎖頭的斜向鎖鏈 (Diagonal Chains to Lock) -->
+                  <!-- 左側至鎖頭 (Left to Padlock) -->
+                  <g transform="translate(18, 135) rotate(10)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(48, 140) rotate(10)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(78, 145) rotate(10)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(108, 150) rotate(10)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(138, 155) rotate(10)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(168, 160) rotate(10)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(198, 165) rotate(10)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(228, 170) rotate(10)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(258, 175) rotate(10)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(288, 180) rotate(10)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(318, 185) rotate(10)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(348, 190) rotate(10)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+
+                  <!-- 右側至鎖頭 (Right to Padlock) -->
+                  <g transform="translate(582, 135) rotate(-16)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(552, 142) rotate(-16)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(522, 149) rotate(-16)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(492, 156) rotate(-16)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(462, 163) rotate(-16)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(432, 170) rotate(-16)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+                  <g transform="translate(402, 177) rotate(-16)"><rect x="-15" y="-8" width="30" height="16" rx="8" fill="none" stroke="url(#chainMetalRing)" stroke-width="4.5"/></g>
+                  <g transform="translate(372, 184) rotate(-16)"><rect x="-7" y="-11" width="14" height="22" rx="5" fill="url(#chainMetalSide)" stroke="#1a1c22" stroke-width="1"/></g>
+
+                  <!-- F. 右下角黃銅鎖頭 (Brass Padlock) -->
+                  <g class="padlock-group">
+                    <!-- 鎖勾 (Shackle) -->
+                    <path d="M 352,190 L 352,152 A 18,18 0 0,1 388,152 L 388,190" fill="none" stroke="url(#chainMetalRing)" stroke-width="8.5" stroke-linecap="round"/>
+                    <!-- 鎖身 (Lock Body) -->
+                    <rect x="340" y="185" width="60" height="52" rx="6" fill="url(#brassLockGrad)" stroke="#3b2903" stroke-width="2.5"/>
+                    <!-- 鑰匙孔 (Keyhole) -->
+                    <circle cx="370" cy="205" r="4.5" fill="#140c01"/>
+                    <polygon points="367.5,205 372.5,205 374,220 366,220" fill="#140c01"/>
+                  </g>
+                </g>
+              </svg>
+
+              <!-- 2. 牛皮紙膠帶告示貼紙 (Kraft Paper Taped Note) -->
+              <div class="kraft-paper-note" style="position: absolute !important; top: 12px !important; left: 50% !important; transform: translateX(-50%) rotate(-2deg) !important; z-index: 60 !important; width: 280px !important; background: linear-gradient(135deg, #eee2cf 0%, #dec9ab 50%, #c9b190 100%) !important; border-radius: 4px !important; padding: 0.8rem 1rem 0.7rem 1rem !important; box-shadow: 0 12px 35px rgba(0,0,0,0.85), inset 0 0 25px rgba(160, 125, 80, 0.3) !important; border: 1px solid #bba481 !important; text-align: center !important; pointer-events: auto !important; user-select: none !important;">
+                <div class="masking-tape" style="position: absolute !important; top: -12px !important; left: 50% !important; transform: translateX(-50%) rotate(1deg) !important; width: 95px !important; height: 25px !important; background: rgba(245, 235, 205, 0.85) !important; backdrop-filter: blur(1.5px) !important; border-left: 2px dashed rgba(180, 160, 120, 0.7) !important; border-right: 2px dashed rgba(180, 160, 120, 0.7) !important; box-shadow: 0 2px 5px rgba(0,0,0,0.3) !important;"></div>
+                
+                <div style="font-size: 1.4rem !important; font-weight: 900 !important; color: #281e15 !important; letter-spacing: 2px !important; line-height: 1.25 !important; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.4) !important;">續改版新增</div>
+                <div style="font-size: 1.7rem !important; font-weight: 900 !important; color: #8b2318 !important; letter-spacing: 2px !important; line-height: 1.2 !important; margin: 0.15rem 0 !important;">儲蓄罐功能</div>
+                <div style="font-size: 1.2rem !important; font-weight: 900 !important; color: #281e15 !important; letter-spacing: 2px !important; display: flex !important; align-items: center !important; justify-content: center !important; gap: 0.3rem !important;">
+                  <span style="color: #8b2318 !important; font-weight: 900 !important;">\=</span>即將開放<span style="color: #8b2318 !important; font-weight: 900 !important;">=/</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="panel-header">
+              <h3><i data-lucide="vault"></i>公會金庫寶箱</h3>
+              <span class="panel-subtitle">後端連線後開放金幣存入與提領</span>
+            </div>
+            <div class="savings-content">
+              <div class="savings-display">
+                <span class="vault-icon"><i data-lucide="coins"></i></span>
+                <div class="vault-info">
+                  <span class="vault-title">已儲蓄金幣</span>
+                  <span class="vault-amount" id="savings-amount">0</span>
+                </div>
+                <span class="interest-rate-badge">功能封印中</span>
+              </div>
+              <div class="savings-actions">
+                <input type="number" id="input-savings-amount" placeholder="輸入金幣數" min="1" disabled>
+                <button class="sub-btn" id="btn-deposit-savings" onclick="handleDeposit()" disabled>存入金幣</button>
+                <button class="sub-btn" id="btn-withdraw-savings" onclick="handleWithdraw()" disabled>提領金幣</button>
+              </div>
+            </div>
+          </section>
+        </div>
+        
+        <!-- 右側：任務判定與狀態 -->
+        <div class="dashboard-right">
+          
+          <!-- 首頁簡化版 Insights 摘要 Widget -->
+          <section class="dashboard-insights-widget card-panel">
+            <div class="panel-header-inline">
+              <h3><i data-lucide="book-marked"></i>本週冒險紀錄摘要</h3>
+            </div>
+            <div class="insights-summary-grid">
+              <div class="summary-item">
+                <span class="summary-label"><i data-lucide="trophy"></i>本週最佳訓練</span>
+                <span class="summary-value" id="dash-best-habit">多喝水 500ml 💧</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label"><i data-lucide="triangle-alert"></i>最大弱點</span>
+                <span class="summary-value" id="dash-biggest-weakness">熬夜滑手機 📱</span>
+              </div>
+              <div class="summary-item">
+                <span class="summary-label"><i data-lucide="list-checks"></i>近 7 日任務完成率</span>
+                <span class="summary-value highlight-gold" id="dash-task-completion-percent">尚無可計算資料</span>
+              </div>
+            </div>
+          </section>
+
+          <!-- 角色狀態面板 -->
+          <section class="effects-panel card-panel">
+            <div class="effects-row">
+              <div class="effects-block">
+                <h4><i data-lucide="sun"></i>角色祝福</h4>
+                <div id="dashboard-buffs">
+                  <!-- JS Rendered -->
+                </div>
+              </div>
+              <div class="effects-block">
+                <h4><i data-lucide="skull"></i>角色詛咒</h4>
+                <div id="dashboard-debuffs">
+                  <!-- JS Rendered -->
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 公會導師完整批註：初始化時移至冒險者紀錄書 -->
+          <section class="ai-coach-dashboard card-panel journal-advisor-note guild-advisor-manuscript">
+            <span class="advisor-paperclip" aria-hidden="true"></span>
+            <header class="advisor-manuscript-header">
+              <div class="advisor-identity">
+                <span class="advisor-portrait" aria-hidden="true"><i data-lucide="user-round"></i></span>
+                <div>
+                  <span class="advisor-kicker">公會紀錄署 · 私人批註</span>
+                  <h3 class="ai-profile"><i data-lucide="feather"></i>公會導師批註</h3>
+                </div>
+              </div>
+              <div class="advisor-review-tools">
+                <span id="advisor-review-period">尚未累積冒險紀錄</span>
+                <button class="icon-text-btn" id="btn-re-analyze" type="button" onclick="triggerAICoach(false)">
+                  <i data-lucide="stamp"></i> 請導師重新審閱
+                </button>
+              </div>
+            </header>
+            <div class="advisor-manuscript-body">
+              <span class="advisor-quote-mark" aria-hidden="true">“</span>
+              <p id="ai-coach-bubble-text">導師正在翻閱你的冒險紀錄……</p>
+              <div class="advisor-evidence">
+                <span>紀錄佐證</span>
+                <p id="insights-ai-analysis-text">尚未累積足夠資料，請先完成每日冒險紀錄。</p>
+              </div>
+            </div>
+            <footer class="advisor-signature">
+              <span>公會生活導師</span>
+              <strong>審閱</strong>
+              <span class="advisor-wax-seal" aria-hidden="true"><i data-lucide="shield"></i></span>
+            </footer>
+          </section>
+
+          <!-- 任務看板 -->
+          <section class="task-board-new">
+            
+            <!-- 恢復與緊急補救任務 (Recovery Tasks) -->
+            <div class="task-column-new" id="col-recovery">
+              <div class="column-header">
+                <h3><i data-lucide="hourglass"></i>詛咒有效期</h3>
+              </div>
+              <div class="task-list-new" id="list-recovery-tasks">
+                <!-- JS Rendered -->
+              </div>
+            </div>
+
+            <!-- 自動判定的每日目標 (Auto Dailies) -->
+            <div class="task-column-new" id="col-auto-quests">
+              <div class="column-header">
+                <h3>📜 今日公會任務</h3>
+              </div>
+              <div class="task-list-new" id="list-auto-quests">
+                <!-- JS Rendered -->
+              </div>
+            </div>
+
+            <!-- 訓練任務與負面事件 -->
+            <div class="task-column-new" id="col-habits">
+              <div class="column-header">
+                <h3><i data-lucide="clipboard-pen-line"></i>東翼委託板</h3>
+              </div>
+              <details class="commission-scribe-desk" id="training-scribe-desk">
+                <summary><i data-lucide="feather"></i><span><strong>請書記張貼新委託</strong><small>新增訓練，或登記需要警戒的負面事件</small></span></summary>
+                <div class="habit-editor" aria-label="新增或編輯訓練任務與負面事件">
+                  <input id="input-habit" type="text" maxlength="80" placeholder="寫下委託或事件名稱" aria-label="任務或事件名稱">
+                  <select id="input-habit-direction" aria-label="紀錄類型">
+                    <option value="good">訓練委託（完成後領取獎勵）</option>
+                    <option value="bad">警戒事件（發生時扣除生命）</option>
+                  </select>
+                  <button id="btn-add-habit" type="button">蓋章張貼</button>
+                  <button id="btn-cancel-habit-edit" type="button" hidden>取消修改</button>
+                </div>
+              </details>
+              <div class="task-list-new" id="list-habits">
+                <!-- JS Rendered -->
+              </div>
+              <div class="habit-undo-bar" id="habit-undo-bar" hidden></div>
+            </div>
+
+            <!-- 公會補給站 -->
+            <div class="task-column-new" id="col-shop">
+              <div class="column-header">
+                <h3><i data-lucide="store"></i>軍需官商品目錄</h3>
+              </div>
+              <div class="task-list-new" id="list-shop-rewards">
+                <!-- JS Rendered -->
+              </div>
+            </div>
+
+          </section>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 頁面 2: 公會訓練場 -->
+    <section class="tab-pane" id="pane-training">
+      <div class="location-page training-location">
+        <header class="location-page-header">
+          <span class="location-icon"><i data-lucide="dumbbell"></i></span>
+          <div>
+            <p>公會東翼 · 木樁與委託板</p>
+            <h2>公會訓練場</h2>
+            <span>從委託板回報今日訓練；只有需要新增內容時，才請書記取出登錄簿。</span>
+          </div>
+        </header>
+        <div class="training-yard-frame">
+          <aside class="training-yard-props" aria-hidden="true">
+            <span class="practice-shield"></span>
+            <span class="practice-sword"></span>
+            <span class="training-rope"></span>
+          </aside>
+          <div class="location-content-slot" id="training-content-slot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 頁面 3: 公會補給站 -->
+    <section class="tab-pane" id="pane-supply">
+      <div class="location-page supply-location">
+        <header class="location-page-header">
+          <span class="location-icon"><i data-lucide="store"></i></span>
+          <div>
+            <p>公會西翼 · 老橡木櫃台</p>
+            <h2>公會補給站</h2>
+            <span>向軍需官查看庫存、兌換犒賞，並確認目前穿戴的冒險裝備。</span>
+          </div>
+        </header>
+        <div class="quartermaster-counter">
+          <aside class="quartermaster-booth" aria-label="軍需官與目前裝備">
+            <div class="quartermaster-portrait" role="img" aria-label="軍需官伯恩的櫃台肖像">
+              <img class="quartermaster-illustration" src="assets/art/guild-quartermaster.png" alt="" aria-hidden="true">
+            </div>
+            <div class="merchant-dialogue">
+              <span>軍需官 · 伯恩</span>
+              <p>「金幣要花在能陪你走更遠的東西上。」</p>
+              <strong><i data-lucide="coins"></i><span id="merchant-gold-count">0</span> 枚可用金幣</strong>
+            </div>
+            <section class="equipped-loadout" aria-labelledby="equipped-loadout-title">
+              <header><small>冒險者隨身裝備</small><h3 id="equipped-loadout-title">目前裝備欄</h3></header>
+              <div class="equipment-slot" id="equipped-weapon-slot" data-slot="weapon"></div>
+              <div class="equipment-slot" id="equipped-armor-slot" data-slot="armor"></div>
+              <div class="equipment-slot" id="equipped-pet-slot" data-slot="pet"></div>
+            </section>
+          </aside>
+          <div class="merchant-stockroom" id="supply-content-slot"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 冒險者紀錄書：分章閱讀，一次只呈現一個主題 -->
+    <section class="tab-pane" id="pane-insights">
+      <div class="insights-page-container guild-journal journal-reader">
+        <header class="insights-page-header journal-header">
+          <span class="journal-emblem" aria-hidden="true"><i data-lucide="book-open-text"></i></span>
+          <div class="journal-heading-copy">
+            <span class="journal-volume">公會典藏 · 冒險者卷冊</span>
+            <h2>冒險者紀錄書</h2>
+            <span class="panel-subtitle">每一筆紀錄，都是你確實走過的旅程</span>
+          </div>
+          <div class="time-toggle-group" aria-label="紀錄範圍">
+            <button class="time-toggle-btn active" data-timeframe="weekly" onclick="setInsightsTimeframe('weekly')">本週</button>
+            <button class="time-toggle-btn" data-timeframe="monthly" onclick="setInsightsTimeframe('monthly')">本月</button>
+          </div>
+        </header>
+
+        <nav class="journal-folio-tabs" aria-label="紀錄書章節">
+          <button class="active" data-journal-folio="summary" onclick="setJournalFolio('summary')"><span>第一章</span>本期手記</button>
+          <button data-journal-folio="trail" onclick="setJournalFolio('trail')"><span>第二章</span>旅程軌跡</button>
+          <button data-journal-folio="status" onclick="setJournalFolio('status')"><span>第三章</span>狀態附錄</button>
+        </nav>
+
+        <div class="journal-book-frame" aria-label="攤開的厚皮革冒險者紀錄書">
+          <span class="journal-page-stack stack-left" aria-hidden="true"></span>
+          <span class="journal-page-stack stack-right" aria-hidden="true"></span>
+          <span class="journal-raised-spine" aria-hidden="true"></span>
+          <span class="journal-corner corner-tl" aria-hidden="true"></span>
+          <span class="journal-corner corner-tr" aria-hidden="true"></span>
+          <span class="journal-corner corner-bl" aria-hidden="true"></span>
+          <span class="journal-corner corner-br" aria-hidden="true"></span>
+          <span class="journal-cover-clasp" aria-hidden="true"></span>
+          <section class="journal-folio active" data-journal-page="summary" aria-labelledby="journal-summary-title">
+            <header class="journal-folio-heading">
+              <span>第一章</span>
+              <div><h3 id="journal-summary-title">本期冒險手記</h3><p>公會書記整理的本期重點，只留下值得記住的四件事。</p></div>
+            </header>
+            <div class="journal-summary-spread">
+              <div class="relocated-content-slot journal-summary-note" id="insights-overview-slot"></div>
+              <div class="journal-insight-ledger" aria-label="本期冒險摘要">
+                <article class="journal-entry-line"><span class="journal-entry-mark"><i data-lucide="trophy"></i></span><div><small>最佳訓練</small><h4 id="insight-card-best-habit">等待真實紀錄</h4></div></article>
+                <article class="journal-entry-line"><span class="journal-entry-mark"><i data-lucide="trending-up"></i></span><div><small>最大進步</small><h4 id="insight-card-biggest-improvement">等待真實紀錄</h4></div></article>
+                <article class="journal-entry-line warning"><span class="journal-entry-mark"><i data-lucide="triangle-alert"></i></span><div><small>反覆出現的阻礙</small><h4 id="insight-card-most-bad-habit">等待真實紀錄</h4></div></article>
+                <article class="journal-entry-line"><span class="journal-entry-mark"><i data-lucide="crosshair"></i></span><div><small>下期優先事項</small><h4 id="insight-card-priority-improvement">等待真實紀錄</h4></div></article>
+              </div>
+            </div>
+            <div class="relocated-content-slot journal-advisor-margin" id="insights-advisor-slot"></div>
+            <footer class="journal-page-turn"><span>公會紀錄書 · 01</span><button onclick="setJournalFolio('trail')">翻到旅程軌跡 <i data-lucide="chevron-right"></i></button></footer>
+          </section>
+
+          <section class="journal-folio" data-journal-page="trail" aria-labelledby="journal-trail-title" hidden>
+            <header class="journal-folio-heading">
+              <span>第二章</span>
+              <div><h3 id="journal-trail-title">旅程軌跡</h3><p>只保留最能反映日常節奏的睡眠與訓練紀錄。</p></div>
+            </header>
+            <div class="journal-trail-charts chronicle-spread">
+              <figure class="journal-ink-chart sleep-chronicle"><figcaption><span class="chronicle-chapter-mark" aria-hidden="true">月</span><span><strong>睡眠月印軌跡</strong><small>公會書記以月印連起每次真實紀錄，七小時為契約基準</small></span></figcaption><div class="journey-ink-plot" id="insightsSleepChart" aria-label="睡眠時間墨水軌跡"></div></figure>
+              <figure class="journal-ink-chart training-chronicle"><figcaption><span class="chronicle-chapter-mark" aria-hidden="true">鍛</span><span><strong>訓練刻痕</strong><small>每一道墨痕代表一日運動時間，盾印代表完成三十分鐘</small></span></figcaption><div class="journey-ink-plot" id="insightsExerciseChart" aria-label="運動時間訓練刻痕"></div></figure>
+            </div>
+            <section class="journal-trail-footprint"><div><h4><i data-lucide="calendar-days"></i>公會任務足跡</h4><p>過去 30 天的完成強度；顏色越深，當日完成越完整。</p></div><div class="heatmap-container" id="insights-heatmap-grid"></div></section>
+            <footer class="journal-page-turn"><button onclick="setJournalFolio('summary')"><i data-lucide="chevron-left"></i> 返回本期手記</button><span>公會紀錄書 · 02</span><button onclick="setJournalFolio('status')">翻到狀態附錄 <i data-lucide="chevron-right"></i></button></footer>
+          </section>
+
+          <section class="journal-folio" data-journal-page="status" aria-labelledby="journal-status-title" hidden>
+            <header class="journal-folio-heading">
+              <span>第三章</span>
+              <div><h3 id="journal-status-title">角色狀態附錄</h3><p>記錄旅途中最常出現的祝福與詛咒，不以排行判斷好壞。</p></div>
+            </header>
+            <div class="journal-status-spread status-index-spread">
+              <section class="journal-status-column blessing"><header><span class="status-ledger-seal" aria-hidden="true">祝</span><div><small>公會狀態圖鑑 · 左卷</small><h4>旅途祝福</h4><p>記下曾在冒險途中生效的正面狀態。</p></div></header><div class="ranking-list status-ledger-list" id="insights-top-buffs"></div></section>
+              <section class="journal-status-column curse"><header><span class="status-ledger-seal" aria-hidden="true">咒</span><div><small>公會狀態圖鑑 · 右卷</small><h4>旅途詛咒</h4><p>記下曾經妨礙冒險進度的負面狀態。</p></div></header><div class="ranking-list status-ledger-list" id="insights-top-debuffs"></div></section>
+            </div>
+            <blockquote class="journal-closing-note">紀錄書只呈現已發生的冒險，不替冒險者編造尚未走過的故事。</blockquote>
+            <footer class="journal-page-turn"><button onclick="setJournalFolio('trail')"><i data-lucide="chevron-left"></i> 返回旅程軌跡</button><span>公會紀錄書 · 03</span></footer>
+          </section>
+        </div>
+      </div>
+    </section>
+
+    <!-- 頁面 3: 命運法典 -->
+    <section class="tab-pane" id="pane-rules">
+      <div class="rules-page-container fate-codex">
+        
+        <!-- 頁面標題與操作列 -->
+        <header class="rules-page-header codex-header">
+          <span class="codex-crest" aria-hidden="true"><i data-lucide="book-lock"></i></span>
+          <div>
+            <span class="codex-kicker">冒險者公會 · 命運檔案庫</span>
+            <h2>命運法典</h2>
+            <span class="panel-subtitle">每一道生效法則，都以公會封印約束冒險者的旅程</span>
+          </div>
+          <div class="codex-volume-mark" aria-label="法典卷號"><span>公會藏本</span><strong>卷 I</strong></div>
+        </header>
+
+        <!-- 規則分類頁籤切換 -->
+        <nav class="rules-category-tabs codex-bookmarks" aria-label="法典分類">
+          <button class="rule-cat-tab active" data-rule-cat="all" onclick="filterRulesCategory('all')"><span>總目</span>全部條文</button>
+          <button class="rule-cat-tab" data-rule-cat="daily" onclick="filterRulesCategory('daily')"><span>壹</span>公會任務</button>
+          <button class="rule-cat-tab" data-rule-cat="buff" onclick="filterRulesCategory('buff')"><span>貳</span>祝福</button>
+          <button class="rule-cat-tab" data-rule-cat="debuff" onclick="filterRulesCategory('debuff')"><span>參</span>詛咒</button>
+          <button class="rule-cat-tab" data-rule-cat="achievement" onclick="filterRulesCategory('achievement')"><span>肆</span>勳章</button>
+          <button class="rule-cat-tab" data-rule-cat="boss" onclick="filterRulesCategory('boss')"><span>伍</span>習慣魔獸</button>
+        </nav>
+
+        <div class="codex-book-spread">
+          <span class="codex-page-stack stack-left" aria-hidden="true"></span>
+          <span class="codex-page-stack stack-right" aria-hidden="true"></span>
+          <span class="codex-bottom-stack bottom-left" aria-hidden="true"></span>
+          <span class="codex-bottom-stack bottom-right" aria-hidden="true"></span>
+          <span class="codex-book-corner corner-tl" aria-hidden="true"></span>
+          <span class="codex-book-corner corner-tr" aria-hidden="true"></span>
+          <span class="codex-book-corner corner-bl" aria-hidden="true"></span>
+          <span class="codex-book-corner corner-br" aria-hidden="true"></span>
+          <span class="codex-book-ribbon" aria-hidden="true"></span>
+
+          <!-- 左頁：公會導師批註 -->
+          <section class="codex-page codex-page-left ai-recommendations-panel">
+            <div class="codex-title-page">
+              <span>公會藏本 · 卷 I</span>
+              <h2>命運法典</h2>
+              <p>卷一・日常誓約</p>
+            </div>
+            <div class="panel-header codex-page-heading">
+              <span class="codex-page-number">左頁 · 邊註</span>
+              <h3><i data-lucide="feather"></i>公會導師手記</h3>
+              <span class="panel-subtitle">導師只能提出草案，必須由冒險者親自蓋章收錄</span>
+            </div>
+            <div class="ai-rec-cards-grid" id="ai-rules-recommendations-container">
+              <!-- Rendered via JS -->
+            </div>
+          </section>
+
+          <!-- 右頁：生效中的法典條目 -->
+          <section class="codex-page codex-page-right active-rules-panel">
+            <div class="panel-header codex-page-heading">
+              <span class="codex-page-number">右頁 · 正文</span>
+              <h3><i data-lucide="scroll-text"></i>法典條文</h3>
+              <span class="panel-subtitle">紅色封印代表條文生效；破印後暫停裁定</span>
+            </div>
+            <div class="codex-recovery-tools" aria-label="法典復原工具">
+              <button type="button" onclick="restoreLastDeletedRule()"><i data-lucide="archive-restore"></i>恢復最近撤除</button>
+              <button type="button" onclick="restoreDefaultRules()"><i data-lucide="book-copy"></i>恢復公會原典</button>
+            </div>
+            <div class="rules-cards-grid" id="active-rules-container">
+              <!-- Rendered via JS -->
+            </div>
+          </section>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- 頁面 4: 屬性戰報與勳章牆 -->
+    <section class="tab-pane" id="pane-analytics">
+      <div class="analytics-layout adventurer-armory character-archive">
+        <header class="armory-header">
+          <span class="armory-crest" aria-hidden="true"><i data-lucide="shield-plus"></i></span>
+          <div>
+            <p>公會地下層 · 冒險者檔案庫</p>
+            <h2>角色檔案與榮譽櫃</h2>
+            <span>翻閱能力卷軸，查看角色裝束與公會正式授予的勳章。</span>
+          </div>
+        </header>
+
+        <section class="adventurer-dossier">
+          <aside class="portrait-niche">
+            <div class="portrait-frame">
+              <div class="character-silhouette" id="archive-character-silhouette" role="img" aria-label="公會登錄的冒險者肖像">
+                <img class="adventurer-portrait-art" src="assets/art/guild-adventurer.png" alt="" aria-hidden="true">
+              </div>
+            </div>
+            <div class="portrait-nameplate">
+              <small>公會登錄冒險者</small>
+              <h3 id="archive-character-name">測試冒險者</h3>
+              <span id="archive-character-rank">等級 1 戰士</span>
+            </div>
+          </aside>
+
+          <div class="dossier-scroll-column">
+            <section class="ability-scroll">
+              <div class="scroll-heading"><span>能力卷軸 · 壹</span><h3><i data-lucide="scroll"></i>四項能力刻印</h3></div>
+              <div class="analytics-status-grid" id="analytics-status-slot"></div>
+            </section>
+
+          </div>
+        </section>
+
+        <section class="achievements-section medal-cabinet">
+          <div class="cabinet-heading">
+            <span><i data-lucide="award"></i></span>
+            <div><p>實木榮譽櫃 · 每枚勳章只授予一次</p><h3>冒險者實體勳章櫃</h3></div>
+          </div>
+          <div class="achievements-grid" id="achievements-grid">
+            <!-- Dynamic Achievements -->
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <!-- 頁面 5: 習慣魔獸戰役 -->
+    <section class="tab-pane" id="pane-boss-battle">
+      <div class="boss-battle-container boss-theater">
+        <header class="boss-info-panel boss-writ">
+          <span class="boss-writ-seal" aria-hidden="true"><i data-lucide="swords"></i></span>
+          <div class="boss-header">
+            <div class="boss-level-tag">公會緊急討伐令</div>
+            <h2 id="boss-name">習慣魔獸尚未現身</h2>
+            <p class="boss-description" id="boss-desc">公會會依據近期真實紀錄，說明習慣魔獸被召喚的原因。</p>
+          </div>
+          
+          <div class="boss-hp-wrapper">
+            <div class="boss-hp-label">
+              <span><i data-lucide="heart-crack"></i>魔獸生命值</span>
+              <span id="boss-hp-text">100 / 100</span>
+            </div>
+            <div class="progress-track boss-hp-track">
+              <div class="progress-fill boss-hp-fill" id="boss-hp-bar" style="width: 100%;"></div>
+            </div>
+          </div>
+        </header>
+
+        <div class="boss-recovery-slot" id="boss-recovery-slot"></div>
+
+        <div class="boss-arena">
+          <div class="arena-background battle-stage">
+            <div class="combatant player-combatant">
+              <span class="combatant-title">公會冒險者</span>
+              <div class="arena-player" id="arena-player-avatar"><img src="assets/art/guild-adventurer.png" alt="" aria-hidden="true"></div>
+              <strong id="arena-player-name">冒險者</strong>
+            </div>
+            <div class="battle-vs" aria-label="對戰"><span class="battle-axis-mark" aria-hidden="true"></span><span>討伐中</span></div>
+            <div class="combatant boss-combatant">
+              <span class="combatant-title">現身魔獸</span>
+              <div class="arena-boss" id="arena-boss-avatar"><span class="boss-awaiting-mark" aria-hidden="true"></span></div>
+              <strong id="arena-boss-name">未知魔獸</strong>
+            </div>
+          </div>
+          
+          <div class="boss-challenge-actions battle-contract">
+            <span class="battle-contract-kicker">擊敗魔獸的唯一途徑</span>
+            <h4><i data-lucide="scroll-text"></i>改善習慣挑戰契約</h4>
+            <div id="boss-challenge-task-container">
+              <!-- Render active habit monster contract -->
+            </div>
+          </div>
+
+          <div class="battle-logs-panel battle-scroll">
+            <h3><i data-lucide="scroll"></i>討伐紀錄</h3>
+            <div class="battle-logs" id="battle-logs">
+              <!-- Log messages -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 頁面 6: 遊戲選單 -->
+    <section class="tab-pane" id="pane-privacy-settings">
+      <div class="privacy-layout game-menu-shell archive-desk-scene">
+        <article class="game-menu-book" aria-labelledby="game-menu-title">
+        <header class="game-menu-header leather-book-header">
+          <span class="game-menu-crest" aria-hidden="true"><i data-lucide="shield-cog"></i></span>
+          <div><p>冒險者公會 · 個人檔案室</p><h2 id="game-menu-title">遊戲選單</h2><span>管理角色資料、主線判定預算與本機冒險紀錄。</span></div>
+        </header>
+
+        <div class="game-menu-book-body">
+          <span class="game-menu-book-spine" aria-hidden="true"></span>
+          <span class="game-menu-metal-corner corner-top-left" aria-hidden="true"></span>
+          <span class="game-menu-metal-corner corner-top-right" aria-hidden="true"></span>
+          <span class="game-menu-metal-corner corner-bottom-left" aria-hidden="true"></span>
+          <span class="game-menu-metal-corner corner-bottom-right" aria-hidden="true"></span>
+
+        <div class="game-menu-page game-menu-left-page">
+        <section class="settings-card adventurer-profile-board profile-register-sheet">
+          <div class="menu-section-heading"><span>左頁 · 身分登錄</span><h3><i data-lucide="contact-round"></i>冒險者資料</h3></div>
+          <div class="settings-form">
+            <div class="form-group">
+              <label for="settings-name"><i data-lucide="signature"></i>冒險者姓名</label>
+              <input type="text" id="settings-name" value="測試冒險者">
+            </div>
+            <div class="form-group">
+              <label for="settings-goal"><i data-lucide="scroll-text"></i>主線契約</label>
+              <select id="settings-goal">
+                <option value="sleep">改善睡眠</option>
+                <option value="spending">控制衝動消費</option>
+                <option value="exercise">建立運動習慣</option>
+                <option value="learning">培養學習習慣</option>
+              </select>
+              <small class="settings-field-note" id="settings-goal-status">未設定主線契約</small>
+            </div>
+            <div class="form-group">
+              <label for="settings-budget"><i data-lucide="coins"></i>每日消費預算</label>
+              <div class="menu-input-unit"><input type="number" id="settings-budget" value="500"><span>元</span></div>
+            </div>
+            
+            <div class="settings-actions-buttons">
+              <button class="cta-btn profile-save-btn" onclick="saveSettings()"><i data-lucide="stamp"></i>蓋章保存冒險者資料</button>
+            </div>
+          </div>
+        </section>
+        </div>
+
+        <div class="game-menu-page game-menu-right-page">
+        <section class="settings-card save-archive-board">
+          <div class="menu-section-heading"><span>右頁 · 公會卷宗櫃</span><h3><i data-lucide="archive-restore"></i>存檔保管</h3></div>
+          <div class="save-archive-copy">
+            <strong>把本機存檔封裝成可驗證的公會卷宗</strong>
+            <p>匯入前會先核對格式與校驗碼、顯示紀錄摘要，確認後才會覆蓋；系統同時保留一份匯入前備份。</p>
+          </div>
+          <div class="save-archive-actions">
+            <button type="button" class="archive-action-btn" onclick="exportSaveArchive()"><i data-lucide="download"></i><span><strong>匯出存檔</strong><small>下載 JSON 卷宗</small></span></button>
+            <button type="button" class="archive-action-btn" onclick="document.getElementById('save-import-file').click()"><i data-lucide="file-up"></i><span><strong>匯入並驗證</strong><small>預覽後才覆蓋</small></span></button>
+            <button type="button" class="archive-action-btn secondary" id="restore-pre-import-btn" onclick="restorePreImportBackup()"><i data-lucide="history"></i><span><strong>還原匯入前備份</strong><small>僅在曾匯入後可用</small></span></button>
+          </div>
+          <input type="file" id="save-import-file" accept="application/json,.json" onchange="handleSaveArchiveFile(event)" hidden>
+        </section>
+
+        <section class="privacy-card data-charter-book charter-document-pocket">
+          <div class="menu-section-heading"><span>右頁 · 保管條款</span><h3><i data-lucide="book-lock"></i>冒險者資料章程</h3></div>
+          <div class="privacy-content">
+            <article><span>第一條</span><div><strong>資料只保存在這台裝置</strong><p>你填寫的睡眠、飲水、運動及消費紀錄，皆直接儲存在目前瀏覽器的 localStorage，不會自動上傳至伺服器。</p></div></article>
+            <article><span>第二條</span><div><strong>公會導師只分析本機紀錄</strong><p>目前的啟發式分析完全在瀏覽器前端執行，不會將冒險紀錄交給第三方大型語言模型。</p></div></article>
+            <article><span>第三條</span><div><strong>你保有匯出與完整刪除權</strong><p>你可以先匯出存檔卷宗，再清空這台裝置中的冒險者檔案、健康紀錄、消費資料與遊戲進度；未匯出便刪除的資料無法復原。</p></div></article>
+          </div>
+          <div class="data-danger-seal">
+            <div><i data-lucide="triangle-alert"></i><span><strong>抹除冒險者檔案</strong><small>永久清除本機所有 LifeQuest 資料</small></span></div>
+            <button class="danger-btn" onclick="confirmResetAll()"><i data-lucide="trash-2"></i>刪除所有紀錄</button>
+          </div>
+        </section>
+        </div>
+        </div>
+        </article>
+      </div>
+    </section>
+
+  </main>
+
+
+
+  <!-- 首次進入：冒險者公會三入口 -->
+  <div class="overlay auth-overlay" id="auth-overlay">
+    <div class="auth-stage" id="auth-home-view">
+      <header class="auth-brand" aria-label="LifeQuest Real Life RPG">
+        <span class="auth-brand-line" aria-hidden="true"></span>
+        <div class="auth-brand-lockup">
+          <span class="auth-brand-crest" aria-hidden="true"><i data-lucide="shield"></i></span>
+          <strong>LIFEQUEST</strong>
+          <small>REAL LIFE RPG</small>
+        </div>
+        <span class="auth-brand-line" aria-hidden="true"></span>
+      </header>
+
+      <section class="auth-guild-panel" role="dialog" aria-modal="true" aria-labelledby="auth-title" aria-describedby="auth-description">
+        <header class="auth-guild-intro">
+          <p class="auth-eyebrow">歡迎來到</p>
+          <h1 id="auth-title">LifeQuest 冒險者公會</h1>
+          <p id="auth-description" class="auth-description">踏上屬於你的冒險旅程，成為更好的自己！</p>
+        </header>
+
+        <div class="auth-entry-grid" aria-label="選擇進入冒險者公會的方式">
+          <article class="auth-entry-card auth-entry-login">
+            <span class="auth-entry-crest" aria-hidden="true"><i data-lucide="shield"></i></span>
+            <div class="auth-entry-copy">
+              <h2>登入</h2>
+              <strong>已有帳號的冒險者</strong>
+              <p>登入後繼續你的冒險吧！</p>
+            </div>
+            <button class="auth-entry-button auth-entry-button-active" id="auth-open-login" type="button" onclick="showAuthLoginPage()">
+              <span>登入</span><i data-lucide="chevron-right" aria-hidden="true"></i>
+            </button>
+            <small class="auth-entry-status auth-entry-status-open"><i data-lucide="door-open" aria-hidden="true"></i> 登入介面</small>
+          </article>
+
+          <article class="auth-entry-card auth-entry-register">
+            <span class="auth-entry-crest" aria-hidden="true"><i data-lucide="feather"></i></span>
+            <div class="auth-entry-copy">
+              <h2>註冊</h2>
+              <strong>還沒有帳號？</strong>
+              <p>註冊新帳號，開啟冒險旅程！</p>
+            </div>
+            <button class="auth-entry-button auth-entry-button-active" id="auth-open-register" type="button" onclick="showAuthRegisterPage()">
+              <span>註冊</span><i data-lucide="chevron-right" aria-hidden="true"></i>
+            </button>
+            <small class="auth-entry-status auth-entry-status-open"><i data-lucide="scroll-text" aria-hidden="true"></i> 註冊介面</small>
+          </article>
+
+          <article class="auth-entry-card auth-entry-guest">
+            <span class="auth-entry-crest" aria-hidden="true"><i data-lucide="user-round"></i></span>
+            <div class="auth-entry-copy">
+              <h2>訪客體驗</h2>
+              <strong>不登入也能玩！</strong>
+              <p>以訪客身分體驗冒險內容。</p>
+            </div>
+            <button class="auth-entry-button auth-entry-button-active" type="button" onclick="selectAuthMethod('guest')">
+              <span>訪客體驗</span><i data-lucide="chevron-right" aria-hidden="true"></i>
+            </button>
+            <small class="auth-entry-status auth-entry-status-open"><i data-lucide="door-open" aria-hidden="true"></i> 目前開放</small>
+          </article>
+        </div>
+
+        <p class="auth-demo-note">
+          <i data-lucide="shield-check" aria-hidden="true"></i>
+          訪客紀錄目前只保存在這台裝置中。
+        </p>
+      </section>
+
+      <footer class="auth-choice-note">
+        <span aria-hidden="true"></span>
+        <p>你的選擇，將決定你在 LifeQuest 的冒險方式</p>
+        <span aria-hidden="true"></span>
+      </footer>
+    </div>
+
+    <div class="auth-login-stage" id="auth-login-view" hidden>
+      <header class="auth-login-topbar">
+        <div class="auth-login-brand" aria-label="LifeQuest Real Life RPG">
+          <span aria-hidden="true"><i data-lucide="shield"></i></span>
+          <div><strong>LifeQuest</strong><small>REAL LIFE RPG</small></div>
+        </div>
+        <button class="auth-back-button" type="button" onclick="showAuthEntrancePage()">
+          <i data-lucide="chevron-left" aria-hidden="true"></i><span>返回首頁</span>
+        </button>
+      </header>
+
+      <section class="auth-login-panel" role="dialog" aria-modal="true" aria-labelledby="auth-login-title" aria-describedby="auth-login-description">
+        <span class="auth-login-guild-crest" aria-hidden="true"><i data-lucide="shield"></i></span>
+        <header class="auth-login-heading">
+          <p>ADVENTURERS' GUILD</p>
+          <h1 id="auth-login-title">冒險者登入</h1>
+          <span id="auth-login-description">歡迎回到你的冒險旅程</span>
+        </header>
+
+        <div class="auth-login-layout">
+          <form class="auth-login-form" id="auth-login-form" novalidate>
+            <label class="auth-field-label" for="auth-account">帳號 / Email</label>
+            <div class="auth-input-shell">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+              <input id="auth-account" name="username" type="text" autocomplete="username" placeholder="請輸入你的帳號或 Email">
+            </div>
+
+            <label class="auth-field-label" for="auth-password">密碼</label>
+            <div class="auth-input-shell auth-password-shell">
+              <i data-lucide="lock-keyhole" aria-hidden="true"></i>
+              <input id="auth-password" name="password" type="password" autocomplete="current-password" placeholder="請輸入你的密碼">
+              <button class="auth-password-toggle" id="auth-password-toggle" type="button" aria-label="顯示密碼" aria-pressed="false" onclick="toggleAuthPasswordVisibility()">
+                <i class="password-eye-show" data-lucide="eye" aria-hidden="true"></i>
+                <i class="password-eye-hide" data-lucide="eye-off" aria-hidden="true"></i>
+              </button>
+            </div>
+
+            <div class="auth-form-options">
+              <label class="auth-remember-option" for="auth-remember">
+                <input id="auth-remember" type="checkbox">
+                <span>記住我</span>
+              </label>
+              <button class="auth-text-action" type="button" disabled>忘記密碼？</button>
+            </div>
+
+            <button class="auth-login-submit" id="auth-login-submit" type="submit">
+              <span aria-hidden="true">◆</span><strong>登入</strong><span aria-hidden="true">◆</span>
+            </button>
+            <p class="auth-login-pending" id="auth-login-status" role="status" aria-live="polite"><i data-lucide="shield-check" aria-hidden="true"></i> 使用公會帳號登入會員卷宗</p>
+
+            <div class="auth-login-divider" aria-hidden="true"><span></span><strong>其他選項</strong><span></span></div>
+
+            <button class="auth-login-guest" type="button" onclick="selectAuthMethod('guest')">
+              <i data-lucide="user-round" aria-hidden="true"></i>
+              <span>訪客體驗（不登入直接開始）</span>
+              <i data-lucide="chevron-right" aria-hidden="true"></i>
+            </button>
+
+            <div class="auth-register-prompt">
+              <span>還沒有帳號？</span>
+              <button type="button" onclick="showAuthRegisterPage()">立即註冊</button>
+            </div>
+          </form>
+
+          <aside class="auth-login-benefits auth-vault-notice" aria-label="冒險者卷宗保管說明">
+            <div class="auth-vault-index">
+              <span>公會檔案庫 · 私人卷宗</span>
+              <strong>LQ–01</strong>
+            </div>
+            <h2>冒險者卷宗<br>保管說明</h2>
+            <p class="auth-vault-lead">會員身分服務已連線；後續遊戲資料開放後，公會書記才會依帳號保管下列旅程紀錄。</p>
+            <ol class="auth-vault-clauses">
+              <li><span>壹</span><p>承接同一份任務進度與冒險經驗</p></li>
+              <li><span>貳</span><p>留存公會結算與勳章授予紀錄</p></li>
+              <li><span>參</span><p>依真實日誌整理個人成長卷冊</p></li>
+            </ol>
+            <div class="auth-vault-seal-row">
+              <span class="auth-vault-seal" aria-hidden="true"><i data-lucide="shield-check"></i></span>
+              <div><small>目前保管狀態</small><strong>會員身分服務已連線</strong></div>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
+
+    <div class="auth-login-stage auth-register-stage" id="auth-register-view" hidden>
+      <header class="auth-login-topbar">
+        <div class="auth-login-brand" aria-label="LifeQuest Real Life RPG">
+          <span aria-hidden="true"><i data-lucide="shield"></i></span>
+          <div><strong>LifeQuest</strong><small>REAL LIFE RPG</small></div>
+        </div>
+        <button class="auth-back-button" type="button" onclick="showAuthEntrancePage()">
+          <i data-lucide="chevron-left" aria-hidden="true"></i><span>返回首頁</span>
+        </button>
+      </header>
+
+      <section class="auth-login-panel auth-register-panel" role="dialog" aria-modal="true" aria-labelledby="auth-register-title" aria-describedby="auth-register-description">
+        <span class="auth-login-guild-crest" aria-hidden="true"><i data-lucide="shield-plus"></i></span>
+        <header class="auth-login-heading auth-register-heading">
+          <p>ADVENTURERS' GUILD</p>
+          <h1 id="auth-register-title">冒險者卷宗登記</h1>
+          <span id="auth-register-description">建立一份屬於你的公會身分卷宗</span>
+        </header>
+
+        <div class="auth-register-dossier-meta" aria-label="冒險者卷宗資料">
+          <div><small>卷宗類別</small><strong>新進冒險者登記</strong></div>
+          <div><small>卷宗編號</small><strong>LQ–REG–01</strong></div>
+          <p role="note"><i data-lucide="feather" aria-hidden="true"></i>書記官註記：請依欄位逐項完成，紅色批註表示資料仍需校正。</p>
+        </div>
+
+        <form class="auth-register-form" id="auth-register-form" novalidate>
+          <div class="auth-register-field auth-register-field--identity">
+            <div class="auth-register-label-row">
+              <label class="auth-field-label" for="auth-register-name">冒險者名稱</label>
+            </div>
+            <div class="auth-input-shell">
+              <i data-lucide="badge" aria-hidden="true"></i>
+              <input id="auth-register-name" name="displayName" type="text" autocomplete="nickname" minlength="2" maxlength="16" placeholder="請輸入你的冒險者名稱" aria-describedby="auth-register-name-error">
+            </div>
+            <span class="auth-register-note">2–16 個字元，可使用中英文字與數字</span>
+            <p class="auth-register-error" id="auth-register-name-error" aria-live="polite" hidden></p>
+          </div>
+
+          <div class="auth-register-field">
+            <div class="auth-register-label-row">
+              <label class="auth-field-label" for="auth-register-email">Email / 電子郵件</label>
+            </div>
+            <div class="auth-input-shell">
+              <i data-lucide="mail" aria-hidden="true"></i>
+              <input id="auth-register-email" name="email" type="email" autocomplete="email" placeholder="請輸入你的 Email" aria-describedby="auth-register-email-error">
+            </div>
+            <span class="auth-register-note">公會將以此地址辨識你的帳號</span>
+            <p class="auth-register-error" id="auth-register-email-error" aria-live="polite" hidden></p>
+          </div>
+
+          <fieldset class="auth-register-seal-group">
+            <legend><i data-lucide="stamp" aria-hidden="true"></i><span>卷宗封印</span><small>設定開啟個人卷宗的密語</small></legend>
+            <div class="auth-register-field">
+              <div class="auth-register-label-row">
+                <label class="auth-field-label" for="auth-register-password">密碼</label>
+              </div>
+              <div class="auth-input-shell auth-password-shell">
+                <i data-lucide="lock-keyhole" aria-hidden="true"></i>
+                <input id="auth-register-password" name="newPassword" type="password" autocomplete="new-password" placeholder="請設定你的密碼" aria-describedby="auth-register-password-error">
+                <button class="auth-password-toggle" id="auth-register-password-toggle" type="button" aria-label="顯示密碼" aria-pressed="false" onclick="toggleAuthPasswordVisibility('auth-register-password', 'auth-register-password-toggle')">
+                  <i class="password-eye-show" data-lucide="eye" aria-hidden="true"></i>
+                  <i class="password-eye-hide" data-lucide="eye-off" aria-hidden="true"></i>
+                </button>
+              </div>
+              <span class="auth-register-note">至少 12 個字元，支援長密碼與易記的密語句</span>
+              <p class="auth-register-error" id="auth-register-password-error" aria-live="polite" hidden></p>
+            </div>
+            <div class="auth-register-field">
+              <div class="auth-register-label-row">
+                <label class="auth-field-label" for="auth-register-confirm">確認密碼</label>
+              </div>
+              <div class="auth-input-shell auth-password-shell">
+                <i data-lucide="lock-keyhole" aria-hidden="true"></i>
+                <input id="auth-register-confirm" name="confirmPassword" type="password" autocomplete="new-password" placeholder="請再次輸入你的密碼" aria-describedby="auth-register-confirm-error">
+                <button class="auth-password-toggle" id="auth-register-confirm-toggle" type="button" aria-label="顯示確認密碼" aria-pressed="false" onclick="toggleAuthPasswordVisibility('auth-register-confirm', 'auth-register-confirm-toggle')">
+                  <i class="password-eye-show" data-lucide="eye" aria-hidden="true"></i>
+                  <i class="password-eye-hide" data-lucide="eye-off" aria-hidden="true"></i>
+                </button>
+              </div>
+              <span class="auth-register-note">再次輸入相同密語，完成雙重封印</span>
+              <p class="auth-register-error" id="auth-register-confirm-error" aria-live="polite" hidden></p>
+            </div>
+          </fieldset>
+
+          <div class="auth-register-terms-wrap">
+            <label class="auth-register-terms" for="auth-register-terms">
+              <input id="auth-register-terms" type="checkbox" aria-describedby="auth-register-terms-error">
+              <span>我已閱讀並同意
+                <span class="auth-policy-link" role="link" aria-disabled="true" tabindex="0" title="條款頁尚未開放">《使用條款》</span>
+                與
+                <span class="auth-policy-link" role="link" aria-disabled="true" tabindex="0" title="政策頁尚未開放">《隱私權政策》</span>
+              </span>
+            </label>
+            <p class="auth-register-error" id="auth-register-terms-error" aria-live="polite" hidden></p>
+          </div>
+
+          <button class="auth-register-submit" id="auth-register-submit" type="submit" disabled>
+            <span aria-hidden="true">◆</span><strong>建立冒險者帳號</strong><span aria-hidden="true">◆</span>
+          </button>
+          <p class="auth-login-pending" id="auth-register-status" role="status" aria-live="polite"><i data-lucide="shield-check" aria-hidden="true"></i> 建立後將初始化你的會員卷宗</p>
+
+          <div class="auth-login-divider" aria-hidden="true"><span></span><strong>或</strong><span></span></div>
+          <div class="auth-register-login-link">
+            <span>已有帳號？</span>
+            <button type="button" onclick="showAuthLoginPage()">立即登入</button>
+          </div>
+        </form>
+      </section>
+
+      <footer class="auth-choice-note auth-register-footer">
+        <span aria-hidden="true"></span>
+        <p>你的選擇，將決定你在 LifeQuest 的冒險方式</p>
+        <span aria-hidden="true"></span>
+      </footer>
+    </div>
+
+    <div class="auth-login-stage" id="auth-member-view" hidden>
+      <header class="auth-login-topbar">
+        <div class="auth-login-brand" aria-label="LifeQuest Real Life RPG">
+          <span aria-hidden="true"><i data-lucide="shield-check"></i></span>
+          <div><strong>LifeQuest</strong><small>REAL LIFE RPG</small></div>
+        </div>
+      </header>
+      <section class="auth-login-panel auth-member-panel" role="dialog" aria-modal="true" aria-labelledby="auth-member-title">
+        <span class="auth-login-guild-crest" aria-hidden="true"><i data-lucide="badge-check"></i></span>
+        <header class="auth-login-heading">
+          <p>ADVENTURERS' GUILD</p>
+          <h1 id="auth-member-title">會員卷宗已連線</h1>
+          <span>公會已載入你的正式會員資料與主線契約</span>
+        </header>
+        <div class="auth-member-summary">
+          <div><small>冒險者</small><strong id="auth-member-name">—</strong></div>
+          <div><small>核心主線</small><strong id="auth-member-main-quest">—</strong></div>
+        </div>
+        <p class="auth-login-pending" id="auth-member-status" role="status" aria-live="polite">會員主線由雲端保存；目前不會載入或覆蓋訪客存檔。</p>
+        <div class="auth-member-phase3-actions" id="auth-member-phase3-actions" hidden>
+          <button type="button" data-member-workspace="draft"><i data-lucide="file-pen-line"></i><strong>今日冒險</strong><small>保存草稿或送交公會結算</small></button>
+          <button type="button" data-member-workspace="habits"><i data-lucide="clipboard-list"></i><strong>訓練與事件</strong><small>回報習慣並讀取核定結果</small></button>
+          <button type="button" data-member-workspace="rules"><i data-lucide="scroll-text"></i><strong>規則偏好</strong><small>只調整系統條文啟用狀態</small></button>
+        </div>
+        <button class="auth-login-submit" id="auth-member-retry" type="button" hidden>
+          <span aria-hidden="true">◆</span><strong>重新讀取會員卷宗</strong><span aria-hidden="true">◆</span>
+        </button>
+        <button class="auth-login-submit" id="auth-logout-submit" type="button">
+          <span aria-hidden="true">◆</span><strong>登出會員卷宗</strong><span aria-hidden="true">◆</span>
+        </button>
+      </section>
+    </div>
+  </div>
+
+  <!-- onboarding 第二步：選擇目標 -->
+  <div class="overlay" id="onboarding-overlay">
+    <div class="modal onboarding-modal" role="dialog" aria-modal="true" aria-labelledby="goal-onboarding-title">
+      <div class="contract-board-header">
+        <div class="contract-board-seal" aria-hidden="true">
+          <i data-lucide="scroll-text"></i>
+        </div>
+        <div class="contract-board-heading">
+          <p class="onboarding-step">公會契約簿 · 第一章</p>
+          <h2 id="goal-onboarding-title">選擇你的第一份主線契約</h2>
+          <p>公會將依照這份契約，安排最適合你的每日任務。</p>
+          <div class="contract-oath">
+            <i data-lucide="feather"></i>
+            <p>「選擇一項最想改善的生活目標。契約成立後，仍可在日後調整公會任務。」</p>
+          </div>
+        </div>
+      </div>
+      
+      <div class="goal-selection-grid">
+        <button class="goal-select-card" onclick="selectOnboardingGoal('sleep')">
+          <span class="goal-contract-number">契約 01</span>
+          <span class="goal-icon" aria-hidden="true"><i data-lucide="moon-star"></i></span>
+          <span class="goal-copy">
+            <span class="goal-title">改善睡眠</span>
+            <span class="goal-desc">建立規律作息，恢復冒險所需的精力</span>
+          </span>
+          <span class="goal-action" aria-hidden="true"><span>接受</span><i data-lucide="chevron-right"></i></span>
+        </button>
+        <button class="goal-select-card" onclick="selectOnboardingGoal('spending')">
+          <span class="goal-contract-number">契約 02</span>
+          <span class="goal-icon" aria-hidden="true"><i data-lucide="coins"></i></span>
+          <span class="goal-copy">
+            <span class="goal-title">控制衝動消費</span>
+            <span class="goal-desc">守住每日預算，累積公會金庫資源</span>
+          </span>
+          <span class="goal-action" aria-hidden="true"><span>接受</span><i data-lucide="chevron-right"></i></span>
+        </button>
+        <button class="goal-select-card" onclick="selectOnboardingGoal('exercise')">
+          <span class="goal-contract-number">契約 03</span>
+          <span class="goal-icon" aria-hidden="true"><i data-lucide="dumbbell"></i></span>
+          <span class="goal-copy">
+            <span class="goal-title">建立運動習慣</span>
+            <span class="goal-desc">完成每日鍛鍊，提高體能與戰鬥續航</span>
+          </span>
+          <span class="goal-action" aria-hidden="true"><span>接受</span><i data-lucide="chevron-right"></i></span>
+        </button>
+        <button class="goal-select-card" onclick="selectOnboardingGoal('learning')">
+          <span class="goal-contract-number">契約 04</span>
+          <span class="goal-icon" aria-hidden="true"><i data-lucide="book-open-text"></i></span>
+          <span class="goal-copy">
+            <span class="goal-title">培養學習習慣</span>
+            <span class="goal-desc">研習知識與技能，提升角色成長屬性</span>
+          </span>
+          <span class="goal-action" aria-hidden="true"><span>接受</span><i data-lucide="chevron-right"></i></span>
+        </button>
+      </div>
+      <div class="member-onboarding-controls" id="member-onboarding-controls" hidden>
+        <p id="member-onboarding-status" role="status" aria-live="polite">請選擇一份主線契約；選擇後將由公會雲端保存。</p>
+        <button type="button" class="return-quest-btn" id="member-onboarding-logout">
+          <i data-lucide="log-out"></i><strong>登出會員卷宗</strong>
+        </button>
+      </div>
+      <div class="contract-book-folio" aria-hidden="true"><span>公會契約簿</span><strong>第一頁</strong></div>
+    </div>
+  </div>
+
+  <!-- 系統事件彈出框 -->
+  <div class="overlay" id="achievement-overlay" data-variant="default" aria-hidden="true">
+    <div class="modal system-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" tabindex="-1">
+      <p class="modal-contract-kicker" id="modal-kicker">公會契約登錄簿</p>
+      <div class="modal-icon" id="modal-icon">🏆</div>
+      <h2 id="modal-title">解鎖勳章！</h2>
+      <div class="modal-contract-goal" aria-label="已登錄的契約目標">
+        <span>契約目標</span>
+        <strong id="modal-goal-name"></strong>
+      </div>
+      <div class="modal-erasure-receipt" id="modal-erasure-receipt" hidden>
+        <span>銷毀範圍</span>
+        <strong>這台裝置的 LifeQuest 存檔</strong>
+        <small>角色資料 · 生活紀錄 · 遊戲進度</small>
+      </div>
+      <p id="modal-desc">恭喜完成此挑戰！獲得獎勵 💎 x 5</p>
+      <div class="mentor-note-signature" aria-hidden="true">
+        <span>公會生活導師</span>
+        <strong>審閱中</strong>
+      </div>
+      <div class="modal-action-row">
+        <button class="cta-btn secondary" id="modal-cancel-btn" type="button" hidden>取消</button>
+        <button class="cta-btn" id="modal-close-btn" type="button">確定</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    window.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) window.lucide.createIcons();
+    });
+  </script>
+  <script src="modalFocusManager.js?v=1"></script>
+  <script src="dailyFormSubmission.js?v=1"></script>
+  <!-- Load App Script -->
+  <script src="app.js?v=60&hardening=member-dossier-flow"></script>
+</body>
+</html>

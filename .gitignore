@@ -1,0 +1,34 @@
+# Dependencies and local npm cache (including CLI binaries).
+node_modules/
+.npm-cache/
+
+# Rebuildable Netlify artifact; keep source and release tooling in Git.
+/dist/
+
+# Local environment values; only a credential-free example may be committed.
+.env
+.env.*
+!.env.example
+
+# Logs, test coverage and local scratch/cache directories.
+*.log
+coverage/
+temp/
+tmp/
+.cache/
+
+# OS and editor temporary files.
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+.#*
+
+# Generated Supabase CLI metadata only, never migrations/functions/config.
+/supabase/.temp/
+/supabase/.branches/
+
+# Private reference screenshot, not a LifeQuest runtime asset.
+/image.png

@@ -1,0 +1,1423 @@
+{
+  "tables": [
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwd/postgres"
+      ],
+      "rls": true,
+      "name": "command_operations",
+      "owner": "postgres",
+      "schema": "private"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "boss_actions",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "boss_encounters",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "authenticated=r/postgres",
+        "service_role=arwdDxtm/postgres"
+      ],
+      "rls": true,
+      "name": "custom_habits",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "authenticated=r/postgres",
+        "service_role=arwdDxtm/postgres"
+      ],
+      "rls": true,
+      "name": "daily_drafts",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "daily_entries",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "daily_entry_revisions",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=rwU/postgres",
+        "anon=rwU/postgres",
+        "authenticated=rwU/postgres",
+        "service_role=rwU/postgres"
+      ],
+      "rls": false,
+      "name": "daily_entry_revisions_id_seq",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "economy_transactions",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "habit_events",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "item_catalog",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "member_game_roots",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "player_achievements",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "player_equipment",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "player_inventory",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "player_reward_tickets",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "player_states",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "profiles",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "resource_ledger",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=rwU/postgres",
+        "anon=rwU/postgres",
+        "authenticated=rwU/postgres",
+        "service_role=rwU/postgres"
+      ],
+      "rls": false,
+      "name": "resource_ledger_id_seq",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "authenticated=r/postgres",
+        "service_role=arwdDxtm/postgres"
+      ],
+      "rls": true,
+      "name": "rule_preferences",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres",
+        "authenticated=r/postgres"
+      ],
+      "rls": true,
+      "name": "status_effects",
+      "owner": "postgres",
+      "schema": "public"
+    }
+  ],
+  "schemas": [
+    {
+      "acl": [
+        "postgres=UC/postgres",
+        "service_role=U/postgres"
+      ],
+      "name": "private",
+      "owner": "postgres"
+    },
+    {
+      "acl": [
+        "pg_database_owner=UC/pg_database_owner",
+        "=U/pg_database_owner",
+        "postgres=U/pg_database_owner",
+        "anon=U/pg_database_owner",
+        "authenticated=U/pg_database_owner",
+        "service_role=U/pg_database_owner"
+      ],
+      "name": "public",
+      "owner": "pg_database_owner"
+    }
+  ],
+  "defaults": [
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "type": "f",
+      "owner": "postgres",
+      "schema": "*"
+    },
+    {
+      "acl": [
+        "postgres=rwU/postgres",
+        "service_role=rwU/postgres"
+      ],
+      "type": "S",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "type": "f",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres"
+      ],
+      "type": "r",
+      "owner": "postgres",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=rwU/postgres",
+        "anon=rwU/postgres",
+        "authenticated=rwU/postgres",
+        "service_role=rwU/postgres"
+      ],
+      "type": "S",
+      "owner": "postgres",
+      "schema": "storage"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "anon=X/postgres",
+        "authenticated=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "type": "f",
+      "owner": "postgres",
+      "schema": "storage"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/postgres",
+        "anon=arwdDxtm/postgres",
+        "authenticated=arwdDxtm/postgres",
+        "service_role=arwdDxtm/postgres"
+      ],
+      "type": "r",
+      "owner": "postgres",
+      "schema": "storage"
+    },
+    {
+      "acl": [
+        "postgres=r*w*U*/supabase_admin"
+      ],
+      "type": "S",
+      "owner": "supabase_admin",
+      "schema": "extensions"
+    },
+    {
+      "acl": [
+        "postgres=X*/supabase_admin"
+      ],
+      "type": "f",
+      "owner": "supabase_admin",
+      "schema": "extensions"
+    },
+    {
+      "acl": [
+        "postgres=a*r*w*d*D*x*t*m*/supabase_admin"
+      ],
+      "type": "r",
+      "owner": "supabase_admin",
+      "schema": "extensions"
+    },
+    {
+      "acl": [
+        "postgres=rwU/supabase_admin",
+        "anon=rwU/supabase_admin",
+        "authenticated=rwU/supabase_admin",
+        "service_role=rwU/supabase_admin"
+      ],
+      "type": "S",
+      "owner": "supabase_admin",
+      "schema": "graphql"
+    },
+    {
+      "acl": [
+        "postgres=X/supabase_admin",
+        "anon=X/supabase_admin",
+        "authenticated=X/supabase_admin",
+        "service_role=X/supabase_admin"
+      ],
+      "type": "f",
+      "owner": "supabase_admin",
+      "schema": "graphql"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/supabase_admin",
+        "anon=arwdDxtm/supabase_admin",
+        "authenticated=arwdDxtm/supabase_admin",
+        "service_role=arwdDxtm/supabase_admin"
+      ],
+      "type": "r",
+      "owner": "supabase_admin",
+      "schema": "graphql"
+    },
+    {
+      "acl": [
+        "postgres=rwU/supabase_admin",
+        "anon=rwU/supabase_admin",
+        "authenticated=rwU/supabase_admin",
+        "service_role=rwU/supabase_admin"
+      ],
+      "type": "S",
+      "owner": "supabase_admin",
+      "schema": "graphql_public"
+    },
+    {
+      "acl": [
+        "postgres=X/supabase_admin",
+        "anon=X/supabase_admin",
+        "authenticated=X/supabase_admin",
+        "service_role=X/supabase_admin"
+      ],
+      "type": "f",
+      "owner": "supabase_admin",
+      "schema": "graphql_public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/supabase_admin",
+        "anon=arwdDxtm/supabase_admin",
+        "authenticated=arwdDxtm/supabase_admin",
+        "service_role=arwdDxtm/supabase_admin"
+      ],
+      "type": "r",
+      "owner": "supabase_admin",
+      "schema": "graphql_public"
+    },
+    {
+      "acl": [
+        "postgres=rwU/supabase_admin",
+        "anon=rwU/supabase_admin",
+        "authenticated=rwU/supabase_admin",
+        "service_role=rwU/supabase_admin"
+      ],
+      "type": "S",
+      "owner": "supabase_admin",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=X/supabase_admin",
+        "anon=X/supabase_admin",
+        "authenticated=X/supabase_admin",
+        "service_role=X/supabase_admin"
+      ],
+      "type": "f",
+      "owner": "supabase_admin",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/supabase_admin",
+        "anon=arwdDxtm/supabase_admin",
+        "authenticated=arwdDxtm/supabase_admin",
+        "service_role=arwdDxtm/supabase_admin"
+      ],
+      "type": "r",
+      "owner": "supabase_admin",
+      "schema": "public"
+    },
+    {
+      "acl": [
+        "postgres=rwU/supabase_admin",
+        "dashboard_user=rwU/supabase_admin"
+      ],
+      "type": "S",
+      "owner": "supabase_admin",
+      "schema": "realtime"
+    },
+    {
+      "acl": [
+        "postgres=X/supabase_admin",
+        "dashboard_user=X/supabase_admin"
+      ],
+      "type": "f",
+      "owner": "supabase_admin",
+      "schema": "realtime"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/supabase_admin",
+        "dashboard_user=arwdDxtm/supabase_admin"
+      ],
+      "type": "r",
+      "owner": "supabase_admin",
+      "schema": "realtime"
+    },
+    {
+      "acl": [
+        "postgres=rwU/supabase_auth_admin",
+        "dashboard_user=rwU/supabase_auth_admin"
+      ],
+      "type": "S",
+      "owner": "supabase_auth_admin",
+      "schema": "auth"
+    },
+    {
+      "acl": [
+        "postgres=X/supabase_auth_admin",
+        "dashboard_user=X/supabase_auth_admin"
+      ],
+      "type": "f",
+      "owner": "supabase_auth_admin",
+      "schema": "auth"
+    },
+    {
+      "acl": [
+        "postgres=arwdDxtm/supabase_auth_admin",
+        "dashboard_user=arwdDxtm/supabase_auth_admin"
+      ],
+      "type": "r",
+      "owner": "supabase_auth_admin",
+      "schema": "auth"
+    }
+  ],
+  "identity": {
+    "role": "postgres",
+    "database": "postgres",
+    "superuser": false
+  },
+  "policies": [
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "boss_actions",
+      "permissive": "PERMISSIVE",
+      "policyname": "boss_actions_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "boss_encounters",
+      "permissive": "PERMISSIVE",
+      "policyname": "boss_encounters_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "custom_habits",
+      "permissive": "PERMISSIVE",
+      "policyname": "custom_habits_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "daily_drafts",
+      "permissive": "PERMISSIVE",
+      "policyname": "daily_drafts_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "daily_entries",
+      "permissive": "PERMISSIVE",
+      "policyname": "daily_entries_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "daily_entry_revisions",
+      "permissive": "PERMISSIVE",
+      "policyname": "daily_entry_revisions_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "economy_transactions",
+      "permissive": "PERMISSIVE",
+      "policyname": "economy_transactions_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "habit_events",
+      "permissive": "PERMISSIVE",
+      "policyname": "habit_events_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(active = true)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "item_catalog",
+      "permissive": "PERMISSIVE",
+      "policyname": "item_catalog_select_active",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "member_game_roots",
+      "permissive": "PERMISSIVE",
+      "policyname": "member_game_roots_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "player_achievements",
+      "permissive": "PERMISSIVE",
+      "policyname": "player_achievements_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "player_equipment",
+      "permissive": "PERMISSIVE",
+      "policyname": "player_equipment_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "player_inventory",
+      "permissive": "PERMISSIVE",
+      "policyname": "player_inventory_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "player_reward_tickets",
+      "permissive": "PERMISSIVE",
+      "policyname": "player_reward_tickets_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "player_states",
+      "permissive": "PERMISSIVE",
+      "policyname": "player_states_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "profiles",
+      "permissive": "PERMISSIVE",
+      "policyname": "profiles_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "resource_ledger",
+      "permissive": "PERMISSIVE",
+      "policyname": "resource_ledger_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "rule_preferences",
+      "permissive": "PERMISSIVE",
+      "policyname": "rule_preferences_select_own",
+      "schemaname": "public",
+      "with_check": null
+    },
+    {
+      "cmd": "SELECT",
+      "qual": "(( SELECT auth.uid() AS uid) = user_id)",
+      "roles": [
+        "authenticated"
+      ],
+      "tablename": "status_effects",
+      "permissive": "PERMISSIVE",
+      "policyname": "status_effects_select_own",
+      "schemaname": "public",
+      "with_check": null
+    }
+  ],
+  "functions": [
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "bootstrap_player_state_from_root",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": true,
+      "definition": "CREATE OR REPLACE FUNCTION private.bootstrap_player_state_from_root()\n RETURNS trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO ''\nAS $function$\nbegin\n  insert into public.player_states(user_id)\n  values (new.user_id)\n  on conflict (user_id) do nothing;\n  return new;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "execute_phase3_command",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.execute_phase3_command(p_user_id uuid, p_command jsonb, p_expected_version bigint DEFAULT NULL::bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_operation_id text := coalesce(p_command ->> 'operationId', '');\n  v_command_type text := coalesce(p_command ->> 'type', '');\n  v_payload jsonb := coalesce(p_command -> 'payload', '{}'::jsonb);\n  v_request_hash text := encode(\n    extensions.digest(convert_to(p_command::text, 'UTF8'), 'sha256'), 'hex'\n  );\n  v_inserted_count bigint := 0;\n  v_existing private.command_operations%rowtype;\n  v_root public.member_game_roots%rowtype;\n  v_profile public.profiles%rowtype;\n  v_result jsonb;\n  v_state jsonb;\n  v_domain_result jsonb := '{}'::jsonb;\n  v_date_text text;\n  v_entry_date date;\n  v_draft jsonb;\n  v_title text;\n  v_direction text;\n  v_habit_id uuid;\n  v_rule_id text;\n  v_enabled boolean;\n  v_habit public.custom_habits%rowtype;\n  v_active_count integer;\nbegin\n  if p_user_id is null then\n    return jsonb_build_object('ok', false, 'errorCode', 'AUTH_REQUIRED', 'retryable', false);\n  end if;\n\n  if p_command is null\n    or jsonb_typeof(p_command) <> 'object'\n    or coalesce(p_command ->> 'contractVersion', '') <> '1'\n    or v_operation_id !~ '^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$'\n    or jsonb_typeof(v_payload) <> 'object'\n    or v_command_type not in (\n      'SAVE_DAILY_DRAFT', 'CREATE_CUSTOM_HABIT', 'UPDATE_CUSTOM_HABIT',\n      'REMOVE_CUSTOM_HABIT', 'RESTORE_CUSTOM_HABIT', 'SET_RULE_ENABLED'\n    )\n  then\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false,\n      'operationId', nullif(v_operation_id, '')\n    );\n  end if;\n\n  -- Validate the complete intent before reserving an operation or casting values.\n  if v_command_type = 'SAVE_DAILY_DRAFT' then\n    v_date_text := coalesce(v_payload ->> 'date', '');\n    v_draft := v_payload -> 'draft';\n    if (select count(*) from jsonb_object_keys(v_payload)) <> 2\n      or (v_payload - 'date' - 'draft') <> '{}'::jsonb\n      or v_date_text !~ '^\\d{4}-\\d{2}-\\d{2}$'\n      or to_char(to_date(v_date_text, 'YYYY-MM-DD'), 'YYYY-MM-DD') <> v_date_text\n      or jsonb_typeof(v_draft) <> 'object'\n      or (select count(*) from jsonb_object_keys(v_draft)) <> 7\n      or (v_draft - 'sleep' - 'water' - 'exercise' - 'study' - 'expense' - 'impulse' - 'sugaryDrinks') <> '{}'::jsonb\n      or exists (\n        select 1 from jsonb_each(v_draft) item\n        where item.value <> 'null'::jsonb and jsonb_typeof(item.value) <> 'number'\n      )\n    then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    v_entry_date := v_date_text::date;\n  elsif v_command_type = 'CREATE_CUSTOM_HABIT' then\n    v_title := btrim(coalesce(v_payload ->> 'title', ''));\n    v_direction := coalesce(v_payload ->> 'direction', '');\n    if (select count(*) from jsonb_object_keys(v_payload)) <> 2\n      or (v_payload - 'title' - 'direction') <> '{}'::jsonb\n      or char_length(v_title) not between 1 and 80\n      or v_direction not in ('good', 'bad')\n    then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n  elsif v_command_type = 'UPDATE_CUSTOM_HABIT' then\n    if coalesce(v_payload ->> 'habitId', '') !~* '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'\n      or (select count(*) from jsonb_object_keys(v_payload)) not between 2 and 3\n      or (v_payload - 'habitId' - 'title' - 'direction') <> '{}'::jsonb\n      or not (v_payload ? 'title' or v_payload ? 'direction')\n      or (v_payload ? 'title' and char_length(btrim(coalesce(v_payload ->> 'title', ''))) not between 1 and 80)\n      or (v_payload ? 'direction' and coalesce(v_payload ->> 'direction', '') not in ('good', 'bad'))\n    then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    v_habit_id := (v_payload ->> 'habitId')::uuid;\n  elsif v_command_type in ('REMOVE_CUSTOM_HABIT', 'RESTORE_CUSTOM_HABIT') then\n    if (select count(*) from jsonb_object_keys(v_payload)) <> 1\n      or (v_payload - 'habitId') <> '{}'::jsonb\n      or coalesce(v_payload ->> 'habitId', '') !~* '^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$'\n    then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    v_habit_id := (v_payload ->> 'habitId')::uuid;\n  elsif v_command_type = 'SET_RULE_ENABLED' then\n    v_rule_id := coalesce(v_payload ->> 'ruleId', '');\n    if (select count(*) from jsonb_object_keys(v_payload)) <> 2\n      or (v_payload - 'ruleId' - 'enabled') <> '{}'::jsonb\n      or v_rule_id not in (\n        'rule_1', 'rule_2', 'rule_water', 'rule_exercise', 'rule_5', 'rule_3',\n        'rule_boss_sleep', 'rule_boss_lazy', 'rule_boss_budget',\n        'rule_boss_fried_food', 'rule_4', 'rule_6'\n      )\n      or jsonb_typeof(v_payload -> 'enabled') <> 'boolean'\n    then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    v_enabled := (v_payload ->> 'enabled')::boolean;\n  end if;\n\n  -- Phase 6B-2: presence is contract validation; receipt replay still precedes version comparison.\n  if p_expected_version is null or p_expected_version < 0 then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false);\n  end if;\n\n  insert into private.command_operations (\n    user_id, operation_id, command_type, request_hash, status\n  ) values (\n    p_user_id, v_operation_id, v_command_type, v_request_hash, 'pending'\n  ) on conflict (user_id, operation_id) do nothing;\n  get diagnostics v_inserted_count = row_count;\n\n  select * into v_existing from private.command_operations\n   where user_id = p_user_id and operation_id = v_operation_id for update;\n\n  if v_inserted_count = 0 then\n    if v_existing.request_hash <> v_request_hash or v_existing.command_type <> v_command_type then\n      return jsonb_build_object('ok', false, 'errorCode', 'OPERATION_ID_REUSED', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    if v_existing.status = 'completed' and v_existing.result is not null then\n      return v_existing.result || jsonb_build_object('duplicate', true);\n    end if;\n    return jsonb_build_object('ok', false, 'errorCode', 'OPERATION_IN_PROGRESS', 'retryable', true, 'operationId', v_operation_id);\n  end if;\n\n  select * into v_root from public.member_game_roots where user_id = p_user_id for update;\n  select * into v_profile from public.profiles where user_id = p_user_id for update;\n  if v_root.user_id is null or v_profile.user_id is null then\n    delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n    return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND', 'retryable', false, 'operationId', v_operation_id);\n  end if;\n  if p_expected_version is not null and p_expected_version <> v_root.repository_version then\n    delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n    return jsonb_build_object('ok', false, 'errorCode', 'VERSION_CONFLICT', 'retryable', true, 'operationId', v_operation_id, 'currentVersion', v_root.repository_version);\n  end if;\n\n  if v_command_type = 'SAVE_DAILY_DRAFT'\n    and v_entry_date > (now() at time zone v_profile.timezone)::date\n  then\n    delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_BUSINESS_DATE', 'retryable', false, 'operationId', v_operation_id);\n  end if;\n\n  if v_command_type = 'SAVE_DAILY_DRAFT' then\n    if v_entry_date < (now() at time zone v_profile.timezone)::date - 7 then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'BACKFILL_NOT_ALLOWED', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    if (v_draft ->> 'sleep')::numeric not between 0 and 24\n      or (v_draft ->> 'water')::numeric not between 0 and 100000\n      or (v_draft ->> 'exercise')::numeric not between 0 and 1440\n      or (v_draft ->> 'study')::numeric not between 0 and 1440\n      or (v_draft ->> 'expense')::numeric not between 0 and 1000000000\n      or (v_draft ->> 'impulse')::numeric not between 0 and 1000\n      or (v_draft ->> 'sugaryDrinks')::numeric not between 0 and 1000\n      or coalesce(mod((v_draft ->> 'water')::numeric, 1) <> 0, false)\n      or coalesce(mod((v_draft ->> 'exercise')::numeric, 1) <> 0, false)\n      or coalesce(mod((v_draft ->> 'study')::numeric, 1) <> 0, false)\n      or coalesce(mod((v_draft ->> 'expense')::numeric, 1) <> 0, false)\n      or coalesce(mod((v_draft ->> 'impulse')::numeric, 1) <> 0, false)\n      or coalesce(mod((v_draft ->> 'sugaryDrinks')::numeric, 1) <> 0, false)\n    then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    insert into public.daily_drafts (\n      user_id, entry_date, sleep, water, exercise, study, expense, impulse, sugary_drinks\n    ) values (\n      p_user_id, v_entry_date,\n      (v_draft ->> 'sleep')::numeric,\n      coalesce((v_draft ->> 'water')::integer, 0),\n      coalesce((v_draft ->> 'exercise')::integer, 0),\n      coalesce((v_draft ->> 'study')::integer, 0),\n      (v_draft ->> 'expense')::integer,\n      coalesce((v_draft ->> 'impulse')::integer, 0),\n      coalesce((v_draft ->> 'sugaryDrinks')::integer, 0)\n    ) on conflict (user_id, entry_date) do update set\n      sleep = excluded.sleep, water = excluded.water, exercise = excluded.exercise,\n      study = excluded.study, expense = excluded.expense, impulse = excluded.impulse,\n      sugary_drinks = excluded.sugary_drinks, updated_at = now();\n    v_domain_result := jsonb_build_object('date', v_date_text);\n  elsif v_command_type = 'CREATE_CUSTOM_HABIT' then\n    select count(*) into v_active_count from public.custom_habits where user_id = p_user_id and deleted_at is null;\n    if v_active_count >= 50 then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'LIMIT_REACHED', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    insert into public.custom_habits(user_id, title, direction)\n      values (p_user_id, v_title, v_direction) returning * into v_habit;\n    v_domain_result := jsonb_build_object('habitId', v_habit.id);\n  elsif v_command_type = 'UPDATE_CUSTOM_HABIT' then\n    update public.custom_habits set\n      title = case when v_payload ? 'title' then btrim(v_payload ->> 'title') else title end,\n      direction = case when v_payload ? 'direction' then v_payload ->> 'direction' else direction end,\n      updated_at = now()\n    where id = v_habit_id and user_id = p_user_id and deleted_at is null\n    returning * into v_habit;\n    if v_habit.id is null then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    v_domain_result := jsonb_build_object('habitId', v_habit.id);\n  elsif v_command_type = 'REMOVE_CUSTOM_HABIT' then\n    update public.custom_habits set deleted_at = now(), updated_at = now()\n    where id = v_habit_id and user_id = p_user_id and deleted_at is null\n    returning * into v_habit;\n    if v_habit.id is null then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    v_domain_result := jsonb_build_object('habitId', v_habit.id, 'deletedAt', v_habit.deleted_at);\n  elsif v_command_type = 'RESTORE_CUSTOM_HABIT' then\n    select count(*) into v_active_count from public.custom_habits where user_id = p_user_id and deleted_at is null;\n    if v_active_count >= 50 then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'LIMIT_REACHED', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    update public.custom_habits set deleted_at = null, updated_at = now()\n    where id = v_habit_id and user_id = p_user_id and deleted_at is not null\n    returning * into v_habit;\n    if v_habit.id is null then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND', 'retryable', false, 'operationId', v_operation_id);\n    end if;\n    v_domain_result := jsonb_build_object('habitId', v_habit.id);\n  elsif v_command_type = 'SET_RULE_ENABLED' then\n    insert into public.rule_preferences(user_id, rule_id, enabled)\n      values (p_user_id, v_rule_id, v_enabled)\n    on conflict (user_id, rule_id) do update set enabled = excluded.enabled, updated_at = now();\n    v_domain_result := jsonb_build_object('ruleId', v_rule_id, 'enabled', v_enabled);\n  end if;\n\n  update public.member_game_roots\n    set repository_version = repository_version + 1, updated_at = now()\n    where user_id = p_user_id returning * into v_root;\n  v_state := private.member_profile_state(p_user_id);\n  v_result := jsonb_build_object(\n    'ok', true,\n    'operationId', v_operation_id,\n    'repositoryVersion', v_root.repository_version,\n    'duplicate', false,\n    'serverTimestamp', now(),\n    'result', v_domain_result,\n    'state', v_state\n  );\n  update private.command_operations set status = 'completed', result = v_result, completed_at = now()\n    where user_id = p_user_id and operation_id = v_operation_id;\n  return v_result;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint, p_plan jsonb",
+      "name": "execute_phase4b_command",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.execute_phase4b_command(p_user_id uuid, p_command jsonb, p_expected_version bigint, p_plan jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_type text := p_command ->> 'type';\n  v_operation_id text := p_command ->> 'operationId';\n  v_payload jsonb := p_command -> 'payload';\n  v_business_date date;\n  v_today date := (now() at time zone 'Asia/Taipei')::date;\n  v_request_hash text;\n  v_reserved jsonb;\n  v_completed jsonb;\n  v_result jsonb := '{}'::jsonb;\n  v_player public.player_states%rowtype;\n  v_before jsonb;\n  v_after jsonb;\n  v_deltas jsonb;\n  v_resource record;\n  v_balance bigint;\n  v_reason text;\n  v_source_type text;\n  v_source_id text;\n  v_event public.habit_events%rowtype;\n  v_entry public.daily_entries%rowtype;\n  v_revision public.daily_entry_revisions%rowtype;\n  v_previous_revision public.daily_entry_revisions%rowtype;\n  v_previous_operation private.command_operations%rowtype;\n  v_old_ledger public.resource_ledger%rowtype;\n  v_status jsonb;\n  v_achievement text;\n  v_boss jsonb;\n  v_boss_definition jsonb;\n  v_encounter public.boss_encounters%rowtype;\n  v_boss_action_id uuid;\n  v_new_hp bigint;\n  v_operation_version bigint;\n  v_current_version bigint;\n  v_component bigint;\n  v_running_balance bigint;\nbegin\n  if p_user_id is null or p_command is null or p_plan is null\n    or jsonb_typeof(p_command) <> 'object' or jsonb_typeof(p_plan) <> 'object'\n    or v_type not in ('REPORT_HABIT_EVENT', 'REVERSE_HABIT_EVENT', 'SUBMIT_DAILY_ENTRY')\n    or p_command ->> 'contractVersion' <> '1'\n    or v_operation_id !~ '^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$'\n    or p_expected_version is null or p_expected_version < 0\n    or p_command #>> '{context,timeZone}' <> 'Asia/Taipei'\n    or p_command #>> '{context,businessDate}' !~ '^\\d{4}-\\d{2}-\\d{2}$' then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n  end if;\n  begin\n    v_business_date := (p_command #>> '{context,businessDate}')::date;\n  exception when others then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_BUSINESS_DATE');\n  end;\n  if v_type in ('REPORT_HABIT_EVENT', 'REVERSE_HABIT_EVENT') and v_business_date <> v_today then\n    return jsonb_build_object('ok', false, 'errorCode', 'HABIT_EVENT_NOT_TODAY');\n  end if;\n  if v_type = 'SUBMIT_DAILY_ENTRY' then\n    if v_business_date > v_today then return jsonb_build_object('ok', false, 'errorCode', 'INVALID_BUSINESS_DATE'); end if;\n    if v_business_date < v_today - 7 then return jsonb_build_object('ok', false, 'errorCode', 'BACKFILL_NOT_ALLOWED'); end if;\n  end if;\n  if (v_type = 'REPORT_HABIT_EVENT' and p_plan ->> 'kind' <> 'habit_event')\n    or (v_type = 'REVERSE_HABIT_EVENT' and p_plan ->> 'kind' <> 'habit_reversal')\n    or (v_type = 'SUBMIT_DAILY_ENTRY' and p_plan ->> 'kind' <> 'daily_settlement')\n    or coalesce(p_plan ->> 'businessDate', v_business_date::text) <> v_business_date::text then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n  end if;\n\n  v_request_hash := encode(extensions.digest(convert_to(p_command::text, 'UTF8'), 'sha256'), 'hex');\n  v_reserved := private.phase4_reserve_operation(\n    p_user_id, v_operation_id, v_type, v_request_hash, p_expected_version\n  );\n  if v_reserved ->> 'ok' <> 'true' then return v_reserved; end if;\n  if coalesce((v_reserved ->> 'duplicate')::boolean, false) then\n    select repository_version into v_current_version from public.member_game_roots where user_id = p_user_id;\n    v_operation_version := coalesce((v_reserved ->> 'repositoryVersion')::bigint, v_current_version);\n    return v_reserved || jsonb_build_object(\n      'operationId', v_operation_id, 'operationRepositoryVersion', v_operation_version,\n      'repositoryVersion', v_current_version, 'state', private.phase4b_state(p_user_id),\n      'serverTimestamp', now(), 'duplicate', true\n    );\n  end if;\n\n  select * into v_player from public.player_states where user_id = p_user_id for update;\n\n  if v_type = 'REVERSE_HABIT_EVENT' then\n    select * into v_event from public.habit_events\n      where id = (v_payload ->> 'eventId')::uuid and user_id = p_user_id for update;\n    if not found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'HABIT_EVENT_NOT_FOUND');\n    end if;\n    select * into v_previous_operation from private.command_operations\n      where user_id = p_user_id and operation_id = v_event.source_operation_id;\n    if v_event.reversed_at is not null\n      or coalesce((v_previous_operation.result ->> 'repositoryVersion')::bigint, -1) <> p_expected_version\n      or coalesce((v_event.policy_snapshot #>> '{resource,died}')::boolean, false)\n      or exists (select 1 from public.boss_actions where user_id = p_user_id and source_type = 'habit_event' and source_id = v_event.id::text)\n      or exists (select 1 from public.status_effects where user_id = p_user_id and source_type = 'habit_event' and source_id = v_event.id::text)\n      or exists (select 1 from public.player_achievements where user_id = p_user_id and target_snapshot ->> 'sourceOperationId' = v_event.source_operation_id) then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'REVERSAL_BLOCKED');\n    end if;\n    v_before := v_event.policy_snapshot #> '{resource,before}';\n    v_after := v_event.policy_snapshot #> '{resource,after}';\n    if v_before is null or v_after is null\n      or v_player.total_xp <> (v_after ->> 'totalXp')::bigint\n      or v_player.hp <> (v_after ->> 'hp')::bigint\n      or v_player.gold <> (v_after ->> 'gold')::bigint\n      or v_player.gems <> (v_after ->> 'gems')::bigint then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'REVERSAL_BLOCKED');\n    end if;\n    update public.habit_events set reversed_at = now(), reversed_by_operation_id = v_operation_id,\n      reversal_reason = 'user_requested' where id = v_event.id;\n    for v_old_ledger in select * from public.resource_ledger\n      where user_id = p_user_id and operation_id = v_event.source_operation_id order by id\n    loop\n      v_balance := case v_old_ledger.resource_type\n        when 'xp' then (v_before ->> 'totalXp')::bigint\n        when 'hp' then (v_before ->> 'hp')::bigint\n        when 'gold' then (v_before ->> 'gold')::bigint\n        when 'gems' then (v_before ->> 'gems')::bigint\n        else (v_before #>> array['baseStats', v_old_ledger.resource_type])::bigint end;\n      insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n        source_type, source_id, operation_id, reverses_ledger_id)\n      values (p_user_id, v_old_ledger.resource_type, -v_old_ledger.delta, v_balance, 'reversal',\n        'reversal', v_old_ledger.id::text, v_operation_id, v_old_ledger.id);\n    end loop;\n    update public.player_states set\n      total_xp = (v_before ->> 'totalXp')::bigint, hp = (v_before ->> 'hp')::bigint,\n      gold = (v_before ->> 'gold')::bigint, gems = (v_before ->> 'gems')::bigint,\n      base_health = (v_before #>> '{baseStats,health}')::integer,\n      base_energy = (v_before #>> '{baseStats,energy}')::integer,\n      base_wealth = (v_before #>> '{baseStats,wealth}')::integer,\n      base_growth = (v_before #>> '{baseStats,growth}')::integer, updated_at = now()\n    where user_id = p_user_id;\n    v_result := jsonb_build_object('eventId', v_event.id, 'reversed', true);\n  else\n    v_before := p_plan #> '{resource,before}';\n    v_after := p_plan #> '{resource,after}';\n    v_deltas := p_plan #> '{resource,deltas}';\n    if v_before is null or v_after is null or v_deltas is null\n      or jsonb_typeof(v_before) <> 'object' or jsonb_typeof(v_after) <> 'object'\n      or jsonb_typeof(v_deltas) <> 'object' then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n    end if;\n\n    if v_type = 'REPORT_HABIT_EVENT' then\n      if v_player.total_xp <> (v_before ->> 'totalXp')::bigint\n        or v_player.hp <> (v_before ->> 'hp')::bigint\n        or v_player.gold <> (v_before ->> 'gold')::bigint\n        or v_player.gems <> (v_before ->> 'gems')::bigint then\n        delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n        return jsonb_build_object('ok', false, 'errorCode', 'VERSION_CONFLICT');\n      end if;\n      insert into public.habit_events(\n        user_id, business_date, habit_kind, system_key, custom_habit_id, direction,\n        title_snapshot, policy_snapshot, source_operation_id, occurred_at\n      ) values (\n        p_user_id, v_business_date, p_plan #>> '{habit,kind}', nullif(p_plan #>> '{habit,systemKey}', ''),\n        nullif(p_plan #>> '{habit,customHabitId}', '')::uuid, p_plan #>> '{habit,direction}',\n        p_plan #>> '{habit,title}', (p_plan #> '{habit,policy}') || jsonb_build_object('resource', p_plan -> 'resource'),\n        v_operation_id, now()\n      ) returning * into v_event;\n      v_source_type := 'habit_event'; v_source_id := v_event.id::text;\n      v_reason := case when v_event.direction = 'good' then 'habit_reward' else 'habit_damage' end;\n      v_result := jsonb_build_object('eventId', v_event.id, 'rewardGranted',\n        coalesce((p_plan #>> '{habit,policy,rewardGranted}')::boolean, false));\n    else\n      select * into v_entry from public.daily_entries\n        where user_id = p_user_id and business_date = v_business_date for update;\n      if found then\n        select * into v_previous_revision from public.daily_entry_revisions\n          where daily_entry_id = v_entry.id and revision_no = v_entry.current_revision for update;\n        select * into v_previous_operation from private.command_operations\n          where user_id = p_user_id and operation_id = v_previous_revision.operation_id;\n        if private.phase4b_has_gameplay_dependency(p_user_id, v_previous_revision.operation_id)\n          or coalesce((v_previous_revision.settlement_snapshot #>> '{resource,died}')::boolean, false)\n          or jsonb_array_length(coalesce(v_previous_revision.settlement_snapshot -> 'statuses', '[]'::jsonb)) > 0\n          or v_previous_revision.settlement_snapshot -> 'boss' <> 'null'::jsonb\n          or jsonb_array_length(coalesce(v_previous_revision.settlement_snapshot -> 'achievementEvents', '[]'::jsonb)) > 0 then\n          delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n          return jsonb_build_object('ok', false, 'errorCode', 'DAILY_REVISION_BLOCKED');\n        end if;\n        if v_player.total_xp <> (p_plan #>> '{correction,expectedPlayerAfter,totalXp}')::bigint\n          or v_player.hp <> (p_plan #>> '{correction,expectedPlayerAfter,hp}')::bigint\n          or v_player.gold <> (p_plan #>> '{correction,expectedPlayerAfter,gold}')::bigint\n          or v_player.gems <> (p_plan #>> '{correction,expectedPlayerAfter,gems}')::bigint then\n          delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n          return jsonb_build_object('ok', false, 'errorCode', 'DAILY_REVISION_BLOCKED');\n        end if;\n        for v_old_ledger in select * from public.resource_ledger\n          where user_id = p_user_id and operation_id = v_previous_revision.operation_id order by id\n        loop\n          v_balance := case v_old_ledger.resource_type\n            when 'xp' then (v_before ->> 'totalXp')::bigint\n            when 'hp' then (v_before ->> 'hp')::bigint\n            when 'gold' then (v_before ->> 'gold')::bigint\n            when 'gems' then (v_before ->> 'gems')::bigint\n            else (v_before #>> array['baseStats', v_old_ledger.resource_type])::bigint end;\n          insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n            source_type, source_id, operation_id, reverses_ledger_id)\n          values (p_user_id, v_old_ledger.resource_type, -v_old_ledger.delta, v_balance, 'reversal',\n            'reversal', v_old_ledger.id::text, v_operation_id, v_old_ledger.id);\n        end loop;\n        v_entry.current_revision := v_entry.current_revision + 1;\n        update public.daily_entries set current_revision = v_entry.current_revision,\n          sleep = (v_payload ->> 'sleep')::numeric, water = (v_payload ->> 'water')::integer,\n          exercise = (v_payload ->> 'exercise')::integer, study = (v_payload ->> 'study')::integer,\n          expense = (v_payload ->> 'expense')::bigint, impulse = (v_payload ->> 'impulse')::integer,\n          sugary_drinks = (v_payload ->> 'sugaryDrinks')::integer,\n          effective_input = p_plan -> 'effectiveInput', settlement_snapshot = p_plan,\n          budget_snapshot = (p_plan ->> 'budgetSnapshot')::bigint, settled_at = now(), updated_at = now()\n        where id = v_entry.id;\n      else\n        if v_player.total_xp <> (v_before ->> 'totalXp')::bigint\n          or v_player.hp <> (v_before ->> 'hp')::bigint\n          or v_player.gold <> (v_before ->> 'gold')::bigint\n          or v_player.gems <> (v_before ->> 'gems')::bigint then\n          delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n          return jsonb_build_object('ok', false, 'errorCode', 'VERSION_CONFLICT');\n        end if;\n        insert into public.daily_entries(\n          user_id, business_date, current_revision, sleep, water, exercise, study, expense, impulse,\n          sugary_drinks, timezone, budget_snapshot, effective_input, settlement_snapshot, settled_at\n        ) values (\n          p_user_id, v_business_date, 1, (v_payload ->> 'sleep')::numeric,\n          (v_payload ->> 'water')::integer, (v_payload ->> 'exercise')::integer,\n          (v_payload ->> 'study')::integer, (v_payload ->> 'expense')::bigint,\n          (v_payload ->> 'impulse')::integer, (v_payload ->> 'sugaryDrinks')::integer,\n          'Asia/Taipei', (p_plan ->> 'budgetSnapshot')::bigint,\n          p_plan -> 'effectiveInput', p_plan, now()\n        ) returning * into v_entry;\n      end if;\n      insert into public.daily_entry_revisions(\n        user_id, daily_entry_id, revision_no, correction_of_revision, raw_input,\n        effective_input, settlement_snapshot, operation_id\n      ) values (\n        p_user_id, v_entry.id, v_entry.current_revision,\n        case when v_entry.current_revision > 1 then v_entry.current_revision - 1 else null end,\n        v_payload, p_plan -> 'effectiveInput', p_plan, v_operation_id\n      ) returning * into v_revision;\n      v_source_type := 'daily_entry_revision'; v_source_id := v_revision.id::text;\n      v_reason := 'daily_reward';\n      v_result := jsonb_build_object(\n        'entryId', v_entry.id, 'revision', v_entry.current_revision,\n        'completedRuleIds', p_plan -> 'completedRuleIds', 'failedRuleIds', p_plan -> 'failedRuleIds',\n        'critical', p_plan -> 'critical'\n      );\n    end if;\n\n    update public.player_states set\n      total_xp = (v_after ->> 'totalXp')::bigint, hp = (v_after ->> 'hp')::bigint,\n      gold = (v_after ->> 'gold')::bigint, gems = (v_after ->> 'gems')::bigint,\n      base_health = (v_after #>> '{baseStats,health}')::integer,\n      base_energy = (v_after #>> '{baseStats,energy}')::integer,\n      base_wealth = (v_after #>> '{baseStats,wealth}')::integer,\n      base_growth = (v_after #>> '{baseStats,growth}')::integer, updated_at = now()\n    where user_id = p_user_id;\n\n    for v_resource in select key, value from jsonb_each_text(v_deltas)\n    loop\n      v_balance := case v_resource.key\n        when 'xp' then (v_after ->> 'totalXp')::bigint\n        when 'hp' then (v_after ->> 'hp')::bigint\n        when 'gold' then (v_after ->> 'gold')::bigint\n        when 'gems' then (v_after ->> 'gems')::bigint\n        else (v_after #>> array['baseStats', v_resource.key])::bigint end;\n      if v_resource.key in ('gold', 'gems') then\n        v_running_balance := case v_resource.key\n          when 'gold' then (v_before ->> 'gold')::bigint\n          else (v_before ->> 'gems')::bigint end;\n        if v_type = 'SUBMIT_DAILY_ENTRY' then\n          v_component := coalesce((p_plan #>> array['rewardBreakdown', 'daily', v_resource.key])::bigint, 0);\n          if v_component <> 0 then\n            v_running_balance := v_running_balance + v_component;\n            insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n              source_type, source_id, operation_id)\n            values (p_user_id, v_resource.key, v_component, v_running_balance, 'daily_reward',\n              v_source_type, v_source_id, v_operation_id);\n          end if;\n          v_component := coalesce((p_plan #>> array['rewardBreakdown', 'boss', v_resource.key])::bigint, 0);\n          if v_component <> 0 then\n            v_running_balance := v_running_balance + v_component;\n            insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n              source_type, source_id, operation_id)\n            values (p_user_id, v_resource.key, v_component, v_running_balance, 'boss_reward',\n              'boss_action', coalesce(p_plan #>> '{boss,encounterId}', v_source_id), v_operation_id);\n          end if;\n          if v_resource.key = 'gems' then\n            for v_achievement in\n              select jsonb_array_elements_text(coalesce(p_plan -> 'achievementEvents', '[]'::jsonb))\n            loop\n              v_component := case\n                when v_achievement in ('exercise_streak_3', 'boss_slayer') then 5\n                else 0\n              end;\n              if v_component <> 0 then\n                v_running_balance := v_running_balance + v_component;\n                insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n                  source_type, source_id, operation_id)\n                values (p_user_id, v_resource.key, v_component, v_running_balance, 'achievement_reward',\n                  'achievement', v_achievement, v_operation_id);\n              end if;\n            end loop;\n          end if;\n        else\n          v_component := coalesce((p_plan #>> array['habit', 'policy', 'effects', v_resource.key])::bigint, 0);\n          if v_component <> 0 then\n            v_running_balance := v_running_balance + v_component;\n            insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n              source_type, source_id, operation_id)\n            values (p_user_id, v_resource.key, v_component, v_running_balance, v_reason,\n              v_source_type, v_source_id, v_operation_id);\n          end if;\n        end if;\n        if v_resource.key = 'gold' and coalesce((p_plan #>> '{resource,goldLost}')::bigint, 0) > 0 then\n          v_component := -((p_plan #>> '{resource,goldLost}')::bigint);\n          v_running_balance := v_running_balance + v_component;\n          insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n            source_type, source_id, operation_id)\n          values (p_user_id, 'gold', v_component, v_running_balance, 'death_penalty',\n            'death', v_source_id, v_operation_id);\n        end if;\n        if v_running_balance <> v_balance then\n          raise exception 'PHASE4_RESOURCE_BREAKDOWN_MISMATCH';\n        end if;\n      elsif v_resource.value::bigint <> 0 then\n        insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n          source_type, source_id, operation_id)\n        values (p_user_id, v_resource.key, v_resource.value::bigint, v_balance,\n          case when v_resource.value::bigint < 0 then\n            case when v_type = 'REPORT_HABIT_EVENT' then 'habit_damage' else 'daily_failure' end\n          else v_reason end,\n          v_source_type, v_source_id, v_operation_id);\n      end if;\n    end loop;\n\n    if coalesce((p_plan #>> '{resource,died}')::boolean, false) then\n      update public.status_effects set state = 'cleared', state_changed_at = now()\n        where user_id = p_user_id and state = 'active';\n    end if;\n\n    for v_status in select value from jsonb_array_elements(coalesce(p_plan -> 'statuses', '[]'::jsonb))\n    loop\n      update public.status_effects set state = 'cleared', state_changed_at = now()\n        where user_id = p_user_id and effect_key = v_status ->> 'key' and state = 'active';\n      insert into public.status_effects(\n        user_id, effect_key, effect_type, title_snapshot, modifier_snapshot,\n        applied_on, expires_on, state, source_type, source_id, definition_version\n      ) values (\n        p_user_id, v_status ->> 'key', v_status ->> 'effectType', v_status ->> 'title',\n        coalesce(v_status -> 'modifiers', '{}'::jsonb), (v_status ->> 'appliedOn')::date,\n        (v_status ->> 'expiresOn')::date, v_status ->> 'state', v_source_type, v_source_id,\n        v_status ->> 'definitionVersion'\n      );\n    end loop;\n\n    for v_achievement in select jsonb_array_elements_text(coalesce(p_plan -> 'achievementEvents', '[]'::jsonb))\n    loop\n      insert into public.player_achievements(\n        user_id, achievement_code, target_snapshot, reward_snapshot, unlocked_at,\n        reward_state, reward_granted_at, reward_operation_id\n      ) values (\n        p_user_id, v_achievement,\n        jsonb_build_object('sourceOperationId', v_operation_id),\n        case\n          when v_achievement = 'exercise_streak_3'\n            then jsonb_build_object('gems', 5, 'status', 'vitality')\n          when v_achievement = 'boss_slayer'\n            then jsonb_build_object('gems', 5)\n          else '{}'::jsonb\n        end,\n        now(), 'granted', now(), v_operation_id\n      ) on conflict (user_id, achievement_code) do nothing;\n    end loop;\n\n    v_boss := p_plan -> 'boss';\n    if v_boss is not null and v_boss <> 'null'::jsonb then\n      if v_boss ->> 'action' = 'summon' then\n        v_boss_definition := p_plan #> array['definitions'];\n        insert into public.boss_encounters(\n          user_id, boss_key, incident_key, name_snapshot, max_hp, hp,\n          challenge_snapshot, reward_snapshot, summoned_on\n        ) values (\n          p_user_id, v_boss ->> 'bossKey', (v_boss ->> 'bossKey') || ':' || v_business_date::text,\n          case v_boss ->> 'bossKey'\n            when 'sleep-nightmare' then '睡眠夢魘' when 'budget-vampire' then '預算吸血鬼'\n            when 'fried-food-beast' then '油炸暴食獸' when 'laziness-beast' then '怠惰巨獸'\n            else '糖分魔獸' end,\n          100, 100, jsonb_build_object('targetDays', 3), jsonb_build_object('gold', 150, 'gems', 3),\n          v_business_date\n        ) on conflict (user_id, incident_key) do nothing returning * into v_encounter;\n        if v_encounter.id is not null then\n          insert into public.boss_actions(user_id, encounter_id, action_type, business_date,\n            source_type, source_id, operation_id, action_snapshot)\n          values (p_user_id, v_encounter.id, 'summon', v_business_date,\n            v_source_type, v_source_id, v_operation_id, v_boss);\n        end if;\n      elsif v_boss ->> 'action' = 'progress' then\n        select * into v_encounter from public.boss_encounters\n          where id = (v_boss ->> 'encounterId')::uuid and user_id = p_user_id and state = 'active' for update;\n        if found then\n          v_new_hp := greatest(0, v_encounter.hp - (v_boss ->> 'damage')::bigint);\n          insert into public.boss_actions(user_id, encounter_id, action_type, business_date,\n            damage, progress_delta, source_type, source_id, operation_id, action_snapshot)\n          values (p_user_id, v_encounter.id, 'progress', v_business_date,\n            (v_boss ->> 'damage')::bigint, case when (v_boss ->> 'matched')::boolean then 1 else 0 end,\n            v_source_type, v_source_id, v_operation_id, v_boss) returning id into v_boss_action_id;\n          update public.boss_encounters set hp = v_new_hp,\n            state = case when v_new_hp = 0 then 'defeated' else 'active' end,\n            defeated_at = case when v_new_hp = 0 then now() else null end,\n            reward_granted_at = case when v_new_hp = 0 then now() else null end,\n            reward_operation_id = case when v_new_hp = 0 then v_operation_id else null end,\n            updated_at = now() where id = v_encounter.id;\n          if v_new_hp = 0 then\n            insert into public.boss_actions(user_id, encounter_id, action_type, business_date,\n              source_type, source_id, operation_id, action_snapshot)\n            values (p_user_id, v_encounter.id, 'defeat', v_business_date,\n              v_source_type, v_source_id, v_operation_id, v_boss);\n            insert into public.boss_actions(user_id, encounter_id, action_type, business_date,\n              source_type, source_id, operation_id, action_snapshot)\n            values (p_user_id, v_encounter.id, 'reward', v_business_date,\n              'boss_encounter', v_encounter.id::text, v_operation_id, v_encounter.reward_snapshot);\n          end if;\n        end if;\n      end if;\n    end if;\n  end if;\n\n  v_completed := private.phase4_complete_operation(\n    p_user_id, v_operation_id,\n    jsonb_build_object('operationId', v_operation_id, 'result', v_result, 'serverTimestamp', now())\n  );\n  if v_completed ->> 'ok' <> 'true' then return v_completed; end if;\n  v_operation_version := (v_completed ->> 'repositoryVersion')::bigint;\n  return v_completed || jsonb_build_object(\n    'operationRepositoryVersion', v_operation_version,\n    'state', private.phase4b_state(p_user_id), 'serverTimestamp', now()\n  );\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "execute_phase5b_economy_command",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.execute_phase5b_economy_command(p_user_id uuid, p_command jsonb, p_expected_version bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_type text := p_command ->> 'type';\n  v_operation_id text := p_command ->> 'operationId';\n  v_payload jsonb := p_command -> 'payload';\n  v_request_hash text;\n  v_reserved jsonb;\n  v_completed jsonb;\n  v_operation_version bigint;\n  v_current_version bigint;\n  v_result jsonb := '{}'::jsonb;\n  v_catalog public.item_catalog%rowtype;\n  v_player public.player_states%rowtype;\n  v_inventory public.player_inventory%rowtype;\n  v_ticket public.player_reward_tickets%rowtype;\n  v_base_wealth bigint;\n  v_discount numeric;\n  v_final_price bigint;\n  v_heal bigint;\n  v_max_hp bigint;\n  v_transaction_id uuid := gen_random_uuid();\n  v_ticket_id uuid := gen_random_uuid();\n  v_existing_item text;\n  v_slot text;\n  v_keys text[];\nbegin\n  if p_user_id is null or p_command is null or jsonb_typeof(p_command) <> 'object'\n    or v_type not in ('PURCHASE_ITEM', 'USE_ITEM', 'EQUIP_ITEM', 'UNEQUIP_ITEM',\n      'REDEEM_REWARD_TICKET', 'USE_REWARD_TICKET', 'REVERSE_REWARD_TICKET')\n    or p_command ->> 'contractVersion' <> '1'\n    or v_operation_id !~ '^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$'\n    or p_expected_version is null or p_expected_version < 0\n    or jsonb_typeof(v_payload) <> 'object' then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n  end if;\n\n  -- Phase 6B-2: require the catalog version before reservation. No client price authority.\n  if v_type in ('PURCHASE_ITEM', 'REDEEM_REWARD_TICKET') and not (\n    case when jsonb_typeof(v_payload -> 'seenCatalogVersion') = 'number'\n      and (v_payload ->> 'seenCatalogVersion') ~ '^[1-9][0-9]*$'\n    then (v_payload ->> 'seenCatalogVersion')::numeric <= 9007199254740991\n    else false end\n  ) then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n  end if;\n\n  select array_agg(key order by key) into v_keys from jsonb_object_keys(v_payload) key;\n  if v_type in ('PURCHASE_ITEM', 'REDEEM_REWARD_TICKET') then\n    if not ((v_keys = array[case when v_type = 'PURCHASE_ITEM' then 'itemKey' else 'ticketKey' end])\n      or (v_keys = case\n        when v_type = 'PURCHASE_ITEM' then array['itemKey', 'seenCatalogVersion']\n        else array['seenCatalogVersion', 'ticketKey']\n      end))\n      or coalesce(v_payload ->> case when v_type = 'PURCHASE_ITEM' then 'itemKey' else 'ticketKey' end, '')\n        !~ '^[a-z][a-z0-9_]{1,63}$'\n      or (v_payload ? 'seenCatalogVersion' and (v_payload ->> 'seenCatalogVersion') !~ '^[1-9][0-9]*$') then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n    end if;\n  elsif v_type in ('USE_ITEM', 'EQUIP_ITEM') then\n    if v_keys <> array['itemKey'] or coalesce(v_payload ->> 'itemKey', '') !~ '^[a-z][a-z0-9_]{1,63}$' then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n    end if;\n  elsif v_type = 'UNEQUIP_ITEM' then\n    if v_keys <> array['slot'] or v_payload ->> 'slot' not in ('weapon', 'armor', 'pet') then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n    end if;\n  else\n    if v_keys <> array['ticketInstanceId']\n      or coalesce(v_payload ->> 'ticketInstanceId', '') !~ '^[0-9a-fA-F-]{36}$' then\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n    end if;\n  end if;\n\n  v_request_hash := encode(extensions.digest(convert_to(p_command::text, 'UTF8'), 'sha256'), 'hex');\n  v_reserved := private.phase4_reserve_operation(\n    p_user_id, v_operation_id, v_type, v_request_hash, p_expected_version\n  );\n  if v_reserved ->> 'ok' <> 'true' then return v_reserved; end if;\n  if coalesce((v_reserved ->> 'duplicate')::boolean, false) then\n    select repository_version into v_current_version\n      from public.member_game_roots where user_id = p_user_id;\n    v_operation_version := coalesce((v_reserved ->> 'repositoryVersion')::bigint, v_current_version);\n    return v_reserved || jsonb_build_object(\n      'operationId', v_operation_id,\n      'operationRepositoryVersion', v_operation_version,\n      'repositoryVersion', v_current_version,\n      'state', private.phase4b_state(p_user_id) || private.phase5b_economy_state(p_user_id),\n      'serverTimestamp', now(), 'duplicate', true\n    );\n  end if;\n\n  select * into v_player from public.player_states where user_id = p_user_id for update;\n\n  if v_type in ('PURCHASE_ITEM', 'REDEEM_REWARD_TICKET') then\n    select * into v_catalog from public.item_catalog\n      where item_key = v_payload ->> case when v_type = 'PURCHASE_ITEM' then 'itemKey' else 'ticketKey' end\n      for share;\n    if not found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_FOUND');\n    end if;\n    if not v_catalog.active then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_AVAILABLE');\n    end if;\n    if v_payload ? 'seenCatalogVersion'\n      and (v_payload ->> 'seenCatalogVersion')::bigint <> v_catalog.catalog_version then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'CATALOG_CHANGED');\n    end if;\n  end if;\n\n  if v_type = 'PURCHASE_ITEM' then\n    if v_catalog.item_type = 'reward_ticket' or v_catalog.currency_type <> 'gold' then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_AVAILABLE');\n    end if;\n    v_base_wealth := v_player.base_wealth;\n    v_discount := least(v_base_wealth * 0.01, 0.20);\n    v_final_price := floor(v_catalog.base_price * (1 - v_discount));\n    if v_player.gold < v_final_price then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'INSUFFICIENT_RESOURCE');\n    end if;\n    select * into v_inventory from public.player_inventory\n      where user_id = p_user_id and item_key = v_catalog.item_key for update;\n    if v_catalog.item_type = 'potion' and found and v_inventory.quantity >= 99 then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'INVENTORY_LIMIT_REACHED');\n    end if;\n    if v_catalog.item_type in ('weapon', 'armor', 'pet') and found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_ALREADY_OWNED');\n    end if;\n    update public.player_states set gold = gold - v_final_price, updated_at = now() where user_id = p_user_id;\n    insert into public.player_inventory(user_id, item_key, quantity)\n      values (p_user_id, v_catalog.item_key, 1)\n      on conflict (user_id, item_key) do update\n      set quantity = public.player_inventory.quantity + 1, updated_at = now();\n    insert into public.economy_transactions(\n      id, user_id, operation_id, transaction_type, item_key, currency_type, currency_delta,\n      base_price_snapshot, discount_snapshot, paid_amount_snapshot, item_name_snapshot,\n      catalog_version_snapshot, detail_snapshot\n    ) values (\n      v_transaction_id, p_user_id, v_operation_id, 'purchase_item', v_catalog.item_key,\n      'gold', -v_final_price, v_catalog.base_price,\n      jsonb_build_object('baseWealth', v_base_wealth, 'rate', v_discount), v_final_price,\n      v_catalog.display_name, v_catalog.catalog_version,\n      jsonb_build_object('itemType', v_catalog.item_type, 'effectKey', v_catalog.effect_key)\n    );\n    insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n      source_type, source_id, operation_id)\n    values (p_user_id, 'gold', -v_final_price, v_player.gold - v_final_price, 'item_purchase',\n      'economy_transaction', v_transaction_id::text, v_operation_id);\n    v_result := jsonb_build_object('transactionId', v_transaction_id, 'itemKey', v_catalog.item_key,\n      'quantity', coalesce(v_inventory.quantity, 0) + 1, 'paidAmount', v_final_price,\n      'currency', 'gold', 'catalogVersion', v_catalog.catalog_version);\n\n  elsif v_type = 'USE_ITEM' then\n    select * into v_catalog from public.item_catalog\n      where item_key = v_payload ->> 'itemKey' and active for share;\n    if not found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_FOUND');\n    end if;\n    if v_catalog.item_type <> 'potion' or not v_catalog.usable then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_USABLE');\n    end if;\n    select * into v_inventory from public.player_inventory\n      where user_id = p_user_id and item_key = v_catalog.item_key for update;\n    if not found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_OWNED');\n    end if;\n    v_max_hp := private.max_hp_v1(v_player.total_xp);\n    if v_player.hp >= v_max_hp then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'HP_ALREADY_FULL');\n    end if;\n    v_heal := least(coalesce((v_catalog.member_effects ->> 'healAmount')::bigint, 0), v_max_hp - v_player.hp);\n    if v_heal <= 0 then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_USABLE');\n    end if;\n    update public.player_states set hp = hp + v_heal, updated_at = now() where user_id = p_user_id;\n    if v_inventory.quantity = 1 then\n      delete from public.player_inventory where user_id = p_user_id and item_key = v_catalog.item_key;\n    else\n      update public.player_inventory set quantity = quantity - 1, updated_at = now()\n        where user_id = p_user_id and item_key = v_catalog.item_key;\n    end if;\n    insert into public.economy_transactions(id, user_id, operation_id, transaction_type,\n      item_key, item_name_snapshot, catalog_version_snapshot, detail_snapshot)\n    values (v_transaction_id, p_user_id, v_operation_id, 'use_item', v_catalog.item_key,\n      v_catalog.display_name, v_catalog.catalog_version,\n      jsonb_build_object('healAmount', v_heal, 'hpBefore', v_player.hp, 'hpAfter', v_player.hp + v_heal));\n    insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n      source_type, source_id, operation_id)\n    values (p_user_id, 'hp', v_heal, v_player.hp + v_heal, 'item_use',\n      'economy_transaction', v_transaction_id::text, v_operation_id);\n    v_result := jsonb_build_object('transactionId', v_transaction_id, 'itemKey', v_catalog.item_key,\n      'healed', v_heal, 'hp', v_player.hp + v_heal, 'maxHp', v_max_hp);\n\n  elsif v_type = 'EQUIP_ITEM' then\n    select * into v_catalog from public.item_catalog\n      where item_key = v_payload ->> 'itemKey' and active for share;\n    if not found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_FOUND');\n    end if;\n    if not v_catalog.equippable or v_catalog.equipment_slot not in ('weapon', 'armor', 'pet') then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_EQUIPPABLE');\n    end if;\n    select * into v_inventory from public.player_inventory\n      where user_id = p_user_id and item_key = v_catalog.item_key for update;\n    if not found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_OWNED');\n    end if;\n    v_slot := v_catalog.equipment_slot;\n    select item_key into v_existing_item from public.player_equipment\n      where user_id = p_user_id and slot = v_slot for update;\n    insert into public.player_equipment(user_id, slot, item_key)\n      values (p_user_id, v_slot, v_catalog.item_key)\n      on conflict (user_id, slot) do update\n      set item_key = excluded.item_key, equipped_at = now(), updated_at = now();\n    insert into public.economy_transactions(id, user_id, operation_id, transaction_type,\n      item_key, item_name_snapshot, catalog_version_snapshot, detail_snapshot)\n    values (v_transaction_id, p_user_id, v_operation_id, 'equip_item', v_catalog.item_key,\n      v_catalog.display_name, v_catalog.catalog_version,\n      jsonb_build_object('slot', v_slot, 'previousItemKey', v_existing_item,\n        'equipmentModifiers', v_catalog.equipment_modifiers, 'memberEffects', v_catalog.member_effects));\n    v_result := jsonb_build_object('transactionId', v_transaction_id, 'itemKey', v_catalog.item_key,\n      'slot', v_slot, 'previousItemKey', v_existing_item);\n\n  elsif v_type = 'UNEQUIP_ITEM' then\n    v_slot := v_payload ->> 'slot';\n    select item_key into v_existing_item from public.player_equipment\n      where user_id = p_user_id and slot = v_slot for update;\n    if not found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_OWNED');\n    end if;\n    delete from public.player_equipment where user_id = p_user_id and slot = v_slot;\n    select * into v_catalog from public.item_catalog where item_key = v_existing_item;\n    insert into public.economy_transactions(id, user_id, operation_id, transaction_type,\n      item_key, item_name_snapshot, catalog_version_snapshot, detail_snapshot)\n    values (v_transaction_id, p_user_id, v_operation_id, 'unequip_item', v_existing_item,\n      v_catalog.display_name, v_catalog.catalog_version, jsonb_build_object('slot', v_slot));\n    v_result := jsonb_build_object('transactionId', v_transaction_id, 'itemKey', v_existing_item,\n      'slot', v_slot, 'unequipped', true);\n\n  elsif v_type = 'REDEEM_REWARD_TICKET' then\n    if v_catalog.item_type <> 'reward_ticket' or v_catalog.currency_type <> 'gems' then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'ITEM_NOT_AVAILABLE');\n    end if;\n    if v_player.gems < v_catalog.base_price then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'INSUFFICIENT_RESOURCE');\n    end if;\n    update public.player_states set gems = gems - v_catalog.base_price, updated_at = now() where user_id = p_user_id;\n    insert into public.economy_transactions(\n      id, user_id, operation_id, transaction_type, item_key, ticket_id,\n      currency_type, currency_delta, base_price_snapshot, paid_amount_snapshot,\n      item_name_snapshot, catalog_version_snapshot, detail_snapshot\n    ) values (\n      v_transaction_id, p_user_id, v_operation_id, 'redeem_reward_ticket', v_catalog.item_key, v_ticket_id,\n      'gems', -v_catalog.base_price, v_catalog.base_price, v_catalog.base_price,\n      v_catalog.display_name, v_catalog.catalog_version,\n      jsonb_build_object('effectKey', v_catalog.effect_key)\n    );\n    insert into public.player_reward_tickets(\n      id, user_id, ticket_key, name_snapshot, gem_cost_snapshot,\n      catalog_version_snapshot, source_operation_id, acquisition_transaction_id\n    ) values (\n      v_ticket_id, p_user_id, v_catalog.item_key, v_catalog.display_name, v_catalog.base_price,\n      v_catalog.catalog_version, v_operation_id, v_transaction_id\n    );\n    insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n      source_type, source_id, operation_id)\n    values (p_user_id, 'gems', -v_catalog.base_price, v_player.gems - v_catalog.base_price,\n      'ticket_redemption', 'reward_ticket', v_ticket_id::text, v_operation_id);\n    v_result := jsonb_build_object('transactionId', v_transaction_id,\n      'ticketInstanceId', v_ticket_id, 'ticketKey', v_catalog.item_key,\n      'paidAmount', v_catalog.base_price, 'currency', 'gems');\n\n  else\n    begin\n      select * into v_ticket from public.player_reward_tickets\n        where id = (v_payload ->> 'ticketInstanceId')::uuid and user_id = p_user_id for update;\n    exception when invalid_text_representation then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n    end;\n    if not found then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'TICKET_NOT_FOUND');\n    end if;\n    if v_ticket.status <> 'unused' then\n      delete from private.command_operations where user_id = p_user_id and operation_id = v_operation_id;\n      return jsonb_build_object('ok', false, 'errorCode', 'TICKET_ALREADY_USED');\n    end if;\n    select * into v_catalog from public.item_catalog where item_key = v_ticket.ticket_key;\n    if v_type = 'USE_REWARD_TICKET' then\n      update public.player_reward_tickets set status = 'used', used_at = now(), updated_at = now()\n        where id = v_ticket.id;\n      insert into public.economy_transactions(id, user_id, operation_id, transaction_type,\n        item_key, ticket_id, item_name_snapshot, catalog_version_snapshot, detail_snapshot)\n      values (v_transaction_id, p_user_id, v_operation_id, 'use_reward_ticket',\n        v_ticket.ticket_key, v_ticket.id, v_ticket.name_snapshot, v_ticket.catalog_version_snapshot,\n        jsonb_build_object('issuedAt', v_ticket.issued_at));\n      v_result := jsonb_build_object('transactionId', v_transaction_id,\n        'ticketInstanceId', v_ticket.id, 'status', 'used');\n    else\n      update public.player_states set gems = gems + v_ticket.gem_cost_snapshot, updated_at = now()\n        where user_id = p_user_id;\n      update public.player_reward_tickets set status = 'reversed', reversed_at = now(), updated_at = now()\n        where id = v_ticket.id;\n      insert into public.economy_transactions(id, user_id, operation_id, transaction_type,\n        item_key, ticket_id, currency_type, currency_delta, base_price_snapshot,\n        paid_amount_snapshot, item_name_snapshot, catalog_version_snapshot,\n        reversal_of_transaction_id, detail_snapshot)\n      values (v_transaction_id, p_user_id, v_operation_id, 'reverse_reward_ticket',\n        v_ticket.ticket_key, v_ticket.id, 'gems', v_ticket.gem_cost_snapshot,\n        v_ticket.gem_cost_snapshot, v_ticket.gem_cost_snapshot, v_ticket.name_snapshot,\n        v_ticket.catalog_version_snapshot, v_ticket.acquisition_transaction_id,\n        jsonb_build_object('refundFromSnapshot', true));\n      insert into public.resource_ledger(user_id, resource_type, delta, balance_after, reason,\n        source_type, source_id, operation_id)\n      values (p_user_id, 'gems', v_ticket.gem_cost_snapshot,\n        v_player.gems + v_ticket.gem_cost_snapshot, 'ticket_refund',\n        'reward_ticket', v_ticket.id::text, v_operation_id);\n      v_result := jsonb_build_object('transactionId', v_transaction_id,\n        'ticketInstanceId', v_ticket.id, 'status', 'reversed',\n        'refundedGems', v_ticket.gem_cost_snapshot);\n    end if;\n  end if;\n\n  v_completed := private.phase4_complete_operation(\n    p_user_id, v_operation_id,\n    jsonb_build_object('operationId', v_operation_id, 'result', v_result, 'serverTimestamp', now())\n  );\n  if v_completed ->> 'ok' <> 'true' then return v_completed; end if;\n  v_operation_version := (v_completed ->> 'repositoryVersion')::bigint;\n  return v_completed || jsonb_build_object(\n    'operationRepositoryVersion', v_operation_version,\n    'state', private.phase4b_state(p_user_id) || private.phase5b_economy_state(p_user_id),\n    'serverTimestamp', now()\n  );\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "guard_achievement_reward_once",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.guard_achievement_reward_once()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n  if old.reward_granted_at is not null and (\n    new.reward_granted_at is distinct from old.reward_granted_at\n    or new.reward_operation_id is distinct from old.reward_operation_id\n  ) then\n    raise exception using errcode = '23514', message = 'ACHIEVEMENT_REWARD_ALREADY_RECORDED';\n  end if;\n  if old.reward_state = 'reversed' and new.reward_state <> 'reversed' then\n    raise exception using errcode = '23514', message = 'ACHIEVEMENT_REWARD_REVERSAL_FINAL';\n  end if;\n  return new;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "guard_boss_reward_once",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.guard_boss_reward_once()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n  if old.reward_granted_at is not null and (\n    new.reward_granted_at is distinct from old.reward_granted_at\n    or new.reward_operation_id is distinct from old.reward_operation_id\n  ) then\n    raise exception using errcode = '23514', message = 'BOSS_REWARD_ALREADY_RECORDED';\n  end if;\n  return new;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "guard_habit_event_reversal_once",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.guard_habit_event_reversal_once()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n  if row(\n    new.id, new.user_id, new.business_date, new.habit_kind, new.system_key,\n    new.custom_habit_id, new.direction, new.title_snapshot, new.policy_snapshot,\n    new.definition_version, new.source_operation_id, new.occurred_at\n  ) is distinct from row(\n    old.id, old.user_id, old.business_date, old.habit_kind, old.system_key,\n    old.custom_habit_id, old.direction, old.title_snapshot, old.policy_snapshot,\n    old.definition_version, old.source_operation_id, old.occurred_at\n  ) then\n    raise exception using errcode = '23514', message = 'HABIT_EVENT_FACT_IMMUTABLE';\n  end if;\n  if old.reversed_at is not null and row(\n    new.reversed_at, new.reversed_by_operation_id, new.reversal_reason\n  ) is distinct from row(\n    old.reversed_at, old.reversed_by_operation_id, old.reversal_reason\n  ) then\n    raise exception using errcode = '23514', message = 'HABIT_EVENT_ALREADY_REVERSED';\n  end if;\n  return new;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "initialize_member_profile",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.initialize_member_profile(p_user_id uuid, p_command jsonb, p_expected_version bigint DEFAULT NULL::bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_operation_id text := coalesce(p_command ->> 'operationId', '');\n  v_command_type text := coalesce(p_command ->> 'type', '');\n  v_adventurer_name text := btrim(coalesce(p_command #>> '{payload,adventurerName}', ''));\n  v_request_hash text := encode(\n    extensions.digest(convert_to(p_command::text, 'UTF8'), 'sha256'),\n    'hex'\n  );\n  v_inserted_count bigint := 0;\n  v_profile_inserted_count bigint := 0;\n  v_existing private.command_operations%rowtype;\n  v_profile public.profiles%rowtype;\n  v_root public.member_game_roots%rowtype;\n  v_result jsonb;\nbegin\n  if p_user_id is null then\n    return jsonb_build_object(\n      'ok', false,\n      'errorCode', 'AUTH_REQUIRED',\n      'retryable', false,\n      'operationId', null\n    );\n  end if;\n\n  if p_command is null\n    or jsonb_typeof(p_command) <> 'object'\n    or coalesce(p_command ->> 'contractVersion', '') <> '1'\n    or v_command_type <> 'INITIALIZE_MEMBER_PROFILE'\n    or v_operation_id !~ '^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$'\n    or jsonb_typeof(p_command -> 'payload') <> 'object'\n    or char_length(v_adventurer_name) not between 2 and 16\n    or v_adventurer_name !~ '^[[:alnum:]]+$'\n  then\n    return jsonb_build_object(\n      'ok', false,\n      'errorCode', 'INVALID_PAYLOAD',\n      'retryable', false,\n      'operationId', nullif(v_operation_id, '')\n    );\n  end if;\n\n  insert into private.command_operations (\n    user_id,\n    operation_id,\n    command_type,\n    request_hash,\n    status\n  ) values (\n    p_user_id,\n    v_operation_id,\n    v_command_type,\n    v_request_hash,\n    'pending'\n  )\n  on conflict (user_id, operation_id) do nothing;\n\n  get diagnostics v_inserted_count = row_count;\n\n  select *\n    into v_existing\n    from private.command_operations\n   where user_id = p_user_id\n     and operation_id = v_operation_id\n   for update;\n\n  if v_inserted_count = 0 then\n    if v_existing.request_hash <> v_request_hash\n      or v_existing.command_type <> v_command_type\n    then\n      return jsonb_build_object(\n        'ok', false,\n        'errorCode', 'OPERATION_ID_REUSED',\n        'retryable', false,\n        'operationId', v_operation_id\n      );\n    end if;\n\n    if v_existing.status = 'completed' and v_existing.result is not null then\n      return v_existing.result || jsonb_build_object('duplicate', true);\n    end if;\n\n    return jsonb_build_object(\n      'ok', false,\n      'errorCode', 'OPERATION_IN_PROGRESS',\n      'retryable', true,\n      'operationId', v_operation_id\n    );\n  end if;\n\n  select *\n    into v_root\n    from public.member_game_roots\n   where user_id = p_user_id\n   for update;\n\n  if p_expected_version is not null\n    and p_expected_version <> coalesce(v_root.repository_version, 0)\n  then\n    delete from private.command_operations\n     where user_id = p_user_id\n       and operation_id = v_operation_id;\n\n    return jsonb_build_object(\n      'ok', false,\n      'errorCode', 'VERSION_CONFLICT',\n      'retryable', true,\n      'operationId', v_operation_id,\n      'currentVersion', coalesce(v_root.repository_version, 0)\n    );\n  end if;\n\n  insert into public.profiles (user_id, adventurer_name)\n  values (p_user_id, v_adventurer_name)\n  on conflict (user_id) do nothing;\n\n  get diagnostics v_profile_inserted_count = row_count;\n\n  insert into public.member_game_roots (user_id, repository_version)\n  values (p_user_id, 0)\n  on conflict (user_id) do nothing;\n\n  update public.member_game_roots\n     set repository_version = repository_version + 1,\n         updated_at = now()\n   where user_id = p_user_id\n   returning * into v_root;\n\n  select *\n    into v_profile\n    from public.profiles\n   where user_id = p_user_id;\n\n  v_result := jsonb_build_object(\n    'ok', true,\n    'operationId', v_operation_id,\n    'repositoryVersion', v_root.repository_version,\n    'duplicate', false,\n    'serverTimestamp', now(),\n    'result', jsonb_build_object(\n      'initialized', true,\n      'profileCreated', v_profile_inserted_count = 1\n    ),\n    'state', jsonb_build_object(\n      'meta', jsonb_build_object(\n        'repositoryVersion', v_root.repository_version,\n        'operations', jsonb_build_array()\n      ),\n      'member', jsonb_build_object(\n        'adventurerName', v_profile.adventurer_name,\n        'onboardingStatus', v_profile.onboarding_status,\n        'createdAt', v_profile.created_at,\n        'updatedAt', v_profile.updated_at\n      )\n    )\n  );\n\n  update private.command_operations\n     set status = 'completed',\n         result = v_result,\n         completed_at = now()\n   where user_id = p_user_id\n     and operation_id = v_operation_id;\n\n  return v_result;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_total_xp bigint",
+      "name": "level_v1",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.level_v1(p_total_xp bigint)\n RETURNS bigint\n LANGUAGE sql\n IMMUTABLE STRICT\n SET search_path TO ''\nAS $function$\n  select floor((1 + sqrt(1 + (4 * p_total_xp::numeric / 25))) / 2)::bigint\n  where p_total_xp >= 0\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_total_xp bigint",
+      "name": "max_hp_v1",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.max_hp_v1(p_total_xp bigint)\n RETURNS bigint\n LANGUAGE sql\n IMMUTABLE STRICT\n SET search_path TO ''\nAS $function$\n  select 50 + ((private.level_v1(p_total_xp) - 1) * 5)\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid",
+      "name": "member_profile_state",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.member_profile_state(p_user_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n  select jsonb_build_object(\n    'meta', jsonb_build_object(\n      'repositoryVersion', r.repository_version,\n      'operations', jsonb_build_array()\n    ),\n    'member', jsonb_build_object(\n      'adventurerName', p.adventurer_name,\n      'onboardingStatus', p.onboarding_status,\n      'onboardingCompleted', p.onboarding_completed,\n      'mainQuestId', p.main_quest_code,\n      'dailyBudget', p.daily_budget,\n      'timeZone', p.timezone,\n      'createdAt', p.created_at,\n      'updatedAt', p.updated_at\n    ),\n    'dailyDrafts', coalesce((\n      select jsonb_object_agg(d.entry_date::text, jsonb_build_object(\n        'date', d.entry_date::text,\n        'sleep', d.sleep,\n        'water', d.water,\n        'exercise', d.exercise,\n        'study', d.study,\n        'expense', d.expense,\n        'impulse', d.impulse,\n        'sugaryDrinks', d.sugary_drinks,\n        'updatedAt', d.updated_at\n      )) from public.daily_drafts d where d.user_id = p_user_id\n    ), '{}'::jsonb),\n    'customHabits', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', h.id,\n        'title', h.title,\n        'direction', h.direction,\n        'deletedAt', h.deleted_at,\n        'createdAt', h.created_at,\n        'updatedAt', h.updated_at\n      ) order by h.created_at)\n      from public.custom_habits h where h.user_id = p_user_id\n    ), '[]'::jsonb),\n    'rulePreferences', coalesce((\n      select jsonb_object_agg(q.rule_id, q.enabled)\n      from public.rule_preferences q where q.user_id = p_user_id\n    ), '{}'::jsonb)\n  )\n  from public.profiles p\n  join public.member_game_roots r on r.user_id = p.user_id\n  where p.user_id = p_user_id;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_operation_id text, p_result jsonb",
+      "name": "phase4_complete_operation",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase4_complete_operation(p_user_id uuid, p_operation_id text, p_result jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_operation private.command_operations%rowtype;\n  v_root public.member_game_roots%rowtype;\n  v_player public.player_states%rowtype;\n  v_version bigint;\n  v_result jsonb;\nbegin\n  if p_user_id is null or p_operation_id is null or p_result is null\n    or jsonb_typeof(p_result) <> 'object' then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n  end if;\n\n  select * into v_operation from private.command_operations\n  where user_id = p_user_id and operation_id = p_operation_id for update;\n  if not found then return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND'); end if;\n  if v_operation.status = 'completed' then\n    return coalesce(v_operation.result, '{}'::jsonb)\n      || jsonb_build_object('ok', true, 'duplicate', true);\n  end if;\n\n  select * into v_root from public.member_game_roots\n  where user_id = p_user_id for update;\n  if not found then return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND'); end if;\n  select * into v_player from public.player_states\n  where user_id = p_user_id for update;\n  if not found then return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND'); end if;\n\n  update public.member_game_roots\n  set repository_version = repository_version + 1, updated_at = now()\n  where user_id = p_user_id\n  returning repository_version into v_version;\n\n  v_result := p_result || jsonb_build_object(\n    'ok', true, 'duplicate', false, 'repositoryVersion', v_version\n  );\n  update private.command_operations\n  set status = 'completed', result = v_result, completed_at = now()\n  where user_id = p_user_id and operation_id = p_operation_id;\n  return v_result;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_operation_id text, p_command_type text, p_request_hash text, p_expected_version bigint",
+      "name": "phase4_reserve_operation",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase4_reserve_operation(p_user_id uuid, p_operation_id text, p_command_type text, p_request_hash text, p_expected_version bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_inserted integer;\n  v_operation private.command_operations%rowtype;\n  v_root public.member_game_roots%rowtype;\n  v_player public.player_states%rowtype;\nbegin\n  if p_user_id is null or p_operation_id is null or p_request_hash is null\n    or p_command_type not in (\n      'REPORT_HABIT_EVENT', 'REVERSE_HABIT_EVENT', 'SUBMIT_DAILY_ENTRY',\n      'PURCHASE_ITEM', 'USE_ITEM', 'EQUIP_ITEM', 'UNEQUIP_ITEM',\n      'REDEEM_REWARD_TICKET', 'USE_REWARD_TICKET', 'REVERSE_REWARD_TICKET'\n    )\n    or p_expected_version is null or p_expected_version < 0 then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n  end if;\n\n  insert into private.command_operations(user_id, operation_id, command_type, request_hash, status)\n  values (p_user_id, p_operation_id, p_command_type, p_request_hash, 'pending')\n  on conflict (user_id, operation_id) do nothing;\n  get diagnostics v_inserted = row_count;\n\n  select * into v_operation\n  from private.command_operations\n  where user_id = p_user_id and operation_id = p_operation_id\n  for update;\n\n  if v_inserted = 0 then\n    if v_operation.command_type <> p_command_type or v_operation.request_hash <> p_request_hash then\n      return jsonb_build_object('ok', false, 'errorCode', 'OPERATION_ID_REUSED');\n    end if;\n    if v_operation.status = 'completed' then\n      return coalesce(v_operation.result, '{}'::jsonb)\n        || jsonb_build_object('ok', true, 'duplicate', true);\n    end if;\n    return jsonb_build_object('ok', false, 'errorCode', 'OPERATION_IN_PROGRESS');\n  end if;\n\n  -- Fixed per-user lock order: operation receipt -> aggregate root -> player state.\n  -- The locked root serializes all Phase 4/5 mutations before future economy rows are touched.\n  select * into v_root from public.member_game_roots\n  where user_id = p_user_id for update;\n  if not found then\n    delete from private.command_operations where user_id = p_user_id and operation_id = p_operation_id;\n    return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND');\n  end if;\n\n  select * into v_player from public.player_states\n  where user_id = p_user_id for update;\n  if not found then\n    delete from private.command_operations where user_id = p_user_id and operation_id = p_operation_id;\n    return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND');\n  end if;\n\n  if v_root.repository_version <> p_expected_version then\n    delete from private.command_operations where user_id = p_user_id and operation_id = p_operation_id;\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'VERSION_CONFLICT',\n      'currentVersion', v_root.repository_version\n    );\n  end if;\n\n  return jsonb_build_object(\n    'ok', true, 'duplicate', false, 'reserved', true,\n    'repositoryVersion', v_root.repository_version\n  );\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_source_operation_id text",
+      "name": "phase4b_has_gameplay_dependency",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase4b_has_gameplay_dependency(p_user_id uuid, p_source_operation_id text)\n RETURNS boolean\n LANGUAGE plpgsql\n STABLE\n SET search_path TO ''\nAS $function$\ndeclare\n  v_source_version bigint;\nbegin\n  select (operation.result ->> 'repositoryVersion')::bigint\n    into v_source_version\n  from private.command_operations operation\n  where operation.user_id = p_user_id\n    and operation.operation_id = p_source_operation_id\n    and operation.status = 'completed';\n\n  -- Missing or incomplete source receipts cannot establish a safe correction boundary.\n  if v_source_version is null then\n    return true;\n  end if;\n\n  return exists (\n    select 1\n    from private.command_operations later_operation\n    where later_operation.user_id = p_user_id\n      and later_operation.status = 'completed'\n      and later_operation.command_type in (\n        'REPORT_HABIT_EVENT',\n        'REVERSE_HABIT_EVENT',\n        'SUBMIT_DAILY_ENTRY'\n      )\n      and coalesce((later_operation.result ->> 'repositoryVersion')::bigint, -1) > v_source_version\n  );\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb",
+      "name": "phase4b_operation_receipt",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase4b_operation_receipt(p_user_id uuid, p_command jsonb)\n RETURNS jsonb\n LANGUAGE plpgsql\n STABLE\n SET search_path TO ''\nAS $function$\ndeclare\n  v_operation private.command_operations%rowtype;\n  v_operation_id text := p_command ->> 'operationId';\n  v_command_type text := p_command ->> 'type';\n  v_request_hash text;\n  v_current_version bigint;\n  v_operation_version bigint;\nbegin\n  if p_user_id is null or p_command is null or jsonb_typeof(p_command) <> 'object'\n    or v_command_type not in ('REPORT_HABIT_EVENT', 'REVERSE_HABIT_EVENT', 'SUBMIT_DAILY_ENTRY')\n    or p_command ->> 'contractVersion' <> '1'\n    or v_operation_id !~ '^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$' then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD');\n  end if;\n\n  v_request_hash := encode(extensions.digest(convert_to(p_command::text, 'UTF8'), 'sha256'), 'hex');\n  select * into v_operation from private.command_operations\n    where user_id = p_user_id and operation_id = v_operation_id;\n  if not found then return jsonb_build_object('ok', true, 'duplicate', false); end if;\n  if v_operation.command_type <> v_command_type or v_operation.request_hash <> v_request_hash then\n    return jsonb_build_object('ok', false, 'errorCode', 'OPERATION_ID_REUSED');\n  end if;\n  if v_operation.status <> 'completed' or v_operation.result is null then\n    return jsonb_build_object('ok', false, 'errorCode', 'OPERATION_IN_PROGRESS', 'retryable', true);\n  end if;\n\n  select repository_version into v_current_version\n    from public.member_game_roots where user_id = p_user_id;\n  if v_current_version is null then return jsonb_build_object('ok', false, 'errorCode', 'NOT_FOUND'); end if;\n  v_operation_version := coalesce((v_operation.result ->> 'repositoryVersion')::bigint, v_current_version);\n  return v_operation.result || jsonb_build_object(\n    'ok', true, 'duplicate', true, 'operationId', v_operation_id,\n    'operationRepositoryVersion', v_operation_version,\n    'repositoryVersion', v_current_version,\n    'state', private.phase4b_state(p_user_id), 'serverTimestamp', now()\n  );\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid",
+      "name": "phase4b_state",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase4b_state(p_user_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n  select private.member_profile_state(p_user_id) || jsonb_build_object(\n    'player', (\n      select jsonb_build_object(\n        'totalXp', s.total_xp, 'level', private.level_v1(s.total_xp),\n        'hp', s.hp, 'maxHp', private.max_hp_v1(s.total_xp),\n        'gold', s.gold, 'gems', s.gems,\n        'baseStats', jsonb_build_object(\n          'health', s.base_health, 'energy', s.base_energy,\n          'wealth', s.base_wealth, 'growth', s.base_growth\n        ), 'levelCurveVersion', s.level_curve_version, 'updatedAt', s.updated_at\n      ) from public.player_states s where s.user_id = p_user_id\n    ),\n    'dailyEntries', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', e.id, 'businessDate', e.business_date, 'currentRevision', e.current_revision,\n        'sleep', e.sleep, 'water', e.water, 'exercise', e.exercise, 'study', e.study,\n        'expense', e.expense, 'impulse', e.impulse, 'sugaryDrinks', e.sugary_drinks,\n        'effectiveInput', e.effective_input, 'settlement', e.settlement_snapshot,\n        'settledAt', e.settled_at\n      ) order by e.business_date desc)\n      from (select * from public.daily_entries where user_id = p_user_id order by business_date desc limit 30) e\n    ), '[]'::jsonb),\n    'habitEvents', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', h.id, 'businessDate', h.business_date, 'kind', h.habit_kind,\n        'systemKey', h.system_key, 'customHabitId', h.custom_habit_id,\n        'direction', h.direction, 'title', h.title_snapshot,\n        'policy', h.policy_snapshot, 'occurredAt', h.occurred_at, 'reversedAt', h.reversed_at\n      ) order by h.occurred_at desc)\n      from (select * from public.habit_events where user_id = p_user_id order by occurred_at desc limit 50) h\n    ), '[]'::jsonb),\n    'statusEffects', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', x.id, 'key', x.effect_key, 'type', x.effect_type, 'title', x.title_snapshot,\n        'modifiers', x.modifier_snapshot, 'appliedOn', x.applied_on,\n        'expiresOn', x.expires_on, 'state', x.state\n      ) order by x.created_at desc)\n      from public.status_effects x where x.user_id = p_user_id\n    ), '[]'::jsonb),\n    'activeBoss', (\n      select jsonb_build_object(\n        'id', b.id, 'bossKey', b.boss_key, 'name', b.name_snapshot,\n        'hp', b.hp, 'maxHp', b.max_hp, 'state', b.state, 'summonedOn', b.summoned_on\n      ) from public.boss_encounters b where b.user_id = p_user_id and b.state = 'active' limit 1\n    ),\n    'achievements', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'code', a.achievement_code, 'unlockedAt', a.unlocked_at,\n        'rewardState', a.reward_state, 'definitionVersion', a.definition_version\n      ) order by a.unlocked_at)\n      from public.player_achievements a where a.user_id = p_user_id\n    ), '[]'::jsonb),\n    'achievementProgress', jsonb_build_object(\n      'gym_rat', least(5, (\n        select count(*)\n        from public.habit_events h\n        where h.user_id = p_user_id\n          and h.system_key = 'exercise_training'\n          and h.business_date = (now() at time zone coalesce((\n            select p.timezone from public.profiles p where p.user_id = p_user_id\n          ), 'Asia/Taipei'))::date\n          and h.reversed_at is null\n      ))\n    )\n  );\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "phase5_guard_equipment_row",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase5_guard_equipment_row()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_item public.item_catalog%rowtype;\nbegin\n  select * into v_item from public.item_catalog where item_key = new.item_key;\n  if not found or not v_item.equippable or v_item.equipment_slot <> new.slot then\n    raise exception 'PHASE5_INVALID_EQUIPMENT_SLOT';\n  end if;\n  return new;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "phase5_guard_inventory_row",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase5_guard_inventory_row()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_item public.item_catalog%rowtype;\nbegin\n  select * into v_item from public.item_catalog where item_key = new.item_key;\n  if not found or v_item.item_type = 'reward_ticket' then\n    raise exception 'PHASE5_INVALID_INVENTORY_ITEM';\n  end if;\n  if v_item.item_type = 'potion' and new.quantity > v_item.max_stack then\n    raise exception 'PHASE5_INVENTORY_STACK_LIMIT';\n  end if;\n  if v_item.item_type in ('weapon', 'armor', 'pet') and new.quantity <> 1 then\n    raise exception 'PHASE5_EQUIPMENT_MUST_BE_UNIQUE';\n  end if;\n  return new;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "phase5_guard_reward_ticket_row",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase5_guard_reward_ticket_row()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_item public.item_catalog%rowtype;\nbegin\n  select * into v_item from public.item_catalog where item_key = new.ticket_key;\n  if not found or v_item.item_type <> 'reward_ticket' or v_item.currency_type <> 'gems' then\n    raise exception 'PHASE5_INVALID_REWARD_TICKET';\n  end if;\n  return new;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "phase5_reject_economy_history_update",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase5_reject_economy_history_update()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n  raise exception 'PHASE5_ECONOMY_HISTORY_IMMUTABLE';\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid",
+      "name": "phase5b_active_status_modifiers",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase5b_active_status_modifiers(p_user_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n  select jsonb_build_object(\n    'health', coalesce(sum((s.modifier_snapshot ->> 'health')::integer), 0),\n    'energy', coalesce(sum((s.modifier_snapshot ->> 'energy')::integer), 0),\n    'wealth', coalesce(sum((s.modifier_snapshot ->> 'wealth')::integer), 0),\n    'growth', coalesce(sum((s.modifier_snapshot ->> 'growth')::integer), 0)\n  )\n  from public.status_effects s\n  where s.user_id = p_user_id\n    and s.state = 'active'\n    and s.expires_on > (now() at time zone 'Asia/Taipei')::date\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid",
+      "name": "phase5b_economy_state",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase5b_economy_state(p_user_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n  with equipment_modifiers as (\n    select private.phase5b_equipment_modifiers(p_user_id) value\n  ), status_modifiers as (\n    select private.phase5b_active_status_modifiers(p_user_id) value\n  )\n  select jsonb_build_object(\n    'inventory', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'itemKey', i.item_key, 'displayName', c.display_name, 'itemType', c.item_type,\n        'quantity', i.quantity, 'acquiredAt', i.acquired_at, 'updatedAt', i.updated_at\n      ) order by c.item_type, c.display_name)\n      from public.player_inventory i\n      join public.item_catalog c on c.item_key = i.item_key\n      where i.user_id = p_user_id\n    ), '[]'::jsonb),\n    'equipment', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'slot', e.slot, 'itemKey', e.item_key, 'displayName', c.display_name,\n        'equipmentModifiers', c.equipment_modifiers, 'memberEffects', c.member_effects,\n        'equippedAt', e.equipped_at, 'updatedAt', e.updated_at\n      ) order by e.slot)\n      from public.player_equipment e\n      join public.item_catalog c on c.item_key = e.item_key\n      where e.user_id = p_user_id\n    ), '[]'::jsonb),\n    'rewardTickets', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', t.id, 'ticketKey', t.ticket_key, 'name', t.name_snapshot,\n        'status', t.status, 'gemCost', t.gem_cost_snapshot,\n        'catalogVersion', t.catalog_version_snapshot, 'issuedAt', t.issued_at,\n        'usedAt', t.used_at, 'reversedAt', t.reversed_at, 'updatedAt', t.updated_at\n      ) order by t.issued_at desc)\n      from public.player_reward_tickets t where t.user_id = p_user_id\n    ), '[]'::jsonb),\n    'economySummary', jsonb_build_object(\n      'gold', coalesce((select gold from public.player_states where user_id = p_user_id), 0),\n      'gems', coalesce((select gems from public.player_states where user_id = p_user_id), 0),\n      'transactionCount', (select count(*) from public.economy_transactions where user_id = p_user_id),\n      'itemsVersion', 'items-v1', 'economyVersion', 'economy-v1'\n    ),\n    'derivedEquipmentModifiers', (select value from equipment_modifiers),\n    'derivedStats', (\n      select jsonb_build_object(\n        'health', s.base_health + (em.value ->> 'health')::integer + (sm.value ->> 'health')::integer,\n        'energy', s.base_energy + (em.value ->> 'energy')::integer + (sm.value ->> 'energy')::integer,\n        'wealth', s.base_wealth + (em.value ->> 'wealth')::integer + (sm.value ->> 'wealth')::integer,\n        'growth', s.base_growth + (em.value ->> 'growth')::integer + (sm.value ->> 'growth')::integer\n      )\n      from public.player_states s cross join equipment_modifiers em cross join status_modifiers sm\n      where s.user_id = p_user_id\n    ),\n    'recentEconomyTransactions', coalesce((\n      select jsonb_agg(jsonb_build_object(\n        'id', x.id, 'operationId', x.operation_id, 'type', x.transaction_type,\n        'itemKey', x.item_key, 'ticketId', x.ticket_id, 'quantity', x.quantity,\n        'currency', x.currency_type, 'currencyDelta', x.currency_delta,\n        'basePrice', x.base_price_snapshot, 'paidAmount', x.paid_amount_snapshot,\n        'itemName', x.item_name_snapshot, 'catalogVersion', x.catalog_version_snapshot,\n        'discount', x.discount_snapshot, 'detail', x.detail_snapshot, 'createdAt', x.created_at\n      ) order by x.created_at desc)\n      from (select * from public.economy_transactions\n        where user_id = p_user_id order by created_at desc limit 30) x\n    ), '[]'::jsonb)\n  );\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid",
+      "name": "phase5b_equipment_modifiers",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase5b_equipment_modifiers(p_user_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$\n  select jsonb_build_object(\n    'health', coalesce(sum((c.equipment_modifiers ->> 'health')::integer), 0),\n    'energy', coalesce(sum((c.equipment_modifiers ->> 'energy')::integer), 0),\n    'wealth', coalesce(sum((c.equipment_modifiers ->> 'wealth')::integer), 0),\n    'growth', coalesce(sum((c.equipment_modifiers ->> 'growth')::integer), 0)\n  )\n  from public.player_equipment e\n  join public.item_catalog c on c.item_key = e.item_key\n  where e.user_id = p_user_id\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "phase5b_validate_daily_equipment_effect",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.phase5b_validate_daily_equipment_effect()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_expected bigint;\n  v_supplied bigint;\nbegin\n  select coalesce((c.member_effects ->> 'settlementGoldBonus')::bigint, 0)\n    into v_expected\n  from public.player_equipment e\n  join public.item_catalog c on c.item_key = e.item_key\n  where e.user_id = new.user_id and e.slot = 'pet' and c.active;\n  v_expected := coalesce(v_expected, 0);\n  v_supplied := coalesce((new.settlement_snapshot #>> '{equipmentEffects,settlementGoldBonus}')::bigint, 0);\n  if v_supplied <> v_expected then\n    raise exception 'PHASE5_EQUIPMENT_SETTLEMENT_MISMATCH';\n  end if;\n  return new;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres"
+      ],
+      "args": "",
+      "name": "reject_phase4_history_update",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.reject_phase4_history_update()\n RETURNS trigger\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\nbegin\n  raise exception using errcode = '23514', message = 'PHASE4_HISTORY_IMMUTABLE';\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "select_main_quest",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.select_main_quest(p_user_id uuid, p_command jsonb, p_expected_version bigint DEFAULT NULL::bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_operation_id text := coalesce(p_command ->> 'operationId', '');\n  v_command_type text := coalesce(p_command ->> 'type', '');\n  v_quest_id text := btrim(coalesce(p_command #>> '{payload,questId}', ''));\n  v_request_hash text := encode(\n    extensions.digest(convert_to(p_command::text, 'UTF8'), 'sha256'),\n    'hex'\n  );\n  v_inserted_count bigint := 0;\n  v_existing private.command_operations%rowtype;\n  v_profile public.profiles%rowtype;\n  v_root public.member_game_roots%rowtype;\n  v_state jsonb;\n  v_result jsonb;\nbegin\n  if p_user_id is null then\n    return jsonb_build_object('ok', false, 'errorCode', 'AUTH_REQUIRED', 'retryable', false);\n  end if;\n\n  if p_command is null\n    or jsonb_typeof(p_command) <> 'object'\n    or coalesce(p_command ->> 'contractVersion', '') <> '1'\n    or v_command_type <> 'SELECT_MAIN_QUEST'\n    or v_operation_id !~ '^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$'\n    or jsonb_typeof(p_command -> 'payload') <> 'object'\n    or (select count(*) from jsonb_object_keys(p_command -> 'payload')) <> 1\n    or not (p_command -> 'payload' ? 'questId')\n    or v_quest_id not in ('sleep', 'spending', 'exercise', 'learning')\n  then\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false,\n      'operationId', nullif(v_operation_id, '')\n    );\n  end if;\n\n  -- Phase 6B-2: presence is contract validation; receipt replay still precedes version comparison.\n  if p_expected_version is null or p_expected_version < 0 then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false);\n  end if;\n\n  insert into private.command_operations (\n    user_id, operation_id, command_type, request_hash, status\n  ) values (\n    p_user_id, v_operation_id, v_command_type, v_request_hash, 'pending'\n  ) on conflict (user_id, operation_id) do nothing;\n  get diagnostics v_inserted_count = row_count;\n\n  select * into v_existing\n    from private.command_operations\n   where user_id = p_user_id and operation_id = v_operation_id\n   for update;\n\n  if v_inserted_count = 0 then\n    if v_existing.request_hash <> v_request_hash or v_existing.command_type <> v_command_type then\n      return jsonb_build_object(\n        'ok', false, 'errorCode', 'OPERATION_ID_REUSED', 'retryable', false,\n        'operationId', v_operation_id\n      );\n    end if;\n    if v_existing.status = 'completed' and v_existing.result is not null then\n      return v_existing.result || jsonb_build_object('duplicate', true);\n    end if;\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'OPERATION_IN_PROGRESS', 'retryable', true,\n      'operationId', v_operation_id\n    );\n  end if;\n\n  select * into v_root\n    from public.member_game_roots\n   where user_id = p_user_id\n   for update;\n\n  select * into v_profile\n    from public.profiles\n   where user_id = p_user_id\n   for update;\n\n  if not found or v_root.user_id is null then\n    delete from private.command_operations\n     where user_id = p_user_id and operation_id = v_operation_id;\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'NOT_FOUND', 'retryable', false,\n      'operationId', v_operation_id\n    );\n  end if;\n\n  if p_expected_version is not null and p_expected_version <> v_root.repository_version then\n    delete from private.command_operations\n     where user_id = p_user_id and operation_id = v_operation_id;\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'VERSION_CONFLICT', 'retryable', true,\n      'operationId', v_operation_id, 'currentVersion', v_root.repository_version\n    );\n  end if;\n\n  if v_profile.onboarding_completed then\n    delete from private.command_operations\n     where user_id = p_user_id and operation_id = v_operation_id;\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'FORBIDDEN', 'retryable', false,\n      'operationId', v_operation_id\n    );\n  end if;\n\n  update public.profiles\n     set main_quest_code = v_quest_id,\n         onboarding_completed = true,\n         onboarding_status = 'main_quest_selected',\n         updated_at = now()\n   where user_id = p_user_id;\n\n  update public.member_game_roots\n     set repository_version = repository_version + 1,\n         updated_at = now()\n   where user_id = p_user_id\n   returning * into v_root;\n\n  v_state := private.member_profile_state(p_user_id);\n  v_result := jsonb_build_object(\n    'ok', true,\n    'operationId', v_operation_id,\n    'repositoryVersion', v_root.repository_version,\n    'duplicate', false,\n    'serverTimestamp', now(),\n    'result', jsonb_build_object(\n      'questId', v_quest_id,\n      'onboardingCompleted', true\n    ),\n    'state', v_state\n  );\n\n  update private.command_operations\n     set status = 'completed', result = v_result, completed_at = now()\n   where user_id = p_user_id and operation_id = v_operation_id;\n\n  return v_result;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "update_member_profile",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "private",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION private.update_member_profile(p_user_id uuid, p_command jsonb, p_expected_version bigint DEFAULT NULL::bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_operation_id text := coalesce(p_command ->> 'operationId', '');\n  v_command_type text := coalesce(p_command ->> 'type', '');\n  v_payload jsonb := coalesce(p_command -> 'payload', '{}'::jsonb);\n  v_has_name boolean := v_payload ? 'adventurerName';\n  v_has_budget boolean := v_payload ? 'dailyBudget';\n  v_adventurer_name text := btrim(coalesce(v_payload ->> 'adventurerName', ''));\n  v_daily_budget_text text := coalesce(v_payload ->> 'dailyBudget', '');\n  v_request_hash text := encode(\n    extensions.digest(convert_to(p_command::text, 'UTF8'), 'sha256'),\n    'hex'\n  );\n  v_inserted_count bigint := 0;\n  v_existing private.command_operations%rowtype;\n  v_profile public.profiles%rowtype;\n  v_root public.member_game_roots%rowtype;\n  v_state jsonb;\n  v_result jsonb;\n  v_updated_fields jsonb := '[]'::jsonb;\nbegin\n  if p_user_id is null then\n    return jsonb_build_object('ok', false, 'errorCode', 'AUTH_REQUIRED', 'retryable', false);\n  end if;\n\n  if p_command is null\n    or jsonb_typeof(p_command) <> 'object'\n    or coalesce(p_command ->> 'contractVersion', '') <> '1'\n    or v_command_type <> 'UPDATE_PROFILE'\n    or v_operation_id !~ '^[A-Za-z0-9][A-Za-z0-9._:-]{7,199}$'\n    or jsonb_typeof(p_command -> 'payload') <> 'object'\n    or (select count(*) from jsonb_object_keys(v_payload)) not between 1 and 2\n    or (v_payload - 'adventurerName' - 'dailyBudget') <> '{}'::jsonb\n    or (v_has_name and (\n      char_length(v_adventurer_name) not between 2 and 16\n      or v_adventurer_name !~ '^[[:alnum:]]+$'\n    ))\n    or (v_has_budget and (\n      v_daily_budget_text !~ '^[0-9]+$'\n      or v_daily_budget_text::numeric not between 1 and 100000000\n    ))\n  then\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false,\n      'operationId', nullif(v_operation_id, '')\n    );\n  end if;\n\n  -- Phase 6B-2: presence is contract validation; receipt replay still precedes version comparison.\n  if p_expected_version is null or p_expected_version < 0 then\n    return jsonb_build_object('ok', false, 'errorCode', 'INVALID_PAYLOAD', 'retryable', false);\n  end if;\n\n  insert into private.command_operations (\n    user_id, operation_id, command_type, request_hash, status\n  ) values (\n    p_user_id, v_operation_id, v_command_type, v_request_hash, 'pending'\n  ) on conflict (user_id, operation_id) do nothing;\n  get diagnostics v_inserted_count = row_count;\n\n  select * into v_existing\n    from private.command_operations\n   where user_id = p_user_id and operation_id = v_operation_id\n   for update;\n\n  if v_inserted_count = 0 then\n    if v_existing.request_hash <> v_request_hash or v_existing.command_type <> v_command_type then\n      return jsonb_build_object(\n        'ok', false, 'errorCode', 'OPERATION_ID_REUSED', 'retryable', false,\n        'operationId', v_operation_id\n      );\n    end if;\n    if v_existing.status = 'completed' and v_existing.result is not null then\n      return v_existing.result || jsonb_build_object('duplicate', true);\n    end if;\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'OPERATION_IN_PROGRESS', 'retryable', true,\n      'operationId', v_operation_id\n    );\n  end if;\n\n  select * into v_root\n    from public.member_game_roots\n   where user_id = p_user_id\n   for update;\n\n  select * into v_profile\n    from public.profiles\n   where user_id = p_user_id\n   for update;\n\n  if not found or v_root.user_id is null then\n    delete from private.command_operations\n     where user_id = p_user_id and operation_id = v_operation_id;\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'NOT_FOUND', 'retryable', false,\n      'operationId', v_operation_id\n    );\n  end if;\n\n  if p_expected_version is not null and p_expected_version <> v_root.repository_version then\n    delete from private.command_operations\n     where user_id = p_user_id and operation_id = v_operation_id;\n    return jsonb_build_object(\n      'ok', false, 'errorCode', 'VERSION_CONFLICT', 'retryable', true,\n      'operationId', v_operation_id, 'currentVersion', v_root.repository_version\n    );\n  end if;\n\n  update public.profiles\n     set adventurer_name = case when v_has_name then v_adventurer_name else adventurer_name end,\n         daily_budget = case when v_has_budget then v_daily_budget_text::integer else daily_budget end,\n         updated_at = now()\n   where user_id = p_user_id;\n\n  if v_has_name then v_updated_fields := v_updated_fields || '\"adventurerName\"'::jsonb; end if;\n  if v_has_budget then v_updated_fields := v_updated_fields || '\"dailyBudget\"'::jsonb; end if;\n\n  update public.member_game_roots\n     set repository_version = repository_version + 1,\n         updated_at = now()\n   where user_id = p_user_id\n   returning * into v_root;\n\n  v_state := private.member_profile_state(p_user_id);\n  v_result := jsonb_build_object(\n    'ok', true,\n    'operationId', v_operation_id,\n    'repositoryVersion', v_root.repository_version,\n    'duplicate', false,\n    'serverTimestamp', now(),\n    'result', jsonb_build_object('updatedFields', v_updated_fields),\n    'state', v_state\n  );\n\n  update private.command_operations\n     set status = 'completed', result = v_result, completed_at = now()\n   where user_id = p_user_id and operation_id = v_operation_id;\n\n  return v_result;\nend;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "execute_phase3_command",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "public",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION public.execute_phase3_command(p_user_id uuid, p_command jsonb, p_expected_version bigint DEFAULT NULL::bigint)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n  select private.execute_phase3_command(p_user_id, p_command, p_expected_version);\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint, p_plan jsonb",
+      "name": "execute_phase4b_command",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "public",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION public.execute_phase4b_command(p_user_id uuid, p_command jsonb, p_expected_version bigint, p_plan jsonb)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n  select private.execute_phase4b_command(p_user_id, p_command, p_expected_version, p_plan);\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "execute_phase5b_economy_command",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "public",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION public.execute_phase5b_economy_command(p_user_id uuid, p_command jsonb, p_expected_version bigint)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$ select private.execute_phase5b_economy_command(p_user_id, p_command, p_expected_version) $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb",
+      "name": "get_phase4b_operation_receipt",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "public",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION public.get_phase4b_operation_receipt(p_user_id uuid, p_command jsonb)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$ select private.phase4b_operation_receipt(p_user_id, p_command); $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid",
+      "name": "get_phase5b_economy_state",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "public",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION public.get_phase5b_economy_state(p_user_id uuid)\n RETURNS jsonb\n LANGUAGE sql\n STABLE\n SET search_path TO ''\nAS $function$ select private.phase5b_economy_state(p_user_id) $function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "initialize_member_profile",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "public",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION public.initialize_member_profile(p_user_id uuid, p_command jsonb, p_expected_version bigint DEFAULT NULL::bigint)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n  select private.initialize_member_profile(p_user_id, p_command, p_expected_version);\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "",
+      "name": "rls_auto_enable",
+      "owner": "postgres",
+      "config": [
+        "search_path=pg_catalog"
+      ],
+      "schema": "public",
+      "definer": true,
+      "definition": "CREATE OR REPLACE FUNCTION public.rls_auto_enable()\n RETURNS event_trigger\n LANGUAGE plpgsql\n SECURITY DEFINER\n SET search_path TO 'pg_catalog'\nAS $function$\nDECLARE\n  cmd record;\nBEGIN\n  FOR cmd IN\n    SELECT *\n    FROM pg_event_trigger_ddl_commands()\n    WHERE command_tag IN ('CREATE TABLE', 'CREATE TABLE AS', 'SELECT INTO')\n      AND object_type IN ('table','partitioned table')\n  LOOP\n     IF cmd.schema_name IS NOT NULL AND cmd.schema_name IN ('public') AND cmd.schema_name NOT IN ('pg_catalog','information_schema') AND cmd.schema_name NOT LIKE 'pg_toast%' AND cmd.schema_name NOT LIKE 'pg_temp%' THEN\n      BEGIN\n        EXECUTE format('alter table if exists %s enable row level security', cmd.object_identity);\n        RAISE LOG 'rls_auto_enable: enabled RLS on %', cmd.object_identity;\n      EXCEPTION\n        WHEN OTHERS THEN\n          RAISE LOG 'rls_auto_enable: failed to enable RLS on %', cmd.object_identity;\n      END;\n     ELSE\n        RAISE LOG 'rls_auto_enable: skip % (either system schema or not in enforced list: %.)', cmd.object_identity, cmd.schema_name;\n     END IF;\n  END LOOP;\nEND;\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "select_main_quest",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "public",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION public.select_main_quest(p_user_id uuid, p_command jsonb, p_expected_version bigint DEFAULT NULL::bigint)\n RETURNS jsonb\n LANGUAGE sql\n SET search_path TO ''\nAS $function$\n  select private.select_main_quest(p_user_id, p_command, p_expected_version);\n$function$\n"
+    },
+    {
+      "acl": [
+        "postgres=X/postgres",
+        "service_role=X/postgres"
+      ],
+      "args": "p_user_id uuid, p_command jsonb, p_expected_version bigint",
+      "name": "update_member_profile",
+      "owner": "postgres",
+      "config": [
+        "search_path=\"\""
+      ],
+      "schema": "public",
+      "definer": false,
+      "definition": "CREATE OR REPLACE FUNCTION public.update_member_profile(p_user_id uuid, p_command jsonb, p_expected_version bigint DEFAULT NULL::bigint)\n RETURNS jsonb\n LANGUAGE plpgsql\n SET search_path TO ''\nAS $function$\ndeclare\n  v_payload jsonb := coalesce(p_command -> 'payload', '{}'::jsonb);\n  v_budget_text text := coalesce(v_payload ->> 'dailyBudget', '');\n  v_budget integer;\nbegin\n  if v_payload ? 'dailyBudget' then\n    if jsonb_typeof(v_payload -> 'dailyBudget') <> 'number'\n      or v_budget_text !~ '^[0-9]{1,9}$'\n    then\n      return jsonb_build_object(\n        'ok', false,\n        'errorCode', 'INVALID_PAYLOAD',\n        'retryable', false,\n        'operationId', nullif(coalesce(p_command ->> 'operationId', ''), '')\n      );\n    end if;\n\n    v_budget := v_budget_text::integer;\n    if v_budget not between 1 and 100000000 then\n      return jsonb_build_object(\n        'ok', false,\n        'errorCode', 'INVALID_PAYLOAD',\n        'retryable', false,\n        'operationId', nullif(coalesce(p_command ->> 'operationId', ''), '')\n      );\n    end if;\n  end if;\n\n  return private.update_member_profile(p_user_id, p_command, p_expected_version);\nend;\n$function$\n"
+    }
+  ],
+  "migrations": [
+    {
+      "name": "phase_1_member_identity",
+      "sql_md5": "4c3b04845180f5a9e727f997837f05ba",
+      "version": "20260822111358"
+    },
+    {
+      "name": "phase_1_harden_command_authority",
+      "sql_md5": "38b603d1786e4f096845d5e4a8ef95cb",
+      "version": "20260822112828"
+    },
+    {
+      "name": "phase_1_revoke_public_rls_helper",
+      "sql_md5": "51b9a81d744b699c000169c173c5ed7e",
+      "version": "20260822125357"
+    },
+    {
+      "name": "phase_2_member_profile_main_quest",
+      "sql_md5": "18312ee6d47384be3a6d7073e020e2f6",
+      "version": "20260822141150"
+    },
+    {
+      "name": "phase_2_profile_budget_validation_hardening",
+      "sql_md5": "e8ef0e7a9d912243c16179118f86959e",
+      "version": "20260822142155"
+    },
+    {
+      "name": "phase_2_jsonb_payload_count_fix",
+      "sql_md5": "36cd0f2dd7f0f1c3c6ace8121eb7216f",
+      "version": "20260822152147"
+    },
+    {
+      "name": "phase_3_member_definitions",
+      "sql_md5": "1a868fd0fa981f32ea4a8b1ec644656d",
+      "version": "20260823032744"
+    },
+    {
+      "name": "phase_4a_authoritative_domain_foundation",
+      "sql_md5": "cbc66d649d9606ea0a5d278cc90582ec",
+      "version": "20260823075114"
+    },
+    {
+      "name": "phase_4a_grants_hardening",
+      "sql_md5": "e21929413c095c5c159aad134e523ecb",
+      "version": "20260823075410"
+    },
+    {
+      "name": "phase_4a_player_state_bootstrap",
+      "sql_md5": "7d1e6ae43d0588ac8486999c0e9480a3",
+      "version": "20260823075817"
+    },
+    {
+      "name": "phase_4a_foreign_key_indexes",
+      "sql_md5": "55f5a4cd8e2b6097b3d95452df625672",
+      "version": "20260823081859"
+    },
+    {
+      "name": "phase_4a_state_transition_guards",
+      "sql_md5": "98470cd1a44a5b50a100e1646cc45b40",
+      "version": "20260823083023"
+    },
+    {
+      "name": "phase_4b_transactional_gameplay_commands",
+      "sql_md5": "a25339fe5f18baafb5ce1b8b7a03c3be",
+      "version": "20260823112601"
+    },
+    {
+      "name": "phase_4b_idempotency_preflight",
+      "sql_md5": "c0d1a3a87d5064bcf0e4fcb78331f241",
+      "version": "20260823134240"
+    },
+    {
+      "name": "phase_4c_daily_correction_dependency_scope",
+      "sql_md5": "3e60c3a6f021fe4b6148d02c5df06916",
+      "version": "20260824051051"
+    },
+    {
+      "name": "fix_gym_rat_daily_achievement",
+      "sql_md5": "3cee2c4d6f46c11bec8503990a31faac",
+      "version": "20260824073523"
+    },
+    {
+      "name": "phase_5a_economy_foundation",
+      "sql_md5": "d4dc4658fedff2f148854a3b84ea5645",
+      "version": "20260824120828"
+    },
+    {
+      "name": "phase_5a_economy_constraints_rls",
+      "sql_md5": "3f8dfb4e14bd207118002ccf2f0504d5",
+      "version": "20260824120859"
+    },
+    {
+      "name": "phase_5a_seed_items_v1",
+      "sql_md5": "44a3d4c5db6ba2dda4f6608d8e120746",
+      "version": "20260824120931"
+    },
+    {
+      "name": "phase_5a_extend_resource_ledger",
+      "sql_md5": "0dd31cc104b6794d59f1b242ebaa29e7",
+      "version": "20260824121000"
+    },
+    {
+      "name": "phase_5a_transaction_kernel",
+      "sql_md5": "79d1b5af92707e3f6593dc31426671b4",
+      "version": "20260824121007"
+    },
+    {
+      "name": "phase_5a_foreign_key_indexes",
+      "sql_md5": "eef3c1df8666773a6788fe638874ed68",
+      "version": "20260824122143"
+    },
+    {
+      "name": "phase_5b_transactional_economy_commands",
+      "sql_md5": "fce3fad860a9c84c3e58bd608cbc8329",
+      "version": "20260825113045"
+    },
+    {
+      "name": "fix_phase5b_reward_ticket_payload_order",
+      "sql_md5": "b2a857344e848305a3f72b2253358657",
+      "version": "20260825122526"
+    },
+    {
+      "name": "fix_boss_slayer_achievement",
+      "sql_md5": "3b1434d3051cb4f70adfc7245bf9646e",
+      "version": "20260826124635"
+    },
+    {
+      "name": "phase_6b2_postgres_privilege_hardening",
+      "sql_md5": "9c6ef921e69dbb0251e8fcd9bfb68fae",
+      "version": "20260828155616"
+    },
+    {
+      "name": "phase_6b2_mandatory_command_versions",
+      "sql_md5": "c72da25b814863ebd41c319216b603ba",
+      "version": "20260828160055"
+    }
+  ],
+  "projectRef": "jwpbwlrdzmfzjlbrktlc",
+  "stage": "after",
+  "capturedAt": "2026-08-28T16:09:49.796Z"
+}

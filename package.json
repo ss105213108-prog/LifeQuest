@@ -1,0 +1,19 @@
+{
+  "name": "lifequest-real-life-rpg",
+  "version": "2.0.0",
+  "private": true,
+  "scripts": {
+    "serve": "node dev-server.cjs",
+    "release:build": "node scripts/build-release.cjs",
+    "release:verify": "node scripts/verify-release.cjs",
+    "release": "npm run release:build && npm run release:verify",
+    "test": "node --test tests/*.test.js",
+    "check": "node --check backendContract.js && node --check lifequestCore.js && node --check mockData.js && node --check gameApplication.js && node --check supabaseConfig.js && node --check supabaseClient.js && node --check memberAuth.js && node --check memberLogoutUi.js && node --check guestMode.js && node --check memberEconomyUi.js && node --check modalFocusManager.js && node --check dailyFormSubmission.js && node --check app.js && node --check dev-server.cjs && node --check scripts/release-files.cjs && node --check scripts/build-release.cjs && node --check scripts/verify-release.cjs && node --check supabase/functions/_shared/phase4Domain.mjs && node --check supabase/functions/_shared/phase5EconomyDomain.mjs && node --check tests/phase5a-live-verification.cjs && node --check tests/phase5b-live-verification.cjs && node --check tests/phase6c3-release-readiness.test.js && node --check tests/phase6c3-offline-reload.test.js"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "2.112.3"
+  },
+  "devDependencies": {
+    "supabase": "2.115.0"
+  }
+}

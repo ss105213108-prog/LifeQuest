@@ -1,0 +1,35 @@
+-- LifeQuest Phase 5A: seed only the accepted existing V1 catalog.
+
+insert into public.item_catalog(
+  item_key, display_name, description, item_type, rarity, currency_type,
+  base_price, catalog_version, stackable, max_stack, usable, equippable,
+  equipment_slot, effect_key, equipment_modifiers, member_effects
+) values
+  ('potion_red', '生命藥水', '使用時恢復最多 15 點生命值；生命值已滿時不可使用。',
+    'potion', 'common', 'gold', 25, 1, true, 99, true, false, null,
+    'restore_hp_15', '{}'::jsonb, '{}'::jsonb),
+  ('weapon_sword', '木劍', '裝備後精力 +2；Phase 5 V1 不影響 Boss 傷害。',
+    'weapon', 'common', 'gold', 60, 1, false, 1, false, true, 'weapon',
+    'equipment_energy_2', '{"energy":2}'::jsonb, '{}'::jsonb),
+  ('armor_shield', '鐵盾', '裝備後健康 +3。',
+    'armor', 'common', 'gold', 80, 1, false, 1, false, true, 'armor',
+    'equipment_health_3', '{"health":3}'::jsonb, '{}'::jsonb),
+  ('pet_cactus', '仙人掌寵物', '裝備後財富 +2；會員每日結算 Gold +1。',
+    'pet', 'uncommon', 'gold', 90, 1, false, 1, false, true, 'pet',
+    'equipment_wealth_2_settlement_gold_1', '{"wealth":2}'::jsonb,
+    '{"settlementGoldBonus":1}'::jsonb),
+  ('pet_dragon', '小青龍寵物', '裝備後健康 +2、成長 +2；Phase 5 V1 不影響 Boss 傷害。',
+    'pet', 'rare', 'gold', 130, 1, false, 1, false, true, 'pet',
+    'equipment_health_2_growth_2', '{"health":2,"growth":2}'::jsonb, '{}'::jsonb),
+  ('rest_30', '短暫休憩券', '安心休息或娛樂 30 分鐘。',
+    'reward_ticket', 'common', 'gems', 3, 1, false, 1, false, false, null,
+    'self_reward_rest_30', '{}'::jsonb, '{}'::jsonb),
+  ('favorite_drink', '喜愛飲品券', '購買一次喜歡的飲品。',
+    'reward_ticket', 'common', 'gems', 5, 1, false, 1, false, false, null,
+    'self_reward_favorite_drink', '{}'::jsonb, '{}'::jsonb),
+  ('free_evening', '自由晚間券', '安排一晚個人娛樂時間。',
+    'reward_ticket', 'uncommon', 'gems', 7, 1, false, 1, false, false, null,
+    'self_reward_free_evening', '{}'::jsonb, '{}'::jsonb),
+  ('weekend_reward', '週末犒賞券', '安排一次較大型的休閒活動。',
+    'reward_ticket', 'rare', 'gems', 12, 1, false, 1, false, false, null,
+    'self_reward_weekend', '{}'::jsonb, '{}'::jsonb);

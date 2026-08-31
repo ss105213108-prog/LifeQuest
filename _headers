@@ -1,0 +1,95 @@
+# LifeQuest Netlify release headers. Source: scripts/release-files.cjs.
+# Inline scripts/styles remain allowed for the existing Vanilla runtime.
+/*
+  Content-Security-Policy: default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; img-src 'self' data:; font-src 'self' https://fonts.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; script-src 'self' 'unsafe-inline'; connect-src 'self' https://jwpbwlrdzmfzjlbrktlc.supabase.co wss://jwpbwlrdzmfzjlbrktlc.supabase.co
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  X-Frame-Options: DENY
+
+/
+  Cache-Control: no-cache, max-age=0, must-revalidate
+
+/app.js
+  Cache-Control: no-cache, must-revalidate
+
+/assets/art/boss-budget-vampire.png
+  Cache-Control: public, max-age=86400
+
+/assets/art/boss-fried-food-beast.png
+  Cache-Control: public, max-age=86400
+
+/assets/art/boss-laziness-beast.png
+  Cache-Control: public, max-age=86400
+
+/assets/art/boss-sleep-nightmare.png
+  Cache-Control: public, max-age=86400
+
+/assets/art/boss-sugar-monster.png
+  Cache-Control: public, max-age=86400
+
+/assets/art/guild-adventurer.png
+  Cache-Control: public, max-age=86400
+
+/assets/art/guild-medals-atlas.png
+  Cache-Control: public, max-age=86400
+
+/assets/art/guild-quartermaster.png
+  Cache-Control: public, max-age=86400
+
+/assets/auth-guild-night.png
+  Cache-Control: public, max-age=86400
+
+/backendContract.js
+  Cache-Control: no-cache, must-revalidate
+
+/dailyFormSubmission.js
+  Cache-Control: no-cache, must-revalidate
+
+/gameApplication.js
+  Cache-Control: no-cache, must-revalidate
+
+/guestMode.js
+  Cache-Control: no-cache, must-revalidate
+
+/index.html
+  Cache-Control: no-cache, max-age=0, must-revalidate
+
+/lifequestCore.js
+  Cache-Control: no-cache, must-revalidate
+
+/memberAuth.js
+  Cache-Control: no-cache, must-revalidate
+
+/memberEconomyUi.js
+  Cache-Control: no-cache, must-revalidate
+
+/memberLogoutUi.js
+  Cache-Control: no-cache, must-revalidate
+
+/mockData.js
+  Cache-Control: no-cache, must-revalidate
+
+/modalFocusManager.js
+  Cache-Control: no-cache, must-revalidate
+
+/rpg-pages.css
+  Cache-Control: no-cache, must-revalidate
+
+/style.css
+  Cache-Control: no-cache, must-revalidate
+
+/supabaseClient.js
+  Cache-Control: no-cache, must-revalidate
+
+/supabaseConfig.js
+  Cache-Control: no-cache, must-revalidate
+
+/vendor/chart.js/chart.umd.min.js
+  Cache-Control: no-cache, must-revalidate
+
+/vendor/lucide/lucide.min.js
+  Cache-Control: no-cache, must-revalidate
+
+/vendor/supabase/supabase.js
+  Cache-Control: no-cache, must-revalidate
