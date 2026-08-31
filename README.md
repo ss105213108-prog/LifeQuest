@@ -10,7 +10,7 @@ LifeQuest 是將日常生活管理 RPG 化的 Web Application：記錄睡眠、�
 
 ## Live Demo
 
-[開啟 LifeQuest](https://eloquent-quejadas-ffaea3.netlify.app)
+[開啟 LifeQuest](https://eloquent-queijadas-ffaea3.netlify.app)
 
 - **Guest**：不需帳號即可體驗主要功能，進度保存在目前瀏覽器。
 - **Member**：註冊自己的帳號，登入後使用 Cloud Save；不提供共用測試帳號。
