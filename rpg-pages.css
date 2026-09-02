@@ -2664,34 +2664,105 @@ body:has(#pane-rules.active) .app-header:hover {
   justify-self: stretch;
   min-height: 68px;
 }
-.save-draft-btn {
-  justify-content: flex-start;
-  border-color: rgba(112, 75, 36, 0.62);
+.camp-log-slot .guild-logbook .save-draft-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  justify-content: center;
+  gap: 0.7rem;
+  min-height: 58px;
+  padding: 0.55rem 1rem;
+  color: #f2d69a;
   background:
-    linear-gradient(90deg, rgba(122, 82, 39, 0.09), transparent 42%),
-    rgba(241, 220, 177, 0.34);
-  text-align: left;
+    radial-gradient(circle at 10px 10px, #d4ac63 0 2px, #6f471f 2.5px 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - 10px) 10px, #d4ac63 0 2px, #6f471f 2.5px 4px, transparent 4.5px),
+    radial-gradient(circle at 10px calc(100% - 10px), #d4ac63 0 2px, #6f471f 2.5px 4px, transparent 4.5px),
+    radial-gradient(circle at calc(100% - 10px) calc(100% - 10px), #d4ac63 0 2px, #6f471f 2.5px 4px, transparent 4.5px),
+    repeating-linear-gradient(96deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 8px),
+    linear-gradient(180deg, #73502b 0%, #4c301b 48%, #2b1a12 100%);
+  border: 3px double #c29650;
+  border-radius: 2px;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 232, 174, 0.2),
+    inset 0 -5px 12px rgba(18, 9, 5, 0.48),
+    0 4px 0 #25150d,
+    0 7px 14px rgba(31, 17, 9, 0.28);
+  text-align: center;
+  text-shadow: 0 1px 0 #2a160c, 0 0 10px rgba(232, 184, 91, 0.16);
+  transition: transform 150ms ease, color 150ms ease, border-color 150ms ease, box-shadow 150ms ease, filter 150ms ease;
 }
-.save-draft-btn:hover,
-.save-draft-btn:focus-visible {
-  color: #3d2815;
-  background:
-    linear-gradient(90deg, rgba(122, 82, 39, 0.16), transparent 48%),
-    rgba(246, 226, 184, 0.55);
+.camp-log-slot .guild-logbook .save-draft-btn::before {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 4px;
+  pointer-events: none;
+  border: 1px solid rgba(234, 194, 116, 0.42);
+  box-shadow: inset 0 0 0 1px rgba(43, 24, 12, 0.72);
 }
-.draft-save-mark {
+.camp-log-slot .guild-logbook .save-draft-btn::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(105deg, transparent 24%, rgba(255, 228, 163, 0.12) 45%, transparent 64%);
+  transform: translateX(-115%);
+  transition: transform 240ms ease;
+}
+.camp-log-slot .guild-logbook .save-draft-btn:hover:not(:disabled) {
+  color: #ffe4aa;
+  border-color: #dfb86f;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 239, 197, 0.3),
+    inset 0 -5px 12px rgba(18, 9, 5, 0.4),
+    0 6px 0 #25150d,
+    0 10px 18px rgba(31, 17, 9, 0.36),
+    0 0 13px rgba(202, 148, 67, 0.24);
+  filter: brightness(1.08);
+  transform: translateY(-2px);
+}
+.camp-log-slot .guild-logbook .save-draft-btn:hover:not(:disabled)::after { transform: translateX(115%); }
+.camp-log-slot .guild-logbook .save-draft-btn:active:not(:disabled) {
+  box-shadow:
+    inset 0 4px 10px rgba(18, 9, 5, 0.55),
+    inset 0 1px 0 rgba(255, 239, 197, 0.12),
+    0 2px 0 #25150d;
+  filter: brightness(0.94);
+  transform: translateY(2px);
+}
+.camp-log-slot .guild-logbook .save-draft-btn:focus-visible {
+  color: #ffe4aa;
+  outline: 3px solid rgba(235, 191, 104, 0.72);
+  outline-offset: 3px;
+}
+.camp-log-slot .guild-logbook .save-draft-btn:disabled {
+  cursor: wait;
+  filter: saturate(0.65);
+  opacity: 0.68;
+  transform: none;
+}
+.camp-log-slot .guild-logbook .draft-save-mark {
   display: grid;
   flex: 0 0 auto;
   place-items: center;
   width: 38px;
   height: 38px;
-  color: #6d4a26;
-  border: 1px solid rgba(101, 67, 32, 0.48);
-  transform: rotate(-2deg);
+  color: #f0c874;
+  background: linear-gradient(145deg, #6d4725, #2c1a10);
+  border: 3px double #bd8d45;
+  border-radius: 50% 50% 44% 44%;
+  box-shadow: inset 0 0 8px rgba(10, 5, 2, 0.65), 0 1px 0 rgba(255, 224, 151, 0.18);
+  transform: rotate(-3deg);
 }
-.draft-save-mark svg { width: 19px; height: 19px; }
-.draft-save-copy { display: grid; gap: 0.12rem; line-height: 1.25; }
-.draft-save-copy strong { font-size: 0.78rem; letter-spacing: 0.04em; }
+.camp-log-slot .guild-logbook .draft-save-mark svg { width: 18px; height: 18px; }
+.camp-log-slot .guild-logbook .draft-save-copy { display: grid; min-width: 0; line-height: 1.25; }
+.camp-log-slot .guild-logbook .draft-save-copy strong {
+  color: inherit;
+  font-family: var(--rpg-font-story);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+}
 .draft-save-copy small {
   color: #806744;
   font-family: var(--rpg-font-ui);
