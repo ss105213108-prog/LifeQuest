@@ -1600,8 +1600,8 @@ function bindUIEvents() {
       if (!saveResult.ok) return;
     }
     showModal(
-      policy.isBackfill ? '補記草稿已暫存' : '今日手稿已暫存',
-      `公會書記已保存 ${date} 的未結算內容；本次沒有發放任何獎勵。`,
+      '契約已保存',
+      `公會書記已保存 ${date} 的內容；本次沒有發放任何獎勵。`,
       'save',
       { iconType: 'lucide' }
     );

@@ -619,6 +619,13 @@ test('daily save remains draft-only while correction consumes command raw input 
   assert.ok(saveStart >= 0 && saveEnd > saveStart);
   assert.match(saveHandler, /saveDailyDraft\(\{ date, draft \}\)/);
   assert.doesNotMatch(saveHandler, /submitDailyEntry|submitDailyLog|Settlement/);
+  assert.match(index, /<span class="draft-save-copy"><strong>保存契約<\/strong><\/span>/);
+  assert.doesNotMatch(index, /保存未完成紀錄|不進行結算，稍後可繼續填寫/);
+  assert.match(
+    saveHandler,
+    /showModal\(\s*'契約已保存',\s*`公會書記已保存 \$\{date\} 的內容；本次沒有發放任何獎勵。`/
+  );
+  assert.doesNotMatch(saveHandler, /補記草稿已暫存|今日手稿已暫存|未結算內容/);
   assert.match(edge, /buildDailySettlementPlan\(\{[\s\S]{0,120}rawInput: payload/);
   assert.match(transaction, /v_entry\.current_revision := v_entry\.current_revision \+ 1/);
   assert.match(transaction, /insert into public\.daily_entry_revisions/);
